@@ -1,0 +1,13 @@
+# Jan Subagent - Zależności Pythona
+# Subagent MCP Jana Kochanowskiego do korekty języka polskiego
+
+# MCP Server Framework
+mcp>=1.0.0
+fastmcp>=0.1.0
+
+# OpenAI-compatible client dla NVIDIA Bielik API
+openai>=1.12.0
+
+# Biblioteki pomocnicze
+python-dotenv>=1.0.0
+pydantic>=2.0.0

@@ -3,6 +3,10 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Jan config directory (w home directory, ale zabezpieczenie)
+.jan/
+~/.jan/
+
 # C extensions
 *.so
 

@@ -1,0 +1,15 @@
+# MCP Configuration for Jan Subagent (OpenCode Optimized)
+
+{
+  "mcpServers": {
+    "jan-kochanowski": {
+      "command": "python3",
+      "args": [
+        "-m",
+        "jan.jan_subagent_opencode"
+      ],
+      "cwd": "/Users/pd/Developer/jan",
+      "env": {}
+    }
+  }
+}

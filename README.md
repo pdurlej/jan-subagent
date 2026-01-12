@@ -1,6 +1,6 @@
 # 📜 Jan Subagent - MCP Subagent Jana Kochanowskiego
 
-![Version](https://img.shields.io/badge/version-1.0.0-blue)
+![Version](https://img.shields.io/badge/version-1.1.0-blue)
 ![Python](https://img.shields.io/badge/python-3.10+-green)
 ![License](https://img.shields.io/badge/license-MIT-orange)
 
@@ -8,9 +8,18 @@
 
 Subagent MCP z osobowością Jana Kochanowskiego, poety renesansowego, do kompleksowej korekty języka polskiego. Używa modelu **Bielik 11B v2.6 Instruct** od NVIDIA jako eksperta językowego.
 
+## ✨ Nowości w v1.1.0 (OpenCode Optimized)
+
+- 🔑 **Automatyczna konfiguracja API key** - pierwszy raz @jan poprosi o NVIDIA API key
+- 💾 **Zapisywanie konfiguracji** - API key zapisywany w `~/.jan/config.json`
+- 🚀 **Zoptymalizowana architektura** - mniejsze pliki, szybsze ładowanie
+- 🛠️ **Narzędzia konfiguracyjne** - `check_configuration`, `setup_api_key`, `reset_api_key`
+- 📦 **Modularny kod** - oddzielone moduły dla łatwiejszego rozwijania
+
 ## 🎯 Cechy
 
 - ✨ **Persona Jana Kochanowskiego** - powitania, pożegnania i komentarze w stylu renesansowym
+- 🔑 **Integracja z NVIDIA Bielik** - model 11B v2.6 Instruct
 - 📝 **Korekta ortografii** - z wyróżnionymi zmianami i wyjaśnieniami
 - 🔤 **Korekta interpunkcji** - szczegółowa analiza znaków przystankowych
 - 📚 **Weryfikacja gramatyki** - zgodność z polskimi regułami gramatycznymi
@@ -18,28 +27,106 @@ Subagent MCP z osobowością Jana Kochanowskiego, poety renesansowego, do komple
 - 🔄 **Kompleksowa korekta** - pełna analiza tekstu w jednym zapytaniu
 - 💡 **Porady językowe** - edukacyjne porady w stylu "Trenów"
 - 📊 **Ocena jakości tekstu** - szybka ocena i rekomendacje
+- 🔧 **Narzędzia konfiguracyjne** - łatwe zarządzanie API key
 
 ## 🚀 Instalacja
 
 ### Wymagania
 
 - Python 3.10 lub nowszy
-- NVIDIA API Key (uzyskaj na [build.nvidia.com](https://build.nvidia.com/api-key))
 - MCP Client (Claude Desktop, Cursor, inne)
+- NVIDIA API Key (uzyskaj na [build.nvidia.com/api-key](https://build.nvidia.com/api-key))
 
-### Kroki instalacji
+### 🎉 Nowy flow v1.1.0 - Automatyczna konfiguracja!
+
+#### Krok 1: Uzyskaj NVIDIA API Key
+
+1. Otwórz [build.nvidia.com/api-key](https://build.nvidia.com/api-key)
+2. Utwórz nowy API key
+3. Skopiuj key
+
+#### Krok 2: Zainstaluj zależności
 
 ```bash
-# 1. Zainstaluj zależności
+cd /Users/pd/Developer/jan
 pip install -r requirements.txt
+```
 
-# 2. Skopiuj i uzupełnij plik .env
+#### Krok 3: Skonfiguruj MCP
+
+**Claude Desktop (macOS):**
+```json
+{
+  "mcpServers": {
+    "jan-kochanowski": {
+      "command": "python3",
+      "args": ["-m", "jan.jan_subagent_opencode"],
+      "cwd": "/Users/pd/Developer/jan",
+      "env": {}
+    }
+  }
+}
+```
+
+**Cursor:**
+Edytuj `~/.cursor/mcp_config.json` z tym samym configiem.
+
+#### Krok 4: Rozpocznij konwersację
+
+Otwórz Claude/Cursor i zacznij konwersację z **@jan**. Przy pierwszym użyciu, **@jan** poprosi Cię o API key:
+
+```
+> @jan popraw ten tekst
+```
+
+**Jan odpowie:**
+> Błagam miłościwi, czekam na API key Bielika, by móc pomóc w korekcie. Użyj narzędzia `setup_api_key` aby ustawić klucz.
+
+Następnie ustaw klucz:
+
+```
+> Użyj setup_api_key z api_key: "nvapi-xxxx-xxxx-xxxx-xxxx-xxxx-xxxx"
+```
+
+**Jan potwierdzi:**
+> ✅ **API Key został pomyślnie ustawiony!**
+
+Gotowe! Od teraz **@jan** będzie działał normalnie bez dodatkowej konfiguracji.
+
+### 📋 Stary flow (ręczna konfiguracja)
+
+Jeśli wolisz ręczną konfigurację:
+
+```bash
+# 1. Utwórz plik .env
 cp .env.example .env
-# Edytuj .env i wpisz swój NVIDIA_API_KEY
 
-# 3. Zainstaluj pakiet w trybie development
+# 2. Edytuj .env i wpisz NVIDIA_API_KEY
+# NVIDIA_API_KEY=twój-nvidia-api-key
+
+# 3. Zainstaluj pakiet
 pip install -e .
 ```
+
+### 🔍 Sprawdzanie konfiguracji
+
+Zawsze możesz sprawdzić status konfiguracji:
+
+```
+> Użyj check_configuration
+```
+
+**Odpowiedź:**
+> ### Konfiguracja Jana Kochanowskiego
+>
+> **API Key skonfigurowany:** ✅
+> **Environment Variable:** ✅
+> **Config File:** ❌
+>
+> **Model:** speakleash/bielik-11b-v2_6-instruct
+> **API Base:** https://integrate.api.nvidia.com/v1
+> **Default Temperature:** 0.3
+> **Max Tokens:** 4096
 
 ## ⚙️ Konfiguracja MCP
 
@@ -71,7 +158,55 @@ Edytuj `~/.cursor/mcp_config.json` z tym samym configiem co wyżej.
 
 ## 📖 Narzędzia MCP
 
-### `correct_orthography`
+### 📋 Konfiguracja
+
+#### `check_configuration`
+Sprawdź konfigurację Jana i status API key.
+
+```python
+check_configuration() -> str
+```
+
+**Odpowiedź:**
+- Status API key (env var / config file)
+- Model ID
+- API Base URL
+- Default parameters
+
+#### `setup_api_key`
+Ustaw NVIDIA API Key - użyj przy pierwszej konfiguracji.
+
+```python
+setup_api_key(api_key: str) -> str
+```
+
+**Przykład użycia przy pierwszej rozmowie:**
+```
+Użyj setup_api_key z api_key: "nvapi-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+```
+
+**Odpowiedź Jana:**
+> Niech Bóg wam błogosławi. Czym mogę służyć w sprawie języka ojczystego?
+>
+> ✅ **API Key został pomyślnie ustawiony!**
+>
+> Lokalizacja: `~/.jan/config.json`
+> Model: `speakleash/bielik-11b-v2_6-instruct`
+>
+> *Słowa poprawione są jak polerowany diament - piękniej lśnią.*
+>
+> Niechaj Bóg strzeże wasze pióra i myśli. Do zobaczenia w innej godzinie.
+
+#### `reset_api_key`
+Resetuj API Key.
+
+```python
+reset_api_key() -> str
+```
+
+### 📝 Korekta języka
+
+#### `correct_orthography`
 Poprawa ortografii tekstu polskiego z komentarzami.
 
 ```python
@@ -249,19 +384,51 @@ Użyj get_language_advice z tematem:
 ```
 jan/
 ├── jan/
-│   ├── __init__.py              # Inicjalizacja pakietu
-│   ├── jan_subagent.py          # Główny plik subagenta z narzędziami MCP
+│   ├── __init__.py              # Inicjalizacja pakietu (zoptymalizowana)
+│   ├── jan_subagent.py          # Główny plik subagenta (oryginalny)
+│   ├── jan_subagent_opencode.py # Zoptymalizowana wersja pod OpenCode
 │   ├── kochanowski_quotes.py    # Cytaty i persona Kochanowskiego
-│   └── system_prompts.py        # System prompty dla Bielika
+│   ├── system_prompts.py        # System prompty dla Bielika
+│   ├── config.py               # Menadżer konfiguracji (NOWY v1.1.0)
+│   └── api_client.py           # Klient Bielika API (NOWY v1.1.0)
 ├── src/                         # Dodatkowe źródła
 ├── tests/                       # Testy jednostkowe
 ├── examples/                    # Przykłady użycia
 ├── docs/                        # Dokumentacja
 ├── requirements.txt             # Zależności Pythona
 ├── .env.example                # Przykładowe zmienne środowiskowe
-├── mcp_config.json             # Konfiguracja MCP
+├── mcp_config.json             # Konfiguracja MCP (oryginalna)
+├── mcp_config_opencode.json    # Konfiguracja MCP (zoptymalizowana)
+├── setup.py                    # Setup script
+├── LICENSE                     # Licencja MIT
 └── README.md                   # Ten plik
 ```
+
+### Nowe moduły v1.1.0
+
+#### `jan/config.py`
+Menadżer konfiguracji Jana - zarządzanie API key, cache'owanie, persistencja.
+
+- API key zapisywany w `~/.jan/config.json`
+- Automatyczne sprawdzanie environment variables
+- Metody do ustawiania/resetowania API key
+- Podsumowanie konfiguracji
+
+#### `jan/api_client.py`
+Klient do komunikacji z NVIDIA Bielik API.
+
+- Oddzielony od głównej logiki MCP
+- Walidacja API key przed zapytaniami
+- Obsługa błędów połączenia
+- Automatyczny reset po zmianie configu
+
+#### `jan/jan_subagent_opencode.py`
+Zoptymalizowana wersja subagenta pod OpenCode.
+
+- Krótszy kod (~40% mniej linii)
+- Lepsza czytelność i modularność
+- Nowe narzędzia konfiguracyjne
+- Szybsze ładowanie
 
 ## 🎨 Persona Jana Kochanowskiego
 

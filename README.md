@@ -35,15 +35,34 @@ Subagent MCP z osobowością Jana Kochanowskiego, poety renesansowego, do komple
 
 - Python 3.10 lub nowszy
 - MCP Client (Claude Desktop, Cursor, inne)
-- NVIDIA API Key (uzyskaj na [build.nvidia.com/api-key](https://build.nvidia.com/api-key))
+- NVIDIA API Key (uzyskaj na https://build.nvidia.com)
 
 ### 🎉 Nowy flow v1.1.0 - Automatyczna konfiguracja!
 
 #### Krok 1: Uzyskaj NVIDIA API Key
 
-1. Otwórz [build.nvidia.com/api-key](https://build.nvidia.com/api-key)
-2. Utwórz nowy API key
-3. Skopiuj key
+#### Metoda 1: Przez build.nvidia.com (zalecana)
+
+1. Otwórz [https://build.nvidia.com/](https://build.nvidia.com/)
+2. Zaloguj się lub zarejestruj konto (Login button w prawym górnym rogu)
+3. Przejdź do [strony modelu Bielik](https://build.nvidia.com/speakleash/bielik-11b-v2_6-instruct)
+4. Kliknij "Get API Key" w prawym panelu
+5. (Opcjonalnie) Podaj nazwę klucza
+6. Skopiuj wygenerowany API key
+
+#### Metoda 2: Bezpośrednio przez NGC (zaawansowana)
+
+1. Otwórz [https://org.ngc.nvidia.com/setup/api-keys](https://org.ngc.nvidia.com/setup/api-keys)
+2. Zaloguj się (to samo konto co build.nvidia.com)
+3. Kliknij **"Generate Personal Key"**
+4. Wypełnij formularz:
+   - **Key Name:** np. "jan-subagent"
+   - **Expiration:** wybierz "Never Expire"
+   - **Services Included:** zaznacz "NGC Catalog" i "Public API Endpoints"
+5. Kliknij **"Generate Personal Key"**
+6. Skopiuj wygenerowany API key (pokazuje się tylko raz!)
+
+**⚠️ Ważne:** API key jest pokazywany tylko raz! Skopiuj go i zapisz w bezpiecznym miejscu.
 
 #### Krok 2: Zainstaluj zależności
 
@@ -95,7 +114,7 @@ Gotowe! Od teraz **@jan** będzie działał normalnie bez dodatkowej konfiguracj
 
 ### 📋 Stary flow (ręczna konfiguracja)
 
-Jeśli wolisz ręczną konfigurację:
+Jeśli wolisz ręczną konfigurację (niezalecane):
 
 ```bash
 # 1. Utwórz plik .env
@@ -107,6 +126,8 @@ cp .env.example .env
 # 3. Zainstaluj pakiet
 pip install -e .
 ```
+
+**Uwaga:** Ten sposób jest mniej bezpieczny, ponieważ API key jest przechowywany w pliku tekstowym. Zalecamy nowy sposób z `setup_api_key`.
 
 ### 🔍 Sprawdzanie konfiguracji
 

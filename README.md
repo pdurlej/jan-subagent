@@ -58,6 +58,30 @@ Najmocniejszy sygnał z dotychczasowego pilota:
 
 Szczegóły: [docs/benchmarks/workplace-writing-pilot.md](/Users/pd/Developer/jan/docs/benchmarks/workplace-writing-pilot.md)
 
+## Side by side: Jan vs typowy ogólny model
+
+To nie jest formalny benchmark. To jest ilustracja różnicy stylu dla tego samego wejścia.
+
+Wejście z typowych, bezosobowych notek GitHuba:
+
+```text
+- Added retry handling for checkout webhook delivery.
+- Improved cache invalidation for product detail pages.
+- Fixed duplicate analytics events on checkout success.
+```
+
+| Typowy baseline ogólnego modelu pokroju GPT-5.4 | Jan MCP |
+| --- | --- |
+| „Dodano obsługę ponownych prób dostarczenia webhooków checkoutu. Ulepszono unieważnianie pamięci podręcznej dla stron szczegółów produktu. Naprawiono zduplikowane zdarzenia analityczne po pomyślnym zakończeniu checkoutu.” | „Poprawiliśmy niezawodność checkoutu i uporządkowaliśmy kilka elementów wokół zakupu. System lepiej ponawia dostarczanie webhooków, strony produktów szybciej pokazują aktualne dane, a analityka po zakończonym checkoutcie nie dubluje już zdarzeń.” |
+
+W praktyce chcemy, żeby różnica była taka:
+
+- Jan ma brzmieć bardziej naturalnie dla polskiego odbiorcy technicznego albo produktowego
+- Jan ma lepiej składać suche, angielskie bullet points w notkę, którą da się wkleić współpracownikom bez dalszego wygładzania
+- baseline ogólnego modelu bywa bardziej neutralny, dosłowny i checklistowy
+
+Nie chodzi o to, że GPT-5.4 „nie umie” pisać po polsku. Chodzi o to, że Jan jest ustawiony produktowo pod ten konkretny workflow: polskie release notesy i changelogi dla zespołu na bazie surowych notek z GitHuba.
+
 ## Primary MCP workflows
 
 ```python

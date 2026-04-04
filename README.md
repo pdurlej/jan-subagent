@@ -1,68 +1,37 @@
-# 📜 Jan - MCP do polskich changelogów i release notesów z notek GitHuba
+# Jan MCP
 
 ![Version](https://img.shields.io/badge/version-3.0.0-blue)
 ![Python](https://img.shields.io/badge/python-3.10+-green)
 ![License](https://img.shields.io/badge/license-MIT-orange)
 
-> *"Niechaj mowa o waszych zmianach będzie jasna, wierna i gotowa do publikacji."*  
-> Jan Kochanowski, gdyby pisał release notes
+<p align="center">
+  <img src="docs/images/jan-kochanowski-coder-engraving.webp" alt="Jan Kochanowski jako skupiony coder w stylu starej ryciny" width="720" />
+</p>
 
-![Jan Kochanowski jako skupiony coder w stylu starej ryciny](https://raw.githubusercontent.com/pdurlej/jan-subagent/master/docs/images/jan-kochanowski-coder-engraving.png)
+> Od suchych bulletów do publikowalnych release notes. Po polsku.
 
-`jan-subagent` w `v3.0.0` nie jest już ogólnym korektorem polszczyzny. To repo-native agent MCP do tłumaczenia i pisania polskich changelogów, release notesów i opisów zmian na bazie typowych githubowych, bezosobowych angielskich notek, diffów i surowych bulletów technicznych.
+Jan to repo-native MCP agent dla polskich zespołów technicznych. Bierze typowe GitHubowe notki, diffy i surowe bullet points, a oddaje gotowe changelogi, release notesy i opisy PR, które da się wkleić bez dalszego wygładzania.
 
-Jan zachowuje charakter i brand Jana Kochanowskiego, ale domyślny workplace UX jest już w pełni `paste-ready`.
+- Zamienia bezosobowe, angielskie notki z GitHuba w naturalny polski komunikat dla zespołu.
+- Trzyma się faktów i szablonów artefaktu zamiast pisać "od zera" jak ogólny chat.
+- Działa w MCP i można go prototypować za darmo na `NVIDIA_API_KEY`.
 
-## Dlaczego Jan jest praktyczny
+Szybkie przejścia: [Quickstart](#quickstart) · [Before / After](#before--after) · [Core workflows](#core-workflows) · [Benchmarki](#benchmark-snapshot)
 
-Najprostsza obietnica produktu jest taka:
+## Co robi Jan
 
-- bierzesz typowe, surowe angielskie notki z GitHuba
-- wrzucasz je do `compose_release_notes(...)`
-- dostajesz gotowe, polskie release notesy albo changelog dla współpracowników
+Jan jest ustawiony pod jeden konkretny workflow: komunikację zmian w software delivery po polsku.
 
-I możesz to odpalić za darmo w trybie prototypowania, korzystając z klucza NVIDIA Developer Program do hosted endpointów NIM. NVIDIA podaje, że członkowie programu mają darmowy dostęp do endpointów NIM do prototypowania:
+Najlepiej sprawdza się przy:
 
-- [Run NIM Anywhere](https://docs.api.nvidia.com/nim/docs/run-anywhere)
-- [API Catalog Quickstart Guide](https://docs.api.nvidia.com/nim/docs/api-quickstart)
+- release notesach i changelogach z GitHubowych bulletów
+- opisach PR dla reviewerów
+- porządkowaniu ticketów i issue do formy gotowej dla zespołu
+- notatkach rolloutowych opartych o realny kontekst z repo
 
-## Co zmieniło się w 3.0.0
+Nie jest pozycjonowany jako "najmądrzejszy model ogólny". Ma być lepszym narzędziem do codziennego publikowania zmian po polsku.
 
-- główny wedge produktu to `repo-native workflows`, nie ogólna korekta tekstu
-- primary MCP surface to named workflows dla tech teamów
-- `jan.yml` w repo działa jako memory-as-code dla templates, glossary, audience packs i validation policy
-- source context może pochodzić z local git, GitHub i Jira
-- workflowy mają trust layer: fact preservation, `no_new_facts`, template compliance, glossary adherence i audience-policy compliance
-- `response_mode="review"` zwraca JSON z `final_text`, `source_trace` i `validator_report`
-- stare tools korektorskie zostają tylko jako `legacy`
-
-Pełna nota wydania: [docs/VERSION_3_0_0.md](/Users/pd/Developer/jan/docs/VERSION_3_0_0.md)  
-Mapa migracji: [docs/MIGRATION_3_0_0.md](/Users/pd/Developer/jan/docs/MIGRATION_3_0_0.md)
-
-## Pozycja produktu
-
-Jan nie próbuje być „najlepszym LLM-em ogólnym”. Ma być najlepszym narzędziem MCP do codziennego zamieniania surowych angielskich notek z GitHuba na publikowalne polskie changelogi i release notesy.
-
-Najwięcej sensu ma dziś w:
-
-- tłumaczeniu i wygładzaniu release notes z angielskich bulletów
-- opisach PR
-- release notes i changelogach
-- przepisywaniu ticketów i issue
-- notatkach rolloutowych
-- repo-native workflowach, gdzie liczy się `time-to-paste`, `fact preservation` i zgodność z template’em zespołu
-
-Najmocniejszy sygnał z dotychczasowego pilota:
-
-- po refactorze `paste-ready` Jan urósł z `49.9%` do `94.0%` `Primary Literal Score`
-- średnia latency spadła z `26.28s` do `2.58s`
-- Jan wyprzedził `raw Bielik` jako produkt, choć nadal minimalnie przegrywa ogólny wynik z `GPT-5.4`
-
-Szczegóły: [docs/benchmarks/workplace-writing-pilot.md](/Users/pd/Developer/jan/docs/benchmarks/workplace-writing-pilot.md)
-
-## Side by side: Jan vs typowy ogólny model
-
-To nie jest formalny benchmark. To jest ilustracja różnicy stylu dla tego samego wejścia.
+## Before / After
 
 Wejście z typowych, bezosobowych notek GitHuba:
 
@@ -72,181 +41,148 @@ Wejście z typowych, bezosobowych notek GitHuba:
 - Fixed duplicate analytics events on checkout success.
 ```
 
-| Typowy baseline ogólnego modelu pokroju GPT-5.4 | Jan MCP |
+| Typowy ogólny model | Jan MCP |
 | --- | --- |
-| „Dodano obsługę ponownych prób dostarczenia webhooków checkoutu. Ulepszono unieważnianie pamięci podręcznej dla stron szczegółów produktu. Naprawiono zduplikowane zdarzenia analityczne po pomyślnym zakończeniu checkoutu.” | „Poprawiliśmy niezawodność checkoutu i uporządkowaliśmy kilka elementów wokół zakupu. System lepiej ponawia dostarczanie webhooków, strony produktów szybciej pokazują aktualne dane, a analityka po zakończonym checkoutcie nie dubluje już zdarzeń.” |
+| Dodano obsługę ponownych prób dostarczenia webhooków checkoutu. Ulepszono unieważnianie pamięci podręcznej dla stron szczegółów produktu. Naprawiono zduplikowane zdarzenia analityczne po pomyślnym zakończeniu checkoutu. | Poprawiliśmy niezawodność checkoutu i uporządkowaliśmy kilka elementów wokół zakupu. System lepiej ponawia dostarczanie webhooków, strony produktów szybciej pokazują aktualne dane, a analityka po zakończonym checkoutcie nie dubluje już zdarzeń. |
 
-W praktyce chcemy, żeby różnica była taka:
+Różnica nie polega na "magii modelu". Jan jest po prostu ustawiony produktowo pod polskie release notesy i changelogi dla współpracowników, a nie pod ogólną konwersację.
 
-- Jan ma brzmieć bardziej naturalnie dla polskiego odbiorcy technicznego albo produktowego
-- Jan ma lepiej składać suche, angielskie bullet points w notkę, którą da się wkleić współpracownikom bez dalszego wygładzania
-- baseline ogólnego modelu bywa bardziej neutralny, dosłowny i checklistowy
-
-Nie chodzi o to, że GPT-5.4 „nie umie” pisać po polsku. Chodzi o to, że Jan jest ustawiony produktowo pod ten konkretny workflow: polskie release notesy i changelogi dla zespołu na bazie surowych notek z GitHuba.
-
-## Primary MCP workflows
-
-```python
-write_pr_description(
-    raw_notes: str = "",
-    git_range: str | None = None,
-    github_pr: int | None = None,
-    jira_keys: list[str] | None = None,
-    audience: str = "reviewer",
-    response_mode: str = "final",
-) -> str
-
-compose_release_notes(
-    raw_notes: str = "",
-    git_range: str | None = None,
-    github_prs: list[int] | None = None,
-    jira_keys: list[str] | None = None,
-    audience: str = "internal",
-    response_mode: str = "final",
-) -> str
-
-rewrite_issue(
-    raw_notes: str = "",
-    github_issue: int | None = None,
-    jira_key: str | None = None,
-    audience: str = "internal",
-    response_mode: str = "final",
-) -> str
-
-write_rollout_note(
-    raw_notes: str = "",
-    git_range: str | None = None,
-    github_prs: list[int] | None = None,
-    jira_keys: list[str] | None = None,
-    audience: str = "internal",
-    response_mode: str = "final",
-) -> str
-```
-
-### Response modes
-
-- `final`  
-  Zwraca wyłącznie paste-ready tekst z wymaganymi sekcjami artefaktu.
-
-- `review`  
-  Zwraca JSON:
-
-```json
-{
-  "final_text": "string",
-  "source_trace": [
-    {
-      "segment": "string",
-      "source_ids": ["string"],
-      "note": "string"
-    }
-  ],
-  "validator_report": {}
-}
-```
-
-## Legacy tools
-
-Te tools zostają callable dla kompatybilności, ale nie są już głównym surface’em produktu:
-
-- `correct_orthography`
-- `correct_punctuation`
-- `verify_grammar`
-- `improve_style`
-- `comprehensive_correction`
-- `check_text_quality`
-
-`greet_jan`, `farewell_jan` i `get_language_advice` zostają jako brand skin i opt-in delight pack. To jest świadomy easter egg, nie główny workflow produktu.
-
-## jan.yml
-
-Repo-level `jan.yml` działa jako policy pack dla workflowów. Trzyma:
-
-- `glossary`
-- `do_not_translate`
-- `banned_phrases`
-- `artifact_templates`
-- `required_sections`
-- `audiences`
-- `validation`
-- `github`
-- `jira`
-
-To jest memory-as-code dla zespołu. Reguły nie są powtarzane w promptach ręcznie przy każdym użyciu.
-
-W tym repo przykładowy policy pack jest w [jan.yml](/Users/pd/Developer/jan/jan.yml).
-
-## Source context
-
-Jan może pracować z trzema warstwami kontekstu:
-
-1. `raw_notes`
-2. local git: branch, changed files, commits, diff excerpt
-3. GitHub i Jira, jeśli są dostępne tokeny
-
-Brak tokenów nie tworzy sztucznego kontekstu. Workflow degraduje się do tego, co jest naprawdę dostępne, i raportuje warningi w `review`.
-
-## Instalacja
-
-### Wymagania
-
-- Python 3.10+
-- MCP client, np. Claude Desktop albo Cursor
-- NVIDIA API key dla Bielika
-
-### Jak dostać darmowy NVIDIA API key krok po kroku
-
-Poniższy flow opiera się na oficjalnym quickstarcie NVIDIA API Catalog i dokumentacji NIM:
-
-1. Wejdź na [build.nvidia.com](https://build.nvidia.com/).
-2. Wyszukaj model albo endpoint, którego chcesz używać. Dla Jana najważniejsze jest to, żeby mieć działający klucz do hosted endpointów NVIDIA.
-3. Otwórz stronę modelu i kliknij `Get API Key` w prawym panelu.
-4. Podaj adres e-mail i dokończ logowanie albo rejestrację. Według dokumentacji NVIDIA zapisze Cię to do NVIDIA Developer Program.
-5. Po powrocie na stronę modelu skopiuj wygenerowany klucz API i zapisz go lokalnie w bezpiecznym miejscu.
-6. Ustaw go lokalnie jako `NVIDIA_API_KEY`, np. w `.env` albo w `~/.jan/config.json`.
-7. Uruchom Jana i sprawdź smoke test:
+## Quickstart
 
 ```bash
-NVIDIA_API_KEY="twoj-klucz" .venv/bin/python -m jan.jan_subagent_opencode
+git clone https://github.com/pdurlej/jan-subagent.git
+cd jan-subagent
+python3 -m venv .venv
+.venv/bin/pip install -r requirements.txt
+.venv/bin/pip install -e .
+export NVIDIA_API_KEY="twoj-klucz"
+.venv/bin/python -m jan.jan_subagent_opencode
 ```
+
+Gotowy sample config dla klienta MCP jest w [mcp_config.json](mcp_config.json).
+
+Jeśli chcesz szybko sprawdzić runtime lokalnie:
+
+```bash
+python3 -m pytest -q
+.venv/bin/python -m compileall -q jan
+.venv/bin/python -m jan.jan_subagent_opencode
+```
+
+## Get a free NVIDIA API key
+
+Jan działa na Bieliku przez hosted endpointy NVIDIA NIM. Do prototypowania wystarczy darmowy dostęp z NVIDIA Developer Program.
+
+1. Wejdź na [build.nvidia.com](https://build.nvidia.com/).
+2. Otwórz dowolny model lub endpoint i kliknij `Get API Key`.
+3. Zaloguj się albo załóż konto w NVIDIA Developer Program.
+4. Skopiuj klucz i ustaw lokalnie jako `NVIDIA_API_KEY`.
 
 Oficjalne źródła:
 
 - [API Catalog Quickstart Guide](https://docs.api.nvidia.com/nim/docs/api-quickstart)
 - [Run NIM Anywhere](https://docs.api.nvidia.com/nim/docs/run-anywhere)
 
-W dokumentacji NVIDIA jest wprost napisane, że członkowie programu deweloperskiego mają darmowy dostęp do endpointów NIM do prototypowania. Traktuj to jako darmowy start dla zespołu i sprawdzenie workflowu przed ewentualnym wdrożeniem produkcyjnym.
+Przykładowy plik środowiskowy jest w [.env.example](.env.example).
 
-### Instalacja lokalna
+## Core workflows
 
-```bash
-cd /Users/pd/Developer/jan
-python3 -m venv .venv
-.venv/bin/pip install -r requirements.txt
-.venv/bin/pip install -e .
+Jan ma dziś najwięcej sensu jako zestaw nazwanych workflowów, a nie zbiór ogólnych promptów.
+
+### Release notes z surowych bulletów
+
+```python
+compose_release_notes(
+    raw_notes="""
+    - Added retry handling for checkout webhook delivery.
+    - Improved cache invalidation for product detail pages.
+    - Fixed duplicate analytics events on checkout success.
+    """,
+    audience="customer",
+)
 ```
 
-### Konfiguracja MCP
+### Opis PR dla reviewera
 
-Repo zawiera gotowy sample config: [mcp_config.json](/Users/pd/Developer/jan/mcp_config.json)
-
-```json
-{
-  "mcpServers": {
-    "jan-kochanowski": {
-      "command": "/absolute/path/to/jan/.venv/bin/python",
-      "args": [
-        "-m",
-        "jan.jan_subagent_opencode"
-      ],
-      "cwd": "/absolute/path/to/jan",
-      "env": {}
-    }
-  }
-}
+```python
+write_pr_description(
+    raw_notes="""
+    checkout webhook retries
+    product page cache invalidation
+    analytics dedupe on success
+    """,
+    audience="reviewer",
+)
 ```
 
-### Konfiguracja kluczy i source context
+### Rewrite chaotycznego issue do formy zespołowej
+
+```python
+rewrite_issue(
+    raw_notes="""
+    klient zgłasza, że po checkoutcie czasem są zdublowane eventy,
+    trudno to odtworzyć, wygląda na problem po stronie success callback
+    """,
+    audience="internal",
+    response_mode="review",
+)
+```
+
+### Notatka rolloutowa z review JSON
+
+```python
+write_rollout_note(
+    raw_notes="Rollout checkout webhook retry logic behind a feature flag.",
+    audience="internal",
+    response_mode="review",
+)
+```
+
+`response_mode="final"` zwraca gotowy tekst do wklejenia. `response_mode="review"` zwraca JSON z `final_text`, `source_trace` i `validator_report`.
+
+## Dla kogo
+
+Jan najlepiej pasuje do:
+
+- polskich zespołów produktowo-inżynieryjnych
+- leadów i senior engineerów piszących opisy PR
+- release managerów składających changelog lub release notes
+- zespołów, które chcą spójnej terminologii i szablonów bez ręcznego promptowania
+
+Mniej sensu ma wtedy, gdy potrzebujesz ogólnego asystenta do wszystkiego albo miękkiej, relacyjnej komunikacji typu support reply czy statusowy mail.
+
+## Kiedy Jan jest lepszym wyborem niż model ogólny
+
+| Sytuacja | Lepszy wybór | Dlaczego |
+| --- | --- | --- |
+| Release notes z suchych bulletów i commitów | Jan | Ma workflow, audience packs, policy pack i output gotowy do wklejenia. |
+| Opis PR zgodny z template'em zespołu | Jan | Lepiej trzyma sekcje, fakty i terminologię z repo. |
+| Porządkowanie issue pod zespół techniczny | Jan | Pracuje na named workflow, nie na improwizowanym promptcie. |
+| Otwarta burza mózgów albo swobodny writing assistant | Ogólny model | Tu specjalizacja Jana daje mniej przewagi niż szeroka inteligencja ogólna. |
+
+## Benchmark snapshot
+
+Obecny pilot po refactorze `paste-ready`:
+
+- `GPT-5.4`: `96.5%`
+- `Jan`: `94.0%`
+- `raw Bielik`: `93.1%`
+
+Najważniejszy sygnał: Jan nie wygrywa "większą inteligencją ogólną". Wygrywa tym, że daje lepszy workflow i bardziej publikowalny polski output niż surowy model.
+
+Dalsze szczegóły:
+
+- [Workplace writing pilot](docs/benchmarks/workplace-writing-pilot.md)
+- [Repo-native delivery benchmark v2](docs/benchmarks/repo-native-delivery-v2.md)
+- [Metodologia benchmarków](docs/benchmark-methodology.md)
+
+## Advanced context
+
+Jan potrafi pracować na więcej niż samym `raw_notes`.
+
+- `jan.yml` trzyma glossary, `do_not_translate`, audience packs i validation policy.
+- Workflow może korzystać z local git, GitHuba i Jiry, jeśli są dostępne kredensiale.
+- `review` mode dodaje traceability i raport walidacyjny zamiast zgadywania.
 
 Najważniejsze envy:
 
@@ -258,112 +194,28 @@ Najważniejsze envy:
 - `JIRA_API_TOKEN`
 - `JAN_POLICY_FILE`
 
-Pełny przykład: [.env.example](/Users/pd/Developer/jan/.env.example)
+Zobacz:
 
-## Benchmarking
+- [jan.yml](jan.yml)
+- [.env.example](.env.example)
 
-### Benchmark v1: workplace writing pilot
+## Dalsza lektura
 
-Ten benchmark zostaje jako regression suite. Mierzy literalny wynik produktu i pilnuje, żeby Jan nie wrócił do verbose wrappera.
+- [Release notes v3.0.0](docs/VERSION_3_0_0.md)
+- [Migration guide 3.0.0](docs/MIGRATION_3_0_0.md)
+- [Contributor thread bootstrap](docs/new-thread-start.md)
 
-- metodologia: [docs/benchmark-methodology.md](/Users/pd/Developer/jan/docs/benchmark-methodology.md)
-- public-safe raport: [docs/benchmarks/workplace-writing-pilot.md](/Users/pd/Developer/jan/docs/benchmarks/workplace-writing-pilot.md)
+## Dla contributorów
 
-### Benchmark v2: repo-native delivery workflows
+Jeśli chcesz pracować nad repo, benchmarkami albo planowaniem kolejnych pivotów:
 
-Nowy harness benchmarkowy działa na osi:
-
-- `artifact`
-- `context richness`
-- `audience`
-
-Lane’y:
-
-- `text_only`
-- `structured_context`
-- `policy_pack`
-
-North-star KPI:
-
-- zero/one-edit acceptance rate
-- fact preservation
-- `no_new_facts`
-- template compliance
-- glossary adherence
-- time-to-paste
-- p95 latency
-
-Artefakty i harness:
-
-- dataset: [benchmarks/delivery_workflows_v2.jsonl](/Users/pd/Developer/jan/benchmarks/delivery_workflows_v2.jsonl)
-- module: [jan/delivery_benchmark.py](/Users/pd/Developer/jan/jan/delivery_benchmark.py)
-- CI-safe test: [scripts/test_delivery_benchmark.py](/Users/pd/Developer/jan/scripts/test_delivery_benchmark.py)
-- live runner: [scripts/run_delivery_benchmark.py](/Users/pd/Developer/jan/scripts/run_delivery_benchmark.py)
-
-## BMAD / BMADX
-
-Repo pracuje teraz na fundamencie `X4` dla pivotu `v3.0.0`.
-
-Trwałe artefakty:
-
-- PRD: [_bmad-output/planning-artifacts/jan-v3-prd.md](/Users/pd/Developer/jan/_bmad-output/planning-artifacts/jan-v3-prd.md)
-- architektura: [_bmad-output/planning-artifacts/jan-v3-architecture.md](/Users/pd/Developer/jan/_bmad-output/planning-artifacts/jan-v3-architecture.md)
-- project context: [_bmad-output/project-context.md](/Users/pd/Developer/jan/_bmad-output/project-context.md)
-- FUBAR bundle: [_bmad-output/planning-artifacts/jan-v3-fubar](/Users/pd/Developer/jan/_bmad-output/planning-artifacts/jan-v3-fubar)
-
-Zasada pozostaje prosta:
-
-- `BMAD > BMADX`
-- `project-context.md` jest source-of-truth dla tego pivotu
-
-## Architektura repo
-
-```text
-jan/
-├── jan/
-│   ├── api_client.py
-│   ├── config.py
-│   ├── delivery_benchmark.py
-│   ├── jan_subagent_opencode.py
-│   ├── output_utils.py
-│   ├── policy.py
-│   ├── source_adapters.py
-│   ├── source_context.py
-│   ├── system_prompts.py
-│   ├── workflow_engine.py
-│   └── workplace_benchmark.py
-├── benchmarks/
-├── docs/
-├── scripts/
-├── _bmad/
-├── _bmad-output/
-├── jan.yml
-└── mcp_config.json
-```
-
-## Validation commands
-
-```bash
-python3 -m pytest -q
-.venv/bin/python -m compileall -q jan
-.venv/bin/python -m jan.jan_subagent_opencode
-.venv/bin/python scripts/test_benchmark_harness.py
-.venv/bin/python scripts/test_delivery_benchmark.py
-python3 scripts/test_sync_bmad_method.py
-python3 scripts/sync_bmad_method.py check --json
-```
-
-Live benchmark v2:
-
-```bash
-.venv/bin/python scripts/run_delivery_benchmark.py --systems Jan raw-bielik gpt-5.4
-```
+- [_bmad-output/project-context.md](_bmad-output/project-context.md)
+- [_bmad-output/planning-artifacts/jan-v3-prd.md](_bmad-output/planning-artifacts/jan-v3-prd.md)
+- [_bmad-output/planning-artifacts/jan-v3-architecture.md](_bmad-output/planning-artifacts/jan-v3-architecture.md)
+- [scripts/test_delivery_benchmark.py](scripts/test_delivery_benchmark.py)
+- [scripts/run_delivery_benchmark.py](scripts/run_delivery_benchmark.py)
 
 ## Kontakt
 
-- Issues: [GitHub Issues](https://github.com/pdurlej/jan-subagent/issues)
-- Repo: [pdurlej/jan-subagent](https://github.com/pdurlej/jan-subagent)
-
----
-
-*Jan wciąż umie się ukłonić, ale teraz przede wszystkim dowozi release notes.*
+- [GitHub Issues](https://github.com/pdurlej/jan-subagent/issues)
+- [Repozytorium](https://github.com/pdurlej/jan-subagent)

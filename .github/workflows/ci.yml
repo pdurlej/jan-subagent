@@ -1,0 +1,57 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+
+      - name: Run unit tests
+        run: pytest -q
+
+      - name: Compile package
+        run: python -m compileall -q jan
+
+      - name: Smoke-check Jan runtime
+        run: |
+          python - <<'PY'
+          import contextlib
+          import io
+          from jan.jan_subagent_opencode import main
+          import jan.jan_subagent_opencode as mod
+
+          out = io.StringIO()
+          original_run = mod.mcp.run
+          mod.mcp.run = lambda: None
+          try:
+              with contextlib.redirect_stdout(out):
+                  main()
+          finally:
+              mod.mcp.run = original_run
+
+          assert out.getvalue() == "", f"Expected no stdout, got: {out.getvalue()!r}"
+          PY
+
+      - name: Run BMAD maintenance tests
+        run: python3 scripts/test_sync_bmad_method.py
+
+      - name: Run BMAD sync check
+        run: python3 scripts/sync_bmad_method.py check --json

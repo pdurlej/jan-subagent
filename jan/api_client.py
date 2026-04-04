@@ -3,10 +3,12 @@ Klient API dla Bielika 11B
 Oddzielony moduł do komunikacji z NVIDIA NIM API
 """
 
-import os
-from typing import Optional, Any, cast
+import logging
+from typing import Optional
 from openai import OpenAI, Client
 from .config import config
+
+logger = logging.getLogger(__name__)
 
 
 class BielikClient:
@@ -30,7 +32,7 @@ class BielikClient:
             else:
                 self.client = None
         except Exception as e:
-            print(f"Błąd inicjalizacji klienta Bielika: {e}")
+            logger.error("Błąd inicjalizacji klienta Bielika: %s", e)
             self.client = None
 
     def is_ready(self) -> bool:
@@ -82,8 +84,10 @@ class BielikClient:
             choices = response.choices
             if choices and len(choices) > 0 and choices[0].message:
                 return choices[0].message.content or ""
+            logger.warning("Bielik zwrócił pustą listę odpowiedzi.")
             return "Nie otrzymano odpowiedzi od modelu."
         except Exception as e:
+            logger.error("Błąd wywołania Bielika API: %s", e)
             return f"Nie udało się połączyć z Bielikiem: {str(e)}"
 
     def _get_unavailable_message(self) -> str:
@@ -96,6 +100,8 @@ class BielikClient:
     def reset(self):
         """Resetuje klienta (np. po zmianie API key)"""
         self.api_key = config.api_key
+        self.base_url = config.api_base
+        self.model_id = config.model_id
         self._init_client()
 
 

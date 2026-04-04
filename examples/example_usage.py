@@ -149,7 +149,7 @@ def main():
     print("=" * 80)
     print()
     print("Aby przetestować z API, ustaw NVIDIA_API_KEY w pliku .env")
-    print("i uruchom: python jan/jan_subagent.py")
+    print("i uruchom: python -m jan.jan_subagent_opencode")
 
 
 if __name__ == "__main__":

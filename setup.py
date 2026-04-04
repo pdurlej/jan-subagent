@@ -9,13 +9,12 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="jan-subagent",
-    version="1.0.0",
+    version="2.0.0",
     author="Jan Subagent Team",
-    author_email="your@email.com",
-    description="Subagent MCP Jana Kochanowskiego do korekty języka polskiego",
+    description="MCP server do korekty języka polskiego z personą Jana Kochanowskiego",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/yourusername/jan",
+    url="https://github.com/pdurlej/jan-subagent",
     packages=find_packages(),
     classifiers=[
         "Development Status :: 4 - Beta",
@@ -40,13 +39,13 @@ setup(
     ],
     entry_points={
         "console_scripts": [
-            "jan-server=jan.jan_subagent:main",
+            "jan-server=jan.jan_subagent_opencode:main",
         ],
     },
     keywords="mcp subagent polish language correction kochanowski bielik",
     project_urls={
-        "Bug Reports": "https://github.com/yourusername/jan/issues",
-        "Source": "https://github.com/yourusername/jan",
-        "Documentation": "https://github.com/yourusername/jan/blob/main/README.md",
+        "Bug Reports": "https://github.com/pdurlej/jan-subagent/issues",
+        "Source": "https://github.com/pdurlej/jan-subagent",
+        "Documentation": "https://github.com/pdurlej/jan-subagent/blob/master/README.md",
     },
 )

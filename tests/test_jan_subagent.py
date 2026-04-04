@@ -2,14 +2,25 @@
 Unit tests dla Jan Subagent
 """
 
-import pytest
-import sys
+import json
 import os
+import sys
+from pathlib import Path
+
+import pytest
 
 # Dodaj katalog nadrzędny do Python path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
-from jan.kochanowski_quotes import KochanowskiPersona, QUOTES_BY_THEME
+from jan import __version__, mcp
+from jan.api_client import BielikClient
+from jan.kochanowski_quotes import (
+    FAREWELLS,
+    GREETINGS,
+    KochanowskiPersona,
+    QUOTES_BY_THEME,
+)
+from jan.jan_subagent_opencode import check_configuration, greet_jan, main
 from jan.system_prompts import get_system_prompt, SYSTEM_PROMPTS
 
 
@@ -22,7 +33,7 @@ class TestKochanowskiPersona:
         assert greeting is not None
         assert isinstance(greeting, str)
         assert len(greeting) > 0
-        assert "Bóg" in greeting or "Zdrowi" in greeting or "Niech" in greeting
+        assert greeting in GREETINGS
 
     def test_get_farewell(self):
         """Test pożegnania"""
@@ -30,7 +41,7 @@ class TestKochanowskiPersona:
         assert farewell is not None
         assert isinstance(farewell, str)
         assert len(farewell) > 0
-        assert "Bóg" in farewell or "pióra" in farewell or "mowa" in farewell
+        assert farewell in FAREWELLS
 
     def test_get_reflection(self):
         """Test refleksji dla różnych typów korekty"""
@@ -65,20 +76,22 @@ class TestKochanowskiPersona:
             message, include_greeting=True, include_farewell=False
         )
         assert message in result
+        assert any(greeting in result for greeting in GREETINGS)
 
         # Tylko z pożegnaniem
         result = KochanowskiPersona.format_with_personality(
             message, include_greeting=False, include_farewell=True
         )
         assert message in result
+        assert any(farewell in result for farewell in FAREWELLS)
 
         # Kompletna wiadomość
         result = KochanowskiPersona.format_with_personality(
             message, include_greeting=True, include_farewell=True
         )
         assert message in result
-        assert "Bóg" in result or "Zdrowi" in result  # powitanie
-        assert "pióra" in result or "mowa" in result  # pożegnanie
+        assert any(greeting in result for greeting in GREETINGS)
+        assert any(farewell in result for farewell in FAREWELLS)
 
 
 class TestSystemPrompts:
@@ -158,14 +171,62 @@ class TestQuotesStructure:
                 assert len(quote) > 0
 
 
+class TestRuntimeBehavior:
+    """Testy publicznego zachowania runtime."""
+
+    def test_check_configuration_uses_status_icons(self):
+        summary = check_configuration()
+        assert "✅" in summary or "❌" in summary
+        assert "True" not in summary
+        assert "False" not in summary
+
+    def test_greet_jan_uses_addressee(self):
+        result = greet_jan("Pawle")
+        assert "Pawle" in result
+
+    def test_main_does_not_write_to_stdout(self, monkeypatch, capsys):
+        monkeypatch.setattr("jan.jan_subagent_opencode.mcp.run", lambda: None)
+        main()
+        captured = capsys.readouterr()
+        assert captured.out == ""
+
+
+class TestPackagingAndConfig:
+    """Testy pakietowania i sample configu."""
+
+    def test_package_version_is_2_0_0(self):
+        assert __version__ == "2.0.0"
+
+    def test_mcp_config_is_valid_json_and_uses_opencode(self):
+        config_path = Path(__file__).resolve().parents[1] / "mcp_config.json"
+        content = config_path.read_text(encoding="utf-8")
+        payload = json.loads(content)
+        server = payload["mcpServers"]["jan-kochanowski"]
+        assert server["args"] == ["-m", "jan.jan_subagent_opencode"]
+
+    def test_bielik_client_reset_refreshes_runtime_config(self, monkeypatch):
+        monkeypatch.setenv("NVIDIA_API_KEY", "nvapi-initial-test-key")
+        monkeypatch.setenv("NVIDIA_API_BASE", "https://initial.example.test/v1")
+        monkeypatch.setenv("BIELIK_MODEL_ID", "initial-model")
+
+        client = BielikClient()
+
+        monkeypatch.setenv("NVIDIA_API_KEY", "nvapi-updated-test-key")
+        monkeypatch.setenv("NVIDIA_API_BASE", "https://updated.example.test/v1")
+        monkeypatch.setenv("BIELIK_MODEL_ID", "updated-model")
+
+        client.reset()
+
+        assert client.api_key == "nvapi-updated-test-key"
+        assert client.base_url == "https://updated.example.test/v1"
+        assert client.model_id == "updated-model"
+
+
 def test_imports():
     """Test czy można importować główne elementy"""
-    from jan import mcp, KochanowskiPersona, get_system_prompt
-
     assert KochanowskiPersona is not None
     assert get_system_prompt is not None
-    # mcp może być None jeśli nie zainstalowano zależności
-    # assert mcp is not None
+    assert mcp is not None
 
 
 if __name__ == "__main__":

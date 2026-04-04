@@ -1,0 +1,30 @@
+{
+  "tracked_checksums": {
+    "CHANGELOG.md": "9a0c88be2e9e62466c4a4331c3ca5a3d433c87e36aa120ac8471c0b4fffedf33",
+    "package_json.md": "403b73263ca7baff2acd1376c754678796406060c842be49c6473d649a036eea",
+    "docs_reference_commands.md": "955e5419098ffaa318e28b80585e04190bb675766a853116ee5d26505bdfdb63",
+    "docs_reference_agents.md": "86d11bb0cfefd84ef9e6d0b3a416eec0d2c7147953fdfccb423345d78c398cef",
+    "docs_reference_modules.md": "65fc3663ab5494ef99cca68d3a6aa99c10b923e758ccd9c8cea92fa497ade529",
+    "docs_reference_workflow_map.md": "73abf4477708671462b249283157ff6d55b112676b41ff0ac9a6b244b542c7bb",
+    "how_to_install_bmad.md": "5c8ca89dc88bd494eefc03cd28e9cee4a4f7e51c7276a77130c0ed32ee843115",
+    "how_to_upgrade_to_v6.md": "2d3f26188c4af76776312b76b972ba28ae712b1bb67b0f5b2ee57b2f34259aa8"
+  },
+  "release": {
+    "tag_name": "v6.2.2",
+    "name": null,
+    "published_at": "2026-03-26T02:44:52Z",
+    "html_url": "https://github.com/bmad-code-org/BMAD-METHOD/releases/tag/v6.2.2",
+    "body_sha": "935cf66b2341d0291f13bb128b331183fff54b30cf92991bfa3120010b1a8a11"
+  },
+  "runtime_version": "0.89.0",
+  "agent_health": {
+    "local_version": "0.2.0",
+    "agent_version": "0.2.0",
+    "agent_path": "/Users/pd/.codex/skills/bmad-method-codex",
+    "versions_match": true
+  },
+  "last_checked_at": "2026-04-03T23:44:07.433434+00:00",
+  "last_check_mode": "check",
+  "tracked_changes_last_sync": [],
+  "last_updated_at": "2026-04-03T23:44:07.433471+00:00"
+}

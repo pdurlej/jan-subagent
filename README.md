@@ -1,599 +1,253 @@
-# 📜 Jan Subagent - MCP Subagent Jana Kochanowskiego
+# 📜 Jan Subagent - MCP server do korekty polszczyzny
 
-![Version](https://img.shields.io/badge/version-1.1.0-blue)
+![Version](https://img.shields.io/badge/version-2.0.0-blue)
 ![Python](https://img.shields.io/badge/python-3.10+-green)
 ![License](https://img.shields.io/badge/license-MIT-orange)
 
 > *"Niechaj Bóg strzeże wasze pióra i myśli"* - Jan Kochanowski
 
-Subagent MCP z osobowością Jana Kochanowskiego, poety renesansowego, do kompleksowej korekty języka polskiego. Używa modelu **Bielik 11B v2.6 Instruct** od NVIDIA jako eksperta językowego.
+`jan-subagent` to MCP server do korekty języka polskiego z personą Jana Kochanowskiego i integracją z NVIDIA Bielik. Wydanie `2.0.0` ustanawia jeden kanoniczny runtime: `jan.jan_subagent_opencode`.
 
-## ✨ Nowości w v1.1.0 (OpenCode Optimized)
+## Co się zmieniło w 2.0.0
 
-- 🔑 **Automatyczna konfiguracja API key** - pierwszy raz @jan poprosi o NVIDIA API key
-- 💾 **Zapisywanie konfiguracji** - API key zapisywany w `~/.jan/config.json`
-- 🚀 **Zoptymalizowana architektura** - mniejsze pliki, szybsze ładowanie
-- 🛠️ **Narzędzia konfiguracyjne** - `check_configuration`, `setup_api_key`, `reset_api_key`
-- 📦 **Modularny kod** - oddzielone moduły dla łatwiejszego rozwijania
+- `jan.jan_subagent_opencode` jest jedynym wspieranym runtime MCP.
+- Usunięto legacy moduł `jan.jan_subagent`.
+- `mcp_config.json` jest jedynym sample configiem i jest poprawnym JSON-em.
+- `check_configuration()` zwraca statusy jako `✅/❌`.
+- `greet_jan(name=...)` realnie używa przekazanego adresata.
+- `main()` nie wypisuje nic na `stdout`, więc nie zakłóca transportu `stdio`.
+- Repo zawiera maintenance scaffold BMAD oraz pełną warstwę projektową `_bmad/`.
 
-## 🎯 Cechy
+Pełna nota wydania: [docs/VERSION_2_0_0.md](/Users/pd/Developer/jan/docs/VERSION_2_0_0.md)
 
-- ✨ **Persona Jana Kochanowskiego** - powitania, pożegnania i komentarze w stylu renesansowym
-- 🔑 **Integracja z NVIDIA Bielik** - model 11B v2.6 Instruct
-- 📝 **Korekta ortografii** - z wyróżnionymi zmianami i wyjaśnieniami
-- 🔤 **Korekta interpunkcji** - szczegółowa analiza znaków przystankowych
-- 📚 **Weryfikacja gramatyki** - zgodność z polskimi regułami gramatycznymi
-- 🎨 **Ulepszanie stylu** - transformacje stylów (elegancki, prosty, poetycki, naukowy)
-- 🔄 **Kompleksowa korekta** - pełna analiza tekstu w jednym zapytaniu
-- 💡 **Porady językowe** - edukacyjne porady w stylu "Trenów"
-- 📊 **Ocena jakości tekstu** - szybka ocena i rekomendacje
-- 🔧 **Narzędzia konfiguracyjne** - łatwe zarządzanie API key
+## Cechy
 
-## 🚀 Instalacja
+- Persona Jana Kochanowskiego w odpowiedziach, refleksjach i poradach językowych.
+- Integracja z NVIDIA Bielik przez OpenAI-compatible API.
+- Narzędzia MCP do ortografii, interpunkcji, gramatyki, stylu i szybkiej oceny tekstu.
+- Automatyczna konfiguracja API key przez `setup_api_key`.
+- Konfiguracja ładowana z `NVIDIA_API_KEY` lub `~/.jan/config.json`.
+- Lazy import `jan.mcp`, bez side-effectów przy `python -m`.
+
+## Instalacja
 
 ### Wymagania
 
-- Python 3.10 lub nowszy
-- MCP Client (Claude Desktop, Cursor, inne)
-- NVIDIA API Key (uzyskaj na https://build.nvidia.com)
+- Python 3.10+
+- MCP client, np. Claude Desktop albo Cursor
+- NVIDIA API key dla Bielika
 
-### 🎉 Nowy flow v1.1.0 - Automatyczna konfiguracja!
-
-#### Krok 1: Uzyskaj NVIDIA API Key
-
-#### Metoda 1: Przez build.nvidia.com (zalecana)
-
-1. Otwórz [https://build.nvidia.com/](https://build.nvidia.com/)
-2. Zaloguj się lub zarejestruj konto (Login button w prawym górnym rogu)
-3. Przejdź do [strony modelu Bielik](https://build.nvidia.com/speakleash/bielik-11b-v2_6-instruct)
-4. Kliknij "Get API Key" w prawym panelu
-5. (Opcjonalnie) Podaj nazwę klucza
-6. Skopiuj wygenerowany API key
-
-#### Metoda 2: Bezpośrednio przez NGC (zaawansowana)
-
-1. Otwórz [https://org.ngc.nvidia.com/setup/api-keys](https://org.ngc.nvidia.com/setup/api-keys)
-2. Zaloguj się (to samo konto co build.nvidia.com)
-3. Kliknij **"Generate Personal Key"**
-4. Wypełnij formularz:
-   - **Key Name:** np. "jan-subagent"
-   - **Expiration:** wybierz "Never Expire"
-   - **Services Included:** zaznacz "NGC Catalog" i "Public API Endpoints"
-5. Kliknij **"Generate Personal Key"**
-6. Skopiuj wygenerowany API key (pokazuje się tylko raz!)
-
-**⚠️ Ważne:** API key jest pokazywany tylko raz! Skopiuj go i zapisz w bezpiecznym miejscu.
-
-#### Krok 2: Zainstaluj zależności
+### Instalacja lokalna
 
 ```bash
 cd /Users/pd/Developer/jan
-pip install -r requirements.txt
+python3 -m venv .venv
+.venv/bin/pip install -r requirements.txt
+.venv/bin/pip install -e .
 ```
 
-#### Krok 3: Skonfiguruj MCP
+### Konfiguracja MCP
 
-**Claude Desktop (macOS):**
+Repo zawiera gotowy sample config: [mcp_config.json](/Users/pd/Developer/jan/mcp_config.json)
+
+Uzupełnij w nim własne ścieżki:
+
 ```json
 {
   "mcpServers": {
     "jan-kochanowski": {
-      "command": "python3",
-      "args": ["-m", "jan.jan_subagent_opencode"],
-      "cwd": "/Users/pd/Developer/jan",
+      "command": "/absolute/path/to/jan/.venv/bin/python",
+      "args": [
+        "-m",
+        "jan.jan_subagent_opencode"
+      ],
+      "cwd": "/absolute/path/to/jan",
       "env": {}
     }
   }
 }
 ```
 
-**Cursor:**
-Edytuj `~/.cursor/mcp_config.json` z tym samym configiem.
+Najbezpieczniej wskazać interpreter z wirtualnego środowiska, bo globalne `python3` może nie mieć zainstalowanego pakietu `mcp`.
 
-#### Krok 4: Rozpocznij konwersację
+### Pierwsza konfiguracja API key
 
-Otwórz Claude/Cursor i zacznij konwersację z **@jan**. Przy pierwszym użyciu, **@jan** poprosi Cię o API key:
+1. Uzyskaj NVIDIA API key na [build.nvidia.com](https://build.nvidia.com/) albo [NGC API Keys](https://org.ngc.nvidia.com/setup/api-keys).
+2. Uruchom klienta MCP z Janem.
+3. Przy pierwszym użyciu `@jan` poprosi o klucz:
 
-```
-> @jan popraw ten tekst
-```
-
-**Jan odpowie:**
-> Błagam miłościwi, czekam na API key Bielika, by móc pomóc w korekcie. Użyj narzędzia `setup_api_key` aby ustawić klucz.
-
-Następnie ustaw klucz:
-
-```
-> Użyj setup_api_key z api_key: "nvapi-xxxx-xxxx-xxxx-xxxx-xxxx-xxxx"
+```text
+@jan popraw ten tekst
 ```
 
-**Jan potwierdzi:**
-> ✅ **API Key został pomyślnie ustawiony!**
+4. Ustaw klucz przez narzędzie MCP:
 
-Gotowe! Od teraz **@jan** będzie działał normalnie bez dodatkowej konfiguracji.
-
-### 📋 Stary flow (ręczna konfiguracja)
-
-Jeśli wolisz ręczną konfigurację (niezalecane):
-
-```bash
-# 1. Utwórz plik .env
-cp .env.example .env
-
-# 2. Edytuj .env i wpisz NVIDIA_API_KEY
-# NVIDIA_API_KEY=twój-nvidia-api-key
-
-# 3. Zainstaluj pakiet
-pip install -e .
+```text
+Użyj setup_api_key z api_key: "nvapi-xxxx-xxxx-xxxx-xxxx"
 ```
 
-**Uwaga:** Ten sposób jest mniej bezpieczny, ponieważ API key jest przechowywany w pliku tekstowym. Zalecamy nowy sposób z `setup_api_key`.
+Klucz zostanie zapisany w `~/.jan/config.json`.
 
-### 🔍 Sprawdzanie konfiguracji
+### Ręczna konfiguracja przez `.env`
 
-Zawsze możesz sprawdzić status konfiguracji:
+Fallback nadal działa, ale nie jest preferowany. Przykład zmiennych znajdziesz w [.env.example](/Users/pd/Developer/jan/.env.example).
 
-```
-> Użyj check_configuration
-```
+## Narzędzia MCP
 
-**Odpowiedź:**
-> ### Konfiguracja Jana Kochanowskiego
->
-> **API Key skonfigurowany:** ✅
-> **Environment Variable:** ✅
-> **Config File:** ❌
->
-> **Model:** speakleash/bielik-11b-v2_6-instruct
-> **API Base:** https://integrate.api.nvidia.com/v1
-> **Default Temperature:** 0.3
-> **Max Tokens:** 4096
-
-## ⚙️ Konfiguracja MCP
-
-### Claude Desktop (macOS)
-
-Edytuj plik `~/Library/Application Support/Claude/claude_desktop_config.json`:
-
-```json
-{
-  "mcpServers": {
-    "jan-kochanowski": {
-      "command": "python3",
-      "args": [
-        "-m",
-        "jan.jan_subagent"
-      ],
-      "cwd": "/ścieżka/do/jan",
-      "env": {
-        "NVIDIA_API_KEY": "twój-nvidia-api-key"
-      }
-    }
-  }
-}
-```
-
-### Cursor
-
-Edytuj `~/.cursor/mcp_config.json` z tym samym configiem co wyżej.
-
-## 📖 Narzędzia MCP
-
-### 📋 Konfiguracja
-
-#### `check_configuration`
-Sprawdź konfigurację Jana i status API key.
+### Konfiguracja
 
 ```python
 check_configuration() -> str
-```
-
-**Odpowiedź:**
-- Status API key (env var / config file)
-- Model ID
-- API Base URL
-- Default parameters
-
-#### `setup_api_key`
-Ustaw NVIDIA API Key - użyj przy pierwszej konfiguracji.
-
-```python
 setup_api_key(api_key: str) -> str
-```
-
-**Przykład użycia przy pierwszej rozmowie:**
-```
-Użyj setup_api_key z api_key: "nvapi-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
-```
-
-**Odpowiedź Jana:**
-> Niech Bóg wam błogosławi. Czym mogę służyć w sprawie języka ojczystego?
->
-> ✅ **API Key został pomyślnie ustawiony!**
->
-> Lokalizacja: `~/.jan/config.json`
-> Model: `speakleash/bielik-11b-v2_6-instruct`
->
-> *Słowa poprawione są jak polerowany diament - piękniej lśnią.*
->
-> Niechaj Bóg strzeże wasze pióra i myśli. Do zobaczenia w innej godzinie.
-
-#### `reset_api_key`
-Resetuj API Key.
-
-```python
 reset_api_key() -> str
 ```
 
-### 📝 Korekta języka
+`check_configuration()` zwraca status konfiguracji, model, base URL i domyślne parametry. Statusy są prezentowane jako `✅/❌`.
 
-#### `correct_orthography`
-Poprawa ortografii tekstu polskiego z komentarzami.
-
-```python
-correct_orthography(
-    text: str,
-    include_greeting: bool = True
-) -> str
-```
-
-**Przykład:**
-```
-Użyj correct_orthography z tekstem:
-"Tak naprawde ciekawe jest to co pisze."
-```
-
-### `correct_punctuation`
-Korekta interpunkcji tekstu polskiego.
+### Korekta językowa
 
 ```python
-correct_punctuation(
-    text: str,
-    include_greeting: bool = True
-) -> str
-```
-
-### `verify_grammar`
-Weryfikacja gramatyki tekstu polskiego.
-
-```python
-verify_grammar(
-    text: str,
-    include_greeting: bool = True
-) -> str
-```
-
-**Zwraca:**
-- `correct`: Czy tekst jest gramatycznie poprawny
-- `errors`: Lista błędów z wyjaśnieniami
-- `suggestions`: Sugestie poprawek
-- `overall_assessment`: Ogólna ocena
-
-### `improve_style`
-Ulepszenie stylu tekstu.
-
-```python
-improve_style(
-    text: str,
-    style: str = "elegancki",  # elegancki, prosty, poetycki, naukowy, ulotny
-    include_greeting: bool = True
-) -> str
-```
-
-**Dostępne style:**
-- `elegancki` - bogate słownictwo, złożona składnia
-- `prosty` - jasny, zrozumiały, bez ozdobników
-- `poetycki` - metafory, obrazowanie, rymy
-- `naukowy` - precyzyjny, terminologiczny
-- `ulotny` - lekki, humorystyczny
-
-### `comprehensive_correction`
-Kompleksowa korekta tekstu (wszystko w jednym).
-
-```python
-comprehensive_correction(
-    text: str,
-    mode: str = "standard",  # standard, conservative, aggressive
-    include_greeting: bool = True,
-    include_farewell: bool = True
-) -> str
-```
-
-**Mode korekty:**
-- `conservative` - tylko ewidentne błędy
-- `standard` - błędy + wyraźne ulepszenia
-- `aggressive` - pełna korekta + stylizacja
-
-**Zwraca:**
-- Raport JSON z ocenami dla: ortografii, interpunkcji, gramatyki, stylu
-- Poprawiony tekst
-- Ogólną ocenę jakości (0-10)
-
-### `get_language_advice`
-Edukacyjna porada językowa.
-
-```python
-get_language_advice(
-    topic: str,
-    include_greeting: bool = True
-) -> str
-```
-
-**Przykłady tematów:**
-- "ó vs u"
-- "interpunkcja"
-- "gramatyka"
-- "styl"
-- "frazeologia"
-
-### `check_text_quality`
-Szybka ocena jakości tekstu.
-
-```python
-check_text_quality(
-    text: str,
-    include_greeting: bool = False
-) -> str
-```
-
-### `greet_jan`
-Powitanie od Jana Kochanowskiego.
-
-```python
+correct_orthography(text: str, include_greeting: bool = True) -> str
+correct_punctuation(text: str, include_greeting: bool = True) -> str
+verify_grammar(text: str, include_greeting: bool = True) -> str
+improve_style(text: str, style: str = "elegancki", include_greeting: bool = True) -> str
+comprehensive_correction(text: str, mode: str = "standard") -> str
+get_language_advice(topic: str) -> str
+check_text_quality(text: str) -> str
 greet_jan(name: str = "miłościw") -> str
-```
-
-### `farewell_jan`
-Pożegnanie od Jana Kochanowskiego.
-
-```python
 farewell_jan() -> str
 ```
 
-## 💬 Przykłady użycia
+Obsługiwane style dla `improve_style`:
 
-### Przykład 1: Prosta korekta ortograficzna
+- `elegancki`
+- `prosty`
+- `poetycki`
+- `naukowy`
+- `ulotny`
 
-```
+Obsługiwane tryby dla `comprehensive_correction`:
+
+- `conservative`
+- `standard`
+- `aggressive`
+
+## Przykłady użycia
+
+### Prosta korekta ortografii
+
+```text
 Użyj correct_orthography z tekstem:
-"Cześć! Napisalem tekst z błedami. Czy jest OK?"
+"Cześć! Napisalem tekst z błedami."
 ```
 
-**Odpowiedź Jana:**
-> Niech Bóg wam błogosławi. Czym mogę służyć w sprawie języka ojczystego?
->
-> Poprawiłem twoje słowa zgodnie z zasadami polskiego piśmiennictwa.
->
-> *Słowa poprawione są jak polerowany diament - piękniej lśnią.*
->
-> Niechaj Bóg strzeże wasze pióra i myśli. Do zobaczenia w innej godzinie.
+### Porada językowa
 
-### Przykład 2: Kompleksowa korekta
-
-```
-Użyj comprehensive_correction z tekstem:
-"Tak naprawde ciekawe jest to co pisze. Ale czy to jest dobre? Nie wiem."
-mode: standard
-```
-
-**Odpowiedź Jana:**
-> Zdrowi bądźcie, miłościwi. Przybywam by pomóc w kunszcie piśmiennictwa polskiego.
->
-> [Raport JSON z wynikami korekty]
->
-> *I tak się pisze w narodzie polskim, co jest piękniejsze niż w obcych językach.*
->
-> Niech wasza mowa zawsze będzie czysta jak źródło polskiej wieśniaczki. Póki co.
-
-### Przykład 3: Ulepszanie stylu
-
-```
-Użyj improve_style z tekstem:
-"To jest dobre. Lubię to."
-style: elegancki
-```
-
-### Przykład 4: Porada językowa
-
-```
+```text
 Użyj get_language_advice z tematem:
 "ó vs u"
 ```
 
-## 🏗️ Architektura projektu
+### Powitanie z adresatem
 
+```python
+from jan.jan_subagent_opencode import greet_jan
+
+print(greet_jan("Pawle"))
 ```
+
+## Architektura repo
+
+```text
 jan/
 ├── jan/
-│   ├── __init__.py              # Inicjalizacja pakietu (zoptymalizowana)
-│   ├── jan_subagent.py          # Główny plik subagenta (oryginalny)
-│   ├── jan_subagent_opencode.py # Zoptymalizowana wersja pod OpenCode
-│   ├── kochanowski_quotes.py    # Cytaty i persona Kochanowskiego
-│   ├── system_prompts.py        # System prompty dla Bielika
-│   ├── config.py               # Menadżer konfiguracji (NOWY v1.1.0)
-│   └── api_client.py           # Klient Bielika API (NOWY v1.1.0)
-├── src/                         # Dodatkowe źródła
-├── tests/                       # Testy jednostkowe
-├── examples/                    # Przykłady użycia
-├── docs/                        # Dokumentacja
-├── requirements.txt             # Zależności Pythona
-├── .env.example                # Przykładowe zmienne środowiskowe
-├── mcp_config.json             # Konfiguracja MCP (oryginalna)
-├── mcp_config_opencode.json    # Konfiguracja MCP (zoptymalizowana)
-├── setup.py                    # Setup script
-├── LICENSE                     # Licencja MIT
-└── README.md                   # Ten plik
+│   ├── __init__.py
+│   ├── api_client.py
+│   ├── config.py
+│   ├── jan_subagent_opencode.py
+│   ├── kochanowski_quotes.py
+│   └── system_prompts.py
+├── docs/
+│   ├── VERSION_1_1_0.md
+│   ├── VERSION_2_0_0.md
+│   └── new-thread-start.md
+├── tests/
+├── examples/
+├── scripts/
+├── references/
+├── agents/
+├── state/
+├── _bmad/
+├── _bmad-output/
+├── .github/
+├── mcp_config.json
+└── setup.py
 ```
 
-### Nowe moduły v1.1.0
+## BMAD
 
-#### `jan/config.py`
-Menadżer konfiguracji Jana - zarządzanie API key, cache'owanie, persistencja.
+Repo jest przygotowane do pracy zarówno z maintenance scaffoldem BMAD, jak i pełną warstwą projektową.
 
-- API key zapisywany w `~/.jan/config.json`
-- Automatyczne sprawdzanie environment variables
-- Metody do ustawiania/resetowania API key
-- Podsumowanie konfiguracji
-
-#### `jan/api_client.py`
-Klient do komunikacji z NVIDIA Bielik API.
-
-- Oddzielony od głównej logiki MCP
-- Walidacja API key przed zapytaniami
-- Obsługa błędów połączenia
-- Automatyczny reset po zmianie configu
-
-#### `jan/jan_subagent_opencode.py`
-Zoptymalizowana wersja subagenta pod OpenCode.
-
-- Krótszy kod (~40% mniej linii)
-- Lepsza czytelność i modularność
-- Nowe narzędzia konfiguracyjne
-- Szybsze ładowanie
-
-## 🎨 Persona Jana Kochanowskiego
-
-Subagent 'jan' zachowuje się jak polski poeta renesansowy Jan Kochanowski (1530-1584), autor "Pieśni", "Trenów" i "Fraszek".
-
-### Cechy persony:
-
-- **Powitania i pożegnania** w stylu renesansowym
-- **Słownictwo** bogate, metaforyczne, klasyczne
-- **Cytaty** z literatury polskiej i samego Kochanowskiego
-- **Refleksje** edukacyjne, inspirowane "Trenami"
-- **Formy grzecznościowe** (miłościwi, panie, pani)
-- **Stylizacja** humanistyczna, humanistyczna troska o język
-
-### Przykłady cytatów:
-
-> *"Mowa polska nie jest licha, lecz piękna, miła i do nauk zdolna."*
->
-> *"Słowa są lustrą duszy ludzkiej."*
->
-> *"Człowiek jest stworzony do mówienia, jak ptak do latania."*
-
-## 🔧 Konfiguracja
-
-### Zmienne środowiskowe
-
-Utwórz plik `.env` w głównym katalogu projektu:
+- Punkt wejścia do workflowów projektowych: `bmad-help`
+- Maintenance sync:
 
 ```bash
-# NVIDIA API Key (wymagane)
-NVIDIA_API_KEY=twój-nvidia-api-key
-
-# Opcjonalne
-BIELIK_MODEL_ID=speakleash/bielik-11b-v2_6-instruct
-NVIDIA_API_BASE=https://integrate.api.nvidia.com/v1
-LOG_LEVEL=info
-DEFAULT_CORRECTION_TEMPERATURE=0.3
-DEFAULT_MAX_TOKENS=4096
+python3 scripts/test_sync_bmad_method.py
+python3 scripts/sync_bmad_method.py check --json
 ```
 
-### Uzyskanie NVIDIA API Key
+Pełna instalacja projektowa znajduje się w `_bmad/`, a wygenerowane artefakty trafiają do `_bmad-output/`.
 
-1. Otwórz [build.nvidia.com](https://build.nvidia.com/)
-2. Zarejestruj się lub zaloguj
-3. Przejdź do [API Keys](https://build.nvidia.com/api-key)
-4. Utwórz nowy API key
-5. Skopiuj i wklej do pliku `.env`
-
-## 🧪 Testowanie
-
-### Uruchomienie testów
+## Testowanie
 
 ```bash
-# Testy jednostkowe
-python -m pytest tests/
-
-# Testy integracyjne (wymaga NVIDIA_API_KEY)
-python -m pytest tests/integration/
-
-# Testowanie persony Kochanowskiego
-python jan/kochanowski_quotes.py
+pytest -q
+.venv/bin/python -m compileall -q jan
+.venv/bin/python -m jan.jan_subagent_opencode
+python3 scripts/test_sync_bmad_method.py
+python3 scripts/sync_bmad_method.py check --json
 ```
 
-### Testowanie narzędzia
+## Dokumentacja API
+
+### `BielikClient`
 
 ```python
-from jan.jan_subagent import greet_jan
-
-# Powitanie
-print(greet_jan())
-
-# Korekta ortograficzna
-from jan.jan_subagent import correct_orthography
-result = correct_orthography(
-    "Cześć! Napisalem tekst.",
-    include_greeting=False
-)
-print(result)
-```
-
-## 📚 Dokumentacja API
-
-### BielikClient
-
-Główna klasa do komunikacji z NVIDIA Bielik API.
-
-```python
-from jan.jan_subagent import BielikClient
+from jan.api_client import BielikClient
 
 client = BielikClient()
-response = client.call_bielik(
+response = client.call(
     system_prompt="Jesteś ekspertem...",
     user_message="Popraw tekst...",
     temperature=0.3,
-    max_tokens=4096
+    max_tokens=4096,
 )
 ```
 
-### KochanowskiPersona
-
-Klasa persony Jana Kochanowskiego z cytatami i stylizacją.
+### `KochanowskiPersona`
 
 ```python
 from jan.kochanowski_quotes import KochanowskiPersona
 
-# Losowe powitanie
 greeting = KochanowskiPersona.get_greeting()
-
-# Losowa refleksja
 reflection = KochanowskiPersona.get_reflection("orthography")
-
-# Formatowanie z osobowością
-message = KochanowskiPersona.format_with_personality(
-    "Poprawiłem twój tekst.",
-    include_greeting=True,
-    include_farewell=True
-)
 ```
 
-## 🤝 Współpraca
+## Współpraca
 
-Contributions are welcome!
+1. Utwórz branch roboczy.
+2. Utrzymuj README, sample config i testy w zgodzie z runtime `jan.jan_subagent_opencode`.
+3. Przy zmianach release/BMAD aktualizuj [docs/new-thread-start.md](/Users/pd/Developer/jan/docs/new-thread-start.md).
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+## Licencja
 
-## 📄 Licencja
+MIT License - patrz [LICENSE](/Users/pd/Developer/jan/LICENSE).
 
-MIT License - patrz plik [LICENSE](LICENSE) dla szczegółów.
+## Kontakt
 
-## 🙏 Podziękowania
-
-- **NVIDIA** za model Bielik 11B i API
-- **Speakleash** za model Bielik wyspecjalizowany w języku polskim
-- **Jan Kochanowski** za mistrzostwo w polskim piśmiennictwie
-
-## 📞 Kontakt
-
-- Issues: [GitHub Issues](https://github.com/yourusername/jan/issues)
-- Email: your@email.com
+- Issues: [GitHub Issues](https://github.com/pdurlej/jan-subagent/issues)
+- Repo: [pdurlej/jan-subagent](https://github.com/pdurlej/jan-subagent)
 
 ---
 
-*"Niechaj Bóg strzeże wasze pióra i myśli. Do zobaczenia w innej godzinie."* - Jan Subagent
+*"Mowa polska to skarb narodu. Niech go chronicie i rozwijacie."* - Jan Subagent

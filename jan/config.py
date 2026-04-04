@@ -5,8 +5,11 @@ Zarządzanie API key, konfiguracją i cache'owaniem
 
 import os
 import json
+import logging
 from pathlib import Path
 from typing import Optional, Dict, Any
+
+logger = logging.getLogger(__name__)
 
 
 class JanConfig:
@@ -30,8 +33,12 @@ class JanConfig:
             try:
                 with open(self.config_file, "r", encoding="utf-8") as f:
                     return json.load(f)
-            except Exception:
-                pass
+            except Exception as e:
+                logger.warning(
+                    "Nie udało się załadować konfiguracji z %s: %s",
+                    self.config_file,
+                    e,
+                )
         return {}
 
     def _save_config(self):
@@ -73,7 +80,7 @@ class JanConfig:
     @property
     def model_id(self) -> str:
         """Pobierz ID modelu"""
-        return os.getenv("BIELIK_MODEL_ID", "speakleash/bielik-11b-v2_6-instruct")
+        return os.getenv("BIELIK_MODEL_ID", "speakleash/bielik-11b-v2.6-instruct")
 
     @property
     def api_base(self) -> str:

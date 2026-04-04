@@ -4,23 +4,28 @@ Zoptymalizowana wersja pod OpenCode
 """
 
 import json
-import random
-from typing import Dict, List, Optional
+import logging
 from mcp.server.fastmcp import FastMCP
 from .kochanowski_quotes import KochanowskiPersona
 from .system_prompts import get_system_prompt
 from .config import config
 from .api_client import bielik
 
+logger = logging.getLogger(__name__)
+
 
 # Inicjalizacja MCP server (zoptymalizowana)
 mcp = FastMCP(
     name="jan-kochanowski",
-    description="Jan Kochanowski - ekspert do korekty języka polskiego",
 )
 
 
 # ==================== HELPER FUNCTIONS ====================
+
+
+def format_status_icon(value: bool) -> str:
+    """Zwraca ikonę statusu zgodną z publiczną dokumentacją."""
+    return "✅" if value else "❌"
 
 
 def format_response(
@@ -57,8 +62,8 @@ def format_json_response(json_str: str, prefix: str = "") -> str:
             json_data = json.loads(json_match.group())
             formatted = json.dumps(json_data, indent=2, ensure_ascii=False)
             return f"{prefix}```json\n{formatted}\n```\n\n{json_str.replace(json_match.group(), '')}"
-    except:
-        pass
+    except Exception as e:
+        logger.debug("Nie udało się sformatować JSON z odpowiedzi modelu: %s", e)
     return json_str
 
 
@@ -71,9 +76,9 @@ def check_configuration() -> str:
     summary = config.get_config_summary()
 
     msg = "### Konfiguracja Jana Kochanowskiego\n\n"
-    msg += f"**API Key skonfigurowany:** {summary['is_configured']}\n"
-    msg += f"**Environment Variable:** {summary['has_env_key']}\n"
-    msg += f"**Config File:** {summary['has_config_key']}\n\n"
+    msg += f"**API Key skonfigurowany:** {format_status_icon(summary['is_configured'])}\n"
+    msg += f"**Environment Variable:** {format_status_icon(summary['has_env_key'])}\n"
+    msg += f"**Config File:** {format_status_icon(summary['has_config_key'])}\n\n"
 
     msg += f"**Model:** {summary['model_id']}\n"
     msg += f"**API Base:** {summary['api_base']}\n"
@@ -251,7 +256,12 @@ def check_text_quality(text: str) -> str:
 @mcp.tool()
 def greet_jan(name: str = "miłościw") -> str:
     """Powitanie od Jana Kochanowskiego"""
-    return f"{KochanowskiPersona.get_greeting()}\n\n*Cóż to za piękny język polski! Czym mogę Cię dzisiaj służyć?*"
+    addressee = name.strip()
+    suffix = f", {addressee}" if addressee else ""
+    return (
+        f"{KochanowskiPersona.get_greeting()}\n\n"
+        f"*Cóż to za piękny język polski{suffix}! Czym mogę Ci dzisiaj służyć?*"
+    )
 
 
 @mcp.tool()
@@ -265,15 +275,9 @@ def farewell_jan() -> str:
 
 def main():
     """Uruchamia MCP server"""
-    print("╔" + "=" * 78 + "╗")
-    print("║" + " " * 25 + "JAN SUBAGENT" + " " * 41 + "║")
-    print("╚" + "=" * 78 + "╝")
-    print()
-    print(f"API Key: {'✅ Ustawiony' if config.is_configured else '❌ Brak'}")
-    print(f"Model: {config.model_id}")
-    print(f"Konfiguracja: {config.config_file}")
-    print()
-    print("Uruchamiam MCP server...")
+    logging.basicConfig(
+        level=getattr(logging, config.log_level.upper(), logging.INFO)
+    )
     mcp.run()
 
 

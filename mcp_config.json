@@ -1,17 +1,13 @@
-# MCP Configuration for Jan Subagent (Claude Desktop - macOS)
-
 {
   "mcpServers": {
     "jan-kochanowski": {
-      "command": "python3",
+      "command": "/absolute/path/to/jan/.venv/bin/python",
       "args": [
         "-m",
-        "jan.jan_subagent"
+        "jan.jan_subagent_opencode"
       ],
-      "cwd": "/Users/pd/Developer/jan",
-      "env": {
-        "NVIDIA_API_KEY": "twoj-nvidia-api-key-tutaj"
-      }
+      "cwd": "/absolute/path/to/jan",
+      "env": {}
     }
   }
 }

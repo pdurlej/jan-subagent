@@ -1,0 +1,15 @@
+{
+  "timestamp": "20260404T012404Z",
+  "dataset": "/Users/pd/Developer/jan/benchmarks/workplace_writing_v1.jsonl",
+  "output_dir": "/Users/pd/Developer/jan/_bmad-output/benchmarks/20260404T012404Z-workplace-writing-pilot",
+  "systems": [
+    "Jan",
+    "raw Bielik",
+    "GPT-5.4"
+  ],
+  "openai_model": "gpt-5.4",
+  "judge_model": "gpt-5.4-mini",
+  "bielik_model": "speakleash/bielik-11b-v2.6-instruct",
+  "jan_python": "/Users/pd/Developer/jan/.venv/bin/python",
+  "jan_cwd": "/Users/pd/Developer/jan"
+}

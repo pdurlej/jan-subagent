@@ -20,7 +20,17 @@ from jan.kochanowski_quotes import (
     KochanowskiPersona,
     QUOTES_BY_THEME,
 )
-from jan.jan_subagent_opencode import check_configuration, greet_jan, main
+from jan.jan_subagent_opencode import (
+    check_configuration,
+    check_text_quality,
+    comprehensive_correction,
+    correct_orthography,
+    correct_punctuation,
+    greet_jan,
+    improve_style,
+    main,
+    verify_grammar,
+)
 from jan.system_prompts import get_system_prompt, SYSTEM_PROMPTS
 
 
@@ -115,6 +125,7 @@ class TestSystemPrompts:
             "style",
             "comprehensive",
             "advice",
+            "quality",
         ]
 
         for prompt_type in prompt_types:
@@ -122,7 +133,11 @@ class TestSystemPrompts:
             assert prompt is not None
             assert isinstance(prompt, str)
             assert len(prompt) > 0
-            assert "Kochanowski" in prompt or "ekspert" in prompt.lower()
+            assert (
+                "Kochanowski" in prompt
+                or "ekspert" in prompt.lower()
+                or "redaktorem" in prompt.lower()
+            )
 
     def test_system_prompts_dict(self):
         """Test słownika system prompts"""
@@ -133,6 +148,21 @@ class TestSystemPrompts:
         assert "style" in SYSTEM_PROMPTS
         assert "comprehensive" in SYSTEM_PROMPTS
         assert "advice" in SYSTEM_PROMPTS
+        assert "quality" in SYSTEM_PROMPTS
+
+    def test_workplace_prompt_contracts_enforce_plain_text(self):
+        prompt = get_system_prompt("orthography", response_mode="plain_text")
+        assert "Zwróć wyłącznie finalny tekst gotowy do wklejenia." in prompt
+        assert "Nie dodawaj nagłówków" in prompt
+
+    def test_workplace_prompt_contracts_enforce_compact_explainer(self):
+        prompt = get_system_prompt("style", response_mode="compact_explainer")
+        assert "Najważniejsze zmiany" in prompt
+        assert "2-5 krótkimi punktami" in prompt
+
+    def test_grammar_prompt_contract_enforces_json_only(self):
+        prompt = get_system_prompt("grammar", response_mode="json_report")
+        assert "Zwróć wyłącznie poprawny JSON." in prompt
 
 
 class TestQuotesStructure:
@@ -190,12 +220,91 @@ class TestRuntimeBehavior:
         captured = capsys.readouterr()
         assert captured.out == ""
 
+    def test_correct_orthography_is_paste_ready_by_default(self, monkeypatch):
+        monkeypatch.setattr("jan.jan_subagent_opencode.bielik.is_ready", lambda: True)
+        monkeypatch.setattr(
+            "jan.jan_subagent_opencode.bielik.call",
+            lambda *args, **kwargs: "Dzień dobry! Tekst poprawny.",
+        )
+        result = correct_orthography("bledny tekst")
+        assert result == "Dzień dobry! Tekst poprawny."
+
+    def test_correct_punctuation_with_greeting_is_one_line_prefix(self, monkeypatch):
+        monkeypatch.setattr("jan.jan_subagent_opencode.bielik.is_ready", lambda: True)
+        monkeypatch.setattr(
+            "jan.jan_subagent_opencode.bielik.call",
+            lambda *args, **kwargs: "Po poprawie wszystko działa.",
+        )
+        result = correct_punctuation("test", include_greeting=True)
+        non_empty_lines = [line for line in result.splitlines() if line.strip()]
+        assert len(non_empty_lines) == 2
+        assert non_empty_lines[-1] == "Po poprawie wszystko działa."
+
+    def test_improve_style_with_explanation_returns_final_text_then_bullets(self, monkeypatch):
+        monkeypatch.setattr("jan.jan_subagent_opencode.bielik.is_ready", lambda: True)
+        monkeypatch.setattr(
+            "jan.jan_subagent_opencode.bielik.call",
+            lambda *args, **kwargs: (
+                "Dzień dobry, temat został rozwiązany.\n\n"
+                "Najważniejsze zmiany:\n"
+                "- Zastąpiono kolokwializmy formalnym językiem.\n"
+                "- Uproszczono składnię."
+            ),
+        )
+        result = improve_style("temat ogarniety", include_explanation=True)
+        assert result.startswith("Dzień dobry, temat został rozwiązany.")
+        assert "Najważniejsze zmiany:" in result
+        assert "- Zastąpiono kolokwializmy formalnym językiem." in result
+
+    def test_comprehensive_correction_extracts_final_text_from_legacy_wrapper(self, monkeypatch):
+        monkeypatch.setattr("jan.jan_subagent_opencode.bielik.is_ready", lambda: True)
+        monkeypatch.setattr(
+            "jan.jan_subagent_opencode.bielik.call",
+            lambda *args, **kwargs: (
+                "### Tekst poprawiony:\n```text\n"
+                "Po synchronizacji mamy zielone światło na wdrożenie.\n```\n\n"
+                "### Raport korekty:\n- Usunięto anglicyzmy."
+            ),
+        )
+        result = comprehensive_correction("sync rollout")
+        assert result == "Po synchronizacji mamy zielone światło na wdrożenie."
+
+    def test_verify_grammar_returns_parseable_json_without_wrapper(self, monkeypatch):
+        monkeypatch.setattr("jan.jan_subagent_opencode.bielik.is_ready", lambda: True)
+        monkeypatch.setattr(
+            "jan.jan_subagent_opencode.bielik.call",
+            lambda *args, **kwargs: (
+                "### Raport\n"
+                '{"correct": true, "errors": [], "suggestions": [], "overall_assessment": "OK"}'
+            ),
+        )
+        result = verify_grammar("To jest poprawne.")
+        payload = json.loads(result)
+        assert payload["correct"] is True
+        assert payload["overall_assessment"] == "OK"
+
+    def test_check_text_quality_returns_plain_scorecard(self, monkeypatch):
+        monkeypatch.setattr("jan.jan_subagent_opencode.bielik.is_ready", lambda: True)
+        monkeypatch.setattr(
+            "jan.jan_subagent_opencode.bielik.call",
+            lambda *args, **kwargs: (
+                "Ocena ogólna: 8/10\n"
+                "Największy atut: klarowność.\n"
+                "Największy problem: drobne powtórzenia.\n"
+                "Rekomendacja: skrócić drugi akapit."
+            ),
+        )
+        result = check_text_quality("To jest tekst.")
+        assert result.startswith("Ocena ogólna: 8/10")
+        assert "Niech" not in result
+        assert "mowie polskiej" not in result
+
 
 class TestPackagingAndConfig:
     """Testy pakietowania i sample configu."""
 
-    def test_package_version_is_2_0_0(self):
-        assert __version__ == "2.0.0"
+    def test_package_version_is_2_1_0(self):
+        assert __version__ == "2.1.0"
 
     def test_mcp_config_is_valid_json_and_uses_opencode(self):
         config_path = Path(__file__).resolve().parents[1] / "mcp_config.json"

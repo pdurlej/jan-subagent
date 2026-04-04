@@ -10,6 +10,12 @@ from .kochanowski_quotes import KochanowskiPersona
 from .system_prompts import get_system_prompt
 from .config import config
 from .api_client import bielik
+from .output_utils import (
+    choose_light_greeting,
+    extract_json_payload,
+    extract_primary_text,
+    format_compact_explainer,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -52,19 +58,55 @@ def format_response(
     return "".join(parts)
 
 
-def format_json_response(json_str: str, prefix: str = "") -> str:
-    """Formatuje JSON z odpowiedzi Bielika"""
-    try:
-        import re
+def format_plain_text_response(content: str, include_greeting: bool = False) -> str:
+    """Zwraca paste-ready tekst bez wrapperów Jana."""
 
-        json_match = re.search(r"\{[\s\S]*\}", json_str)
-        if json_match:
-            json_data = json.loads(json_match.group())
-            formatted = json.dumps(json_data, indent=2, ensure_ascii=False)
-            return f"{prefix}```json\n{formatted}\n```\n\n{json_str.replace(json_match.group(), '')}"
-    except Exception as e:
-        logger.debug("Nie udało się sformatować JSON z odpowiedzi modelu: %s", e)
-    return json_str
+    primary = extract_primary_text(content)
+    if not primary:
+        return ""
+    if include_greeting:
+        return f"{choose_light_greeting()}\n{primary}"
+    return primary
+
+
+def format_explainer_response(content: str, include_greeting: bool = False) -> str:
+    """Zwraca zwięzły explain mode dla korekty workplace."""
+
+    formatted = format_compact_explainer(content, include_greeting=include_greeting)
+    return formatted or format_plain_text_response(content, include_greeting=include_greeting)
+
+
+def format_json_report_response(content: str) -> str:
+    """Zwraca wyłącznie poprawny JSON, jeśli uda się go wydobyć."""
+
+    payload = extract_json_payload(content)
+    if payload is not None:
+        return json.dumps(payload, indent=2, ensure_ascii=False)
+    return content.strip()
+
+
+def format_quality_scorecard(content: str) -> str:
+    """Zwraca krótki scorecard jakości tekstu bez wrappera persony."""
+
+    return content.strip()
+
+
+def build_workplace_response(
+    content: str,
+    include_greeting: bool = False,
+    include_explanation: bool = False,
+) -> str:
+    """Formatowanie odpowiedzi dla tooli workplace."""
+
+    if include_explanation:
+        return format_explainer_response(content, include_greeting=include_greeting)
+    return format_plain_text_response(content, include_greeting=include_greeting)
+
+
+def build_response_mode(include_explanation: bool = False) -> str:
+    """Zwraca response mode dla prompt buildera."""
+
+    return "compact_explainer" if include_explanation else "plain_text"
 
 
 # ==================== MCP TOOLS - KONFIGURACJA ====================
@@ -142,51 +184,72 @@ def reset_api_key() -> str:
 
 
 @mcp.tool()
-def correct_orthography(text: str, include_greeting: bool = True) -> str:
+def correct_orthography(
+    text: str,
+    include_greeting: bool = False,
+    include_explanation: bool = False,
+) -> str:
     """Poprawa ortografii tekstu polskiego"""
     if not bielik.is_ready():
         return bielik.call("", "")  # Zwraca komunikat o braku API key
 
-    system_prompt = get_system_prompt("orthography")
+    system_prompt = get_system_prompt(
+        "orthography", response_mode=build_response_mode(include_explanation)
+    )
     user_message = f'Popraw ortografię w tekście: "{text}"'
 
     result = bielik.call(system_prompt, user_message, temperature=0.2)
-
-    return format_response(result, "orthography", include_greeting=include_greeting)
+    return build_workplace_response(
+        result,
+        include_greeting=include_greeting,
+        include_explanation=include_explanation,
+    )
 
 
 @mcp.tool()
-def correct_punctuation(text: str, include_greeting: bool = True) -> str:
+def correct_punctuation(
+    text: str,
+    include_greeting: bool = False,
+    include_explanation: bool = False,
+) -> str:
     """Korekta interpunkcji tekstu polskiego"""
     if not bielik.is_ready():
         return bielik.call("", "")
 
-    system_prompt = get_system_prompt("punctuation")
+    system_prompt = get_system_prompt(
+        "punctuation", response_mode=build_response_mode(include_explanation)
+    )
     user_message = f'Popraw interpunkcję w tekście: "{text}"'
 
     result = bielik.call(system_prompt, user_message, temperature=0.2)
-
-    return format_response(result, "punctuation", include_greeting=include_greeting)
+    return build_workplace_response(
+        result,
+        include_greeting=include_greeting,
+        include_explanation=include_explanation,
+    )
 
 
 @mcp.tool()
-def verify_grammar(text: str, include_greeting: bool = True) -> str:
+def verify_grammar(text: str, include_greeting: bool = False) -> str:
     """Weryfikacja gramatyki tekstu polskiego"""
     if not bielik.is_ready():
         return bielik.call("", "")
 
-    system_prompt = get_system_prompt("grammar")
+    system_prompt = get_system_prompt("grammar", response_mode="json_report")
     user_message = f'Sprawdź gramatykę tekstu: "{text}"'
 
     result = bielik.call(system_prompt, user_message, temperature=0.1)
-    result = format_json_response(result, "### Raport Gramatyczny\n\n")
-
-    return format_response(result, "grammar", include_greeting=include_greeting)
+    if include_greeting:
+        logger.debug("verify_grammar ignores include_greeting to preserve parseable JSON")
+    return format_json_report_response(result)
 
 
 @mcp.tool()
 def improve_style(
-    text: str, style: str = "elegancki", include_greeting: bool = True
+    text: str,
+    style: str = "elegancki",
+    include_greeting: bool = False,
+    include_explanation: bool = False,
 ) -> str:
     """Ulepszenie stylu tekstu polskiego"""
     if not bielik.is_ready():
@@ -195,28 +258,40 @@ def improve_style(
     available_styles = ["elegancki", "prosty", "poetycki", "naukowy", "ulotny"]
     style = style.lower() if style.lower() in available_styles else "elegancki"
 
-    system_prompt = get_system_prompt("style")
+    system_prompt = get_system_prompt(
+        "style", response_mode=build_response_mode(include_explanation)
+    )
     user_message = f'Ulepsz styl tekstu "{text}" na styl: {style}'
 
     result = bielik.call(system_prompt, user_message, temperature=0.4)
-
-    return format_response(result, "style", include_greeting=include_greeting)
+    return build_workplace_response(
+        result,
+        include_greeting=include_greeting,
+        include_explanation=include_explanation,
+    )
 
 
 @mcp.tool()
-def comprehensive_correction(text: str, mode: str = "standard") -> str:
+def comprehensive_correction(
+    text: str,
+    mode: str = "standard",
+    include_greeting: bool = False,
+    include_explanation: bool = False,
+) -> str:
     """Kompleksowa korekta tekstu polskiego"""
     if not bielik.is_ready():
         return bielik.call("", "")
 
-    system_prompt = get_system_prompt("comprehensive")
+    system_prompt = get_system_prompt(
+        "comprehensive", response_mode=build_response_mode(include_explanation)
+    )
     user_message = f'Kompleksowa korekta tekstu: "{text}" w trybie: {mode}'
 
     result = bielik.call(system_prompt, user_message, temperature=0.3)
-    result = format_json_response(result)
-
-    return format_response(
-        result, "comprehensive", include_greeting=True, include_farewell=True
+    return build_workplace_response(
+        result,
+        include_greeting=include_greeting,
+        include_explanation=include_explanation,
     )
 
 
@@ -242,12 +317,11 @@ def check_text_quality(text: str) -> str:
     if not bielik.is_ready():
         return bielik.call("", "")
 
-    system_prompt = get_system_prompt("main")
+    system_prompt = get_system_prompt("quality")
     user_message = f'Sprawdź jakość tekstu: "{text}" (maks. 300 słów)'
 
     result = bielik.call(system_prompt, user_message, temperature=0.3)
-
-    return format_response(result, "general", include_greeting=False)
+    return format_quality_scorecard(result)
 
 
 # ==================== MCP TOOLS - PERSONA ====================

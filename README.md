@@ -1,28 +1,28 @@
 # 📜 Jan Subagent - MCP server do korekty polszczyzny
 
-![Version](https://img.shields.io/badge/version-2.0.0-blue)
+![Version](https://img.shields.io/badge/version-2.1.0-blue)
 ![Python](https://img.shields.io/badge/python-3.10+-green)
 ![License](https://img.shields.io/badge/license-MIT-orange)
 
 > *"Niechaj Bóg strzeże wasze pióra i myśli"* - Jan Kochanowski
 
-`jan-subagent` to MCP server do korekty języka polskiego z personą Jana Kochanowskiego i integracją z NVIDIA Bielik. Wydanie `2.0.0` ustanawia jeden kanoniczny runtime: `jan.jan_subagent_opencode`.
+`jan-subagent` to MCP server do korekty języka polskiego z personą Jana Kochanowskiego i integracją z NVIDIA Bielik. Wydanie `2.1.0` przesuwa Jana w stronę paste-ready workplace writing przy zachowaniu persony w narzędziach poradniczych.
 
-## Co się zmieniło w 2.0.0
+## Co się zmieniło w 2.1.0
 
-- `jan.jan_subagent_opencode` jest jedynym wspieranym runtime MCP.
-- Usunięto legacy moduł `jan.jan_subagent`.
-- `mcp_config.json` jest jedynym sample configiem i jest poprawnym JSON-em.
-- `check_configuration()` zwraca statusy jako `✅/❌`.
-- `greet_jan(name=...)` realnie używa przekazanego adresata.
-- `main()` nie wypisuje nic na `stdout`, więc nie zakłóca transportu `stdio`.
-- Repo zawiera maintenance scaffold BMAD oraz pełną warstwę projektową `_bmad/`.
+- Correction tools są domyślnie `paste-ready` i zwracają tylko finalny tekst.
+- Explainery są dostępne tylko jako `opt-in` przez `include_explanation=True`.
+- `verify_grammar()` zwraca parseowalny JSON bez wrappera persony.
+- `check_text_quality()` zwraca krótki plain-text scorecard.
+- Benchmark workplace writing ma teraz `Primary Literal Score` i `Normalized Diagnostic Score`.
+- To wydanie nie dodaje osobnego trybu edukacyjnego; domyślny fokus pozostaje na workplace writing.
 
-Pełna nota wydania: [docs/VERSION_2_0_0.md](/Users/pd/Developer/jan/docs/VERSION_2_0_0.md)
+Pełna nota wydania: [docs/VERSION_2_1_0.md](/Users/pd/Developer/jan/docs/VERSION_2_1_0.md)
 
 ## Cechy
 
-- Persona Jana Kochanowskiego w odpowiedziach, refleksjach i poradach językowych.
+- Paste-ready correction tools dla workplace writing.
+- Persona Jana Kochanowskiego w poradach językowych i lekkich interakcjach.
 - Integracja z NVIDIA Bielik przez OpenAI-compatible API.
 - Narzędzia MCP do ortografii, interpunkcji, gramatyki, stylu i szybkiej oceny tekstu.
 - Automatyczna konfiguracja API key przez `setup_api_key`.
@@ -107,16 +107,19 @@ reset_api_key() -> str
 ### Korekta językowa
 
 ```python
-correct_orthography(text: str, include_greeting: bool = True) -> str
-correct_punctuation(text: str, include_greeting: bool = True) -> str
-verify_grammar(text: str, include_greeting: bool = True) -> str
-improve_style(text: str, style: str = "elegancki", include_greeting: bool = True) -> str
-comprehensive_correction(text: str, mode: str = "standard") -> str
+correct_orthography(text: str, include_greeting: bool = False, include_explanation: bool = False) -> str
+correct_punctuation(text: str, include_greeting: bool = False, include_explanation: bool = False) -> str
+verify_grammar(text: str, include_greeting: bool = False) -> str
+improve_style(text: str, style: str = "elegancki", include_greeting: bool = False, include_explanation: bool = False) -> str
+comprehensive_correction(text: str, mode: str = "standard", include_greeting: bool = False, include_explanation: bool = False) -> str
 get_language_advice(topic: str) -> str
 check_text_quality(text: str) -> str
 greet_jan(name: str = "miłościw") -> str
 farewell_jan() -> str
 ```
+
+Domyślnie correction tools zwracają wyłącznie finalny tekst. Jeśli chcesz krótki explain mode, ustaw `include_explanation=True`.
+`include_greeting=True` nadal działa, ale dodaje tylko jedną krótką linię przed wynikiem zamiast dawnego, rozbudowanego wrappera Jana.
 
 Obsługiwane style dla `improve_style`:
 
@@ -139,6 +142,15 @@ Obsługiwane tryby dla `comprehensive_correction`:
 ```text
 Użyj correct_orthography z tekstem:
 "Cześć! Napisalem tekst z błedami."
+```
+
+### Krótki explain mode
+
+```text
+Użyj improve_style z tekstem:
+"Hej, temat mamy już ogarnięty i wszystko śmiga."
+
+ustawiając include_explanation na true.
 ```
 
 ### Porada językowa
@@ -166,13 +178,19 @@ jan/
 │   ├── config.py
 │   ├── jan_subagent_opencode.py
 │   ├── kochanowski_quotes.py
-│   └── system_prompts.py
+│   ├── output_utils.py
+│   ├── system_prompts.py
+│   └── workplace_benchmark.py
 ├── docs/
 │   ├── VERSION_1_1_0.md
 │   ├── VERSION_2_0_0.md
+│   ├── VERSION_2_1_0.md
+│   ├── benchmark-methodology.md
+│   ├── benchmarks/
 │   └── new-thread-start.md
 ├── tests/
 ├── examples/
+├── benchmarks/
 ├── scripts/
 ├── references/
 ├── agents/
@@ -198,12 +216,44 @@ python3 scripts/sync_bmad_method.py check --json
 
 Pełna instalacja projektowa znajduje się w `_bmad/`, a wygenerowane artefakty trafiają do `_bmad-output/`.
 
+## Benchmarking
+
+Repo zawiera pilot benchmarkowy workplace writing porównujący:
+
+- `Jan` przez realny MCP `stdio`
+- `raw Bielik`
+- `GPT-5.4`
+
+Dataset, prompty i rubric są w `benchmarks/`, metodologia w [docs/benchmark-methodology.md](/Users/pd/Developer/jan/docs/benchmark-methodology.md), a public-safe notatka pilota w [docs/benchmarks/workplace-writing-pilot.md](/Users/pd/Developer/jan/docs/benchmarks/workplace-writing-pilot.md).
+
+Benchmark ma teraz dwa widoki:
+
+- `Primary Literal Score` jako główny KPI produktu
+- `Normalized Diagnostic Score` jako diagnostykę kosztu wrappera Jana
+
+`Normalized Diagnostic Score` nie zastępuje literalnego wyniku produktu. Służy tylko do odpowiedzi na pytanie, ile jakości kosztuje opakowanie odpowiedzi Jana.
+
+CI-safe walidacja harnessu:
+
+```bash
+.venv/bin/python scripts/test_benchmark_harness.py
+```
+
+Live pilot:
+
+```bash
+.venv/bin/python scripts/run_workplace_benchmark.py
+```
+
+Artefakty live runu trafiają do `_bmad-output/benchmarks/<timestamp>/`.
+
 ## Testowanie
 
 ```bash
 pytest -q
 .venv/bin/python -m compileall -q jan
 .venv/bin/python -m jan.jan_subagent_opencode
+.venv/bin/python scripts/test_benchmark_harness.py
 python3 scripts/test_sync_bmad_method.py
 python3 scripts/sync_bmad_method.py check --json
 ```

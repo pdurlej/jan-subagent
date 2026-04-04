@@ -1,0 +1,3733 @@
+[
+  {
+    "case": {
+      "id": "pr-surface-01",
+      "scenario": "PR description",
+      "intent": "surface correction",
+      "input_text": "Ten PR naprawia blad w cache tokenow dla eksportu CSV. Dodalem fallback dla pustej konfiguracji i test regresji dla endpointu /reports.",
+      "jan_tool": "correct_orthography",
+      "baseline_prompt_family": "surface_orthography",
+      "must_keep": [
+        "PR",
+        "cache",
+        "CSV",
+        "/reports"
+      ],
+      "should_fix": [
+        "blad",
+        "tokenow",
+        "Dodalem"
+      ],
+      "must_not_introduce": [
+        "breaking change",
+        "rollback"
+      ],
+      "notes": "Opis PR z prostymi błędami ortograficznymi."
+    },
+    "system": "Jan",
+    "output_text": "Zdrowi bądźcie, miłościwi. Przybywam by pomóc w kunszcie piśmiennictwa polskiego.\n\nOto poprawiona wersja tekstu z zachowaniem oryginalnej struktury:\n\n**\"Ten PR naprawia błąd w cache tokenów dla eksportu CSV. Dodałem fallback dla pustej konfiguracji i test regresji dla endpointu /reports.\"**\n\n### Poprawki:\n1. **Błąd:** \"blad\" → **Poprawna forma:** \"błąd\"\n   - **Wyjaśnienie:** Pisownia \"błąd\" jest poprawna. Błąd ortograficzny wynikał z nieprawidłowego zapisu \"ł\" jako \"a\".\n\n2. **Błąd:** \"cache\" → **Poprawna forma:** \"cache\" (bez zmian)\n   - **Wyjaśnienie:** \"Cache\" jest zapożyczeniem z języka angielskiego i zachowuje oryginalną pisownię.\n\n3. **Błąd:** \"tokenow\" → **Poprawna forma:** \"tokenów\"\n   - **Wyjaśnienie:** Końcówka \"-ów\" w dopełniaczu liczby mnogiej rzeczowników męskich nieżywotnych (np. \"tokenów\", \"kotów\").\n\n4. **Błąd:** \"Dodalem\" → **Poprawna forma:** \"Dodałem\"\n   - **Wyjaśnienie:** Poprawna forma czasu przeszłego czasownika \"dodać\" dla męskiego rodzaju: \"dodałem\".\n\n5. **Błąd:** \"fallback\" → **Poprawna forma:** \"fallback\" (bez zmian)\n   - **Wyjaśnienie:** \"Fallback\" jest zapożyczeniem i zachowuje oryginalną pisownię.\n\n6. **Błąd:** \"pustej\" → **Poprawna forma:** \"pustej\" (bez zmian)\n   - **Wyjaśnienie:** Poprawna forma przymiotnika \"pusty\" w dopełniaczu liczby pojedynczej: \"pustej\".\n\n7. **Błąd:** \"test regresji\" → **Poprawna forma:** \"test regresji\" (bez zmian)\n   - **Wyjaśnienie:** \"Regresja\" w tym kontekście jest rzeczownikiem i piszemy ją małą literą.\n\n8. **Błąd:** \"endpointu\" → **Poprawna forma:** \"endpointu\" (bez zmian)\n   - **Wyjaśnienie:** \"Endpoint\" jest zapożyczeniem i zachowuje oryginalną pisownię, a końcówka \"-u\" jest poprawna w dopełniaczu liczby pojedynczej.\n\n### Refleksja o języku polskim:\nJęzyk polski jest bogaty w zasady ortograficzne, które mogą być wyzwaniem nawet dla rodzimych użytkowników. W tekście technicznym, jak ten przykład, ważne jest, aby zachować precyzję, ale także dostosować pisownię do konwencji branżowych (np. zapożyczenia z angielskiego). Poprawne użycie zasad ortograficznych nie tylko świadczy o profesjonalizmie, ale także ułatwia zrozumienie komunikatu.\n\n*Każda litera ma swoją wartość - niech one będą na swoim miejscu.*",
+    "latency_seconds": 28.852448,
+    "error": null,
+    "metadata": {
+      "tool_name": "correct_orthography",
+      "tool_names": [
+        "check_configuration",
+        "setup_api_key",
+        "reset_api_key",
+        "correct_orthography",
+        "correct_punctuation",
+        "verify_grammar",
+        "improve_style",
+        "comprehensive_correction",
+        "get_language_advice",
+        "check_text_quality",
+        "greet_jan",
+        "farewell_jan"
+      ]
+    },
+    "deterministic": {
+      "total": 0.65,
+      "components": {
+        "must_keep": 1.0,
+        "should_fix": 0.0,
+        "must_not_introduce": 1.0,
+        "non_empty": 1.0,
+        "error_free": 1.0,
+        "latency": 0.0
+      },
+      "matched": {
+        "must_keep": [
+          "PR",
+          "cache",
+          "CSV",
+          "/reports"
+        ],
+        "should_fix": [],
+        "must_not_introduce": [
+          "breaking change",
+          "rollback"
+        ]
+      },
+      "missing": {
+        "must_keep": [],
+        "should_fix": [
+          "blad",
+          "tokenow",
+          "Dodalem"
+        ],
+        "must_not_introduce": []
+      }
+    },
+    "judge": {
+      "total": 0.4,
+      "dimensions": {
+        "factual_preservation": 0.4,
+        "language_quality": 0.8,
+        "clarity": 0.4,
+        "workplace_usefulness": 0.2,
+        "concision": 0.2
+      },
+      "rationale": "Treść poprawionej wersji zachowuje główne znaczenie i większość faktów, ale jest mocno przegadana i zawiera zbędną personę oraz rozbudowane komentarze. Język polski jest ogólnie poprawny i naturalny, choć styl jest przesadnie literacki jak na zadanie workplace. Czytelność spada przez długi wstęp, numerowaną listę i refleksję, a użyteczność w pracy jest niska, bo zamiast samej korekty dostajemy nadmiarowy komentarz. Zwięzłość bardzo słaba, bo output jest wielokrotnie dłuższy niż potrzeba do surface correction."
+    },
+    "final_score": 0.575
+  },
+  {
+    "case": {
+      "id": "pr-surface-01",
+      "scenario": "PR description",
+      "intent": "surface correction",
+      "input_text": "Ten PR naprawia blad w cache tokenow dla eksportu CSV. Dodalem fallback dla pustej konfiguracji i test regresji dla endpointu /reports.",
+      "jan_tool": "correct_orthography",
+      "baseline_prompt_family": "surface_orthography",
+      "must_keep": [
+        "PR",
+        "cache",
+        "CSV",
+        "/reports"
+      ],
+      "should_fix": [
+        "blad",
+        "tokenow",
+        "Dodalem"
+      ],
+      "must_not_introduce": [
+        "breaking change",
+        "rollback"
+      ],
+      "notes": "Opis PR z prostymi błędami ortograficznymi."
+    },
+    "system": "raw Bielik",
+    "output_text": "Ten PR naprawia błąd w cache tokenów dla eksportu CSV. Dodałem fallback dla pustej konfiguracji i test regresji dla endpointu /reports.",
+    "latency_seconds": 1.68065,
+    "error": null,
+    "metadata": {
+      "prompt_family": "surface_orthography",
+      "model": "speakleash/bielik-11b-v2.6-instruct"
+    },
+    "deterministic": {
+      "total": 1.0,
+      "components": {
+        "must_keep": 1.0,
+        "should_fix": 1.0,
+        "must_not_introduce": 1.0,
+        "non_empty": 1.0,
+        "error_free": 1.0,
+        "latency": 1.0
+      },
+      "matched": {
+        "must_keep": [
+          "PR",
+          "cache",
+          "CSV",
+          "/reports"
+        ],
+        "should_fix": [
+          "blad",
+          "tokenow",
+          "Dodalem"
+        ],
+        "must_not_introduce": [
+          "breaking change",
+          "rollback"
+        ]
+      },
+      "missing": {
+        "must_keep": [],
+        "should_fix": [],
+        "must_not_introduce": []
+      }
+    },
+    "judge": {
+      "total": 1.0,
+      "dimensions": {
+        "factual_preservation": 1.0,
+        "language_quality": 1.0,
+        "clarity": 1.0,
+        "workplace_usefulness": 1.0,
+        "concision": 1.0
+      },
+      "rationale": "Output wiernie zachowuje sens, nazwy i szczegóły z wejścia, jednocześnie poprawiając oczywiste błędy ortograficzne i interpunkcyjne. Brzmi naturalnie po polsku, jest jasny i gotowy do użycia w opisie PR bez dalszej obróbki."
+    },
+    "final_score": 1.0
+  },
+  {
+    "case": {
+      "id": "pr-surface-01",
+      "scenario": "PR description",
+      "intent": "surface correction",
+      "input_text": "Ten PR naprawia blad w cache tokenow dla eksportu CSV. Dodalem fallback dla pustej konfiguracji i test regresji dla endpointu /reports.",
+      "jan_tool": "correct_orthography",
+      "baseline_prompt_family": "surface_orthography",
+      "must_keep": [
+        "PR",
+        "cache",
+        "CSV",
+        "/reports"
+      ],
+      "should_fix": [
+        "blad",
+        "tokenow",
+        "Dodalem"
+      ],
+      "must_not_introduce": [
+        "breaking change",
+        "rollback"
+      ],
+      "notes": "Opis PR z prostymi błędami ortograficznymi."
+    },
+    "system": "GPT-5.4",
+    "output_text": "Ten PR naprawia błąd w cache tokenów dla eksportu CSV. Dodałem fallback dla pustej konfiguracji i test regresji dla endpointu /reports.",
+    "latency_seconds": 1.191084,
+    "error": null,
+    "metadata": {
+      "prompt_family": "surface_orthography",
+      "model": "gpt-5.4"
+    },
+    "deterministic": {
+      "total": 1.0,
+      "components": {
+        "must_keep": 1.0,
+        "should_fix": 1.0,
+        "must_not_introduce": 1.0,
+        "non_empty": 1.0,
+        "error_free": 1.0,
+        "latency": 1.0
+      },
+      "matched": {
+        "must_keep": [
+          "PR",
+          "cache",
+          "CSV",
+          "/reports"
+        ],
+        "should_fix": [
+          "blad",
+          "tokenow",
+          "Dodalem"
+        ],
+        "must_not_introduce": [
+          "breaking change",
+          "rollback"
+        ]
+      },
+      "missing": {
+        "must_keep": [],
+        "should_fix": [],
+        "must_not_introduce": []
+      }
+    },
+    "judge": {
+      "total": 1.0,
+      "dimensions": {
+        "factual_preservation": 1.0,
+        "language_quality": 1.0,
+        "clarity": 1.0,
+        "workplace_usefulness": 1.0,
+        "concision": 1.0
+      },
+      "rationale": "Output zachowuje pełne znaczenie tekstu wejściowego, poprawia literówki i polskie znaki, a także pozostaje zwięzły i gotowy do użycia w kontekście workplace writing."
+    },
+    "final_score": 1.0
+  },
+  {
+    "case": {
+      "id": "pr-style-01",
+      "scenario": "PR description",
+      "intent": "style rewrite",
+      "input_text": "Ten PR ogarnia nam temat z timeoutem w syncu, bo wcześniej requesty wisiały i ludzie myśleli, że apka zdechła. Dorzuciłem retry i lepsze logi.",
+      "jan_tool": "improve_style",
+      "baseline_prompt_family": "style_prosty",
+      "must_keep": [
+        "timeout",
+        "retry",
+        "logi"
+      ],
+      "should_fix": [
+        "ogarnia",
+        "apka zdechła",
+        "Dorzuciłem"
+      ],
+      "must_not_introduce": [
+        "database",
+        "breaking change"
+      ],
+      "notes": "Styl roboczy i kolokwialny, do uproszczenia."
+    },
+    "system": "Jan",
+    "output_text": "Zdrowi bądźcie, miłościwi. Przybywam by pomóc w kunszcie piśmiennictwa polskiego.\n\n**Ulepszony tekst:**\n\"Ten PR rozwiązuje problem z timeoutami w synchronizacji, ponieważ wcześniej żądania zatrzymywały się, a użytkownicy myśleli, że aplikacja przestała działać. Dodałem mechanizm ponownych prób i lepsze logowanie.\"\n\n**Lista zmian z uzasadnieniami:**\n\n1. **Zamiana \"ogarnia\" na \"rozwiązuje\":**\n   - Użycie bardziej formalnego i zrozumiałego słowa \"rozwiązuje\" zamiast slangowego \"ogarnia\".\n\n2. **Rozwinięcie \"timeoutem w syncu\" na \"problemem z timeoutami w synchronizacji\":**\n   - Dodanie kontekstu i wyjaśnienie, o jaki problem chodzi, aby tekst był bardziej jasny.\n\n3. **Zamiana \"wcześniej requesty wisiały\" na \"wcześniej żądania zatrzymywały się\":**\n   - Zastąpienie potocznego \"wisiały\" bardziej formalnym \"zatrzymywały się\" dla lepszej zrozumiałości.\n\n4. **Zmiana \"apka zdechła\" na \"aplikacja przestała działać\":**\n   - Zastąpienie kolokwialnego wyrażenia bardziej neutralnym i zrozumiałym dla szerszego grona odbiorców.\n\n5. **Dodanie \"mechanizm ponownych prób\" zamiast \"retry\":**\n   - Wyjaśnienie skrótu \"retry\" pełnym terminem dla lepszej zrozumiałości.\n\n6. **Zamiana \"lepsze logi\" na \"lepsze logowanie\":**\n   - Użycie rzeczownika odczasownikowego \"logowanie\" zamiast potocznej formy \"logi\" dla poprawy jasności i estetyki.\n\n**Cytat z literatury ilustrujący styl:**\n\"Prostota jest szczytem wyrafinowania.\"\n— Steve Jobs\n\nStyl prosty charakteryzuje się klarownością, bezpośredniością i unikaniem zbędnych ozdobników, co ułatwia zrozumienie przekazu.\n\n*Styl to człowiek - każdy ma swój własny, piękny styl.*",
+    "latency_seconds": 20.051866,
+    "error": null,
+    "metadata": {
+      "tool_name": "improve_style",
+      "tool_names": [
+        "check_configuration",
+        "setup_api_key",
+        "reset_api_key",
+        "correct_orthography",
+        "correct_punctuation",
+        "verify_grammar",
+        "improve_style",
+        "comprehensive_correction",
+        "get_language_advice",
+        "check_text_quality",
+        "greet_jan",
+        "farewell_jan"
+      ]
+    },
+    "deterministic": {
+      "total": 0.759376,
+      "components": {
+        "must_keep": 1.0,
+        "should_fix": 0.333333,
+        "must_not_introduce": 1.0,
+        "non_empty": 1.0,
+        "error_free": 1.0,
+        "latency": 0.260428
+      },
+      "matched": {
+        "must_keep": [
+          "timeout",
+          "retry",
+          "logi"
+        ],
+        "should_fix": [
+          "Dorzuciłem"
+        ],
+        "must_not_introduce": [
+          "database",
+          "breaking change"
+        ]
+      },
+      "missing": {
+        "must_keep": [],
+        "should_fix": [
+          "ogarnia",
+          "apka zdechła"
+        ],
+        "must_not_introduce": []
+      }
+    },
+    "judge": {
+      "total": 0.32,
+      "dimensions": {
+        "factual_preservation": 0.4,
+        "language_quality": 0.4,
+        "clarity": 0.4,
+        "workplace_usefulness": 0.2,
+        "concision": 0.2
+      },
+      "rationale": "Główne znaczenie zostało zachowane, ale odpowiedź jest mocno przeładowana i odbiega od zadania style rewrite przez zbędne wstawki, cytat i personę. Polski jest miejscami poprawny, lecz nienaturalny i przesadnie ozdobny. Czytelność i użyteczność w pracy są niskie, bo tekst wymagałby dużego skrócenia i usunięcia komentarzy. Zwięzłość bardzo słaba ze względu na rozbudowaną metakomunikację i listę zmian."
+    },
+    "final_score": 0.49575
+  },
+  {
+    "case": {
+      "id": "pr-style-01",
+      "scenario": "PR description",
+      "intent": "style rewrite",
+      "input_text": "Ten PR ogarnia nam temat z timeoutem w syncu, bo wcześniej requesty wisiały i ludzie myśleli, że apka zdechła. Dorzuciłem retry i lepsze logi.",
+      "jan_tool": "improve_style",
+      "baseline_prompt_family": "style_prosty",
+      "must_keep": [
+        "timeout",
+        "retry",
+        "logi"
+      ],
+      "should_fix": [
+        "ogarnia",
+        "apka zdechła",
+        "Dorzuciłem"
+      ],
+      "must_not_introduce": [
+        "database",
+        "breaking change"
+      ],
+      "notes": "Styl roboczy i kolokwialny, do uproszczenia."
+    },
+    "system": "raw Bielik",
+    "output_text": "Ten komunikat prasowy dotyczy problemu związanego z timeoutami w synchronizacji, który powodował, że wcześniejsze żądania pozostawały zawieszone, a użytkownicy mieli wrażenie, że aplikacja przestała działać. Wprowadzono mechanizm ponownego próbowania (retry) oraz ulepszono system logowania, aby poprawić stabilność i widoczność problemów.",
+    "latency_seconds": 4.292032,
+    "error": null,
+    "metadata": {
+      "prompt_family": "style_prosty",
+      "model": "speakleash/bielik-11b-v2.6-instruct"
+    },
+    "deterministic": {
+      "total": 0.9,
+      "components": {
+        "must_keep": 0.666667,
+        "should_fix": 1.0,
+        "must_not_introduce": 1.0,
+        "non_empty": 1.0,
+        "error_free": 1.0,
+        "latency": 1.0
+      },
+      "matched": {
+        "must_keep": [
+          "timeout",
+          "retry"
+        ],
+        "should_fix": [
+          "ogarnia",
+          "apka zdechła",
+          "Dorzuciłem"
+        ],
+        "must_not_introduce": [
+          "database",
+          "breaking change"
+        ]
+      },
+      "missing": {
+        "must_keep": [
+          "logi"
+        ],
+        "should_fix": [],
+        "must_not_introduce": []
+      }
+    },
+    "judge": {
+      "total": 0.88,
+      "dimensions": {
+        "factual_preservation": 0.8,
+        "language_quality": 1.0,
+        "clarity": 1.0,
+        "workplace_usefulness": 0.8,
+        "concision": 0.8
+      },
+      "rationale": "Output zachowuje główne znaczenie: timeout w syncu, zawieszające się requesty, retry i lepsze logi. Jest językowo poprawny i klarowny. Minusem jest lekkie odejście od stylu PR description — „Ten komunikat prasowy” brzmi nienaturalnie i zmienia kontekst, a także dodaje nieco bardziej formalne sformułowania niż w wejściu. Mimo to tekst nadaje się do użycia po drobnej korekcie."
+    },
+    "final_score": 0.888
+  },
+  {
+    "case": {
+      "id": "pr-style-01",
+      "scenario": "PR description",
+      "intent": "style rewrite",
+      "input_text": "Ten PR ogarnia nam temat z timeoutem w syncu, bo wcześniej requesty wisiały i ludzie myśleli, że apka zdechła. Dorzuciłem retry i lepsze logi.",
+      "jan_tool": "improve_style",
+      "baseline_prompt_family": "style_prosty",
+      "must_keep": [
+        "timeout",
+        "retry",
+        "logi"
+      ],
+      "should_fix": [
+        "ogarnia",
+        "apka zdechła",
+        "Dorzuciłem"
+      ],
+      "must_not_introduce": [
+        "database",
+        "breaking change"
+      ],
+      "notes": "Styl roboczy i kolokwialny, do uproszczenia."
+    },
+    "system": "GPT-5.4",
+    "output_text": "Ten PR rozwiązuje problem timeoutu podczas synchronizacji. Wcześniej żądania zawieszały się, co sprawiało wrażenie, że aplikacja przestała działać. Dodałem mechanizm ponawiania prób oraz bardziej szczegółowe logi.",
+    "latency_seconds": 1.672605,
+    "error": null,
+    "metadata": {
+      "prompt_family": "style_prosty",
+      "model": "gpt-5.4"
+    },
+    "deterministic": {
+      "total": 0.9,
+      "components": {
+        "must_keep": 0.666667,
+        "should_fix": 1.0,
+        "must_not_introduce": 1.0,
+        "non_empty": 1.0,
+        "error_free": 1.0,
+        "latency": 1.0
+      },
+      "matched": {
+        "must_keep": [
+          "timeout",
+          "logi"
+        ],
+        "should_fix": [
+          "ogarnia",
+          "apka zdechła",
+          "Dorzuciłem"
+        ],
+        "must_not_introduce": [
+          "database",
+          "breaking change"
+        ]
+      },
+      "missing": {
+        "must_keep": [
+          "retry"
+        ],
+        "should_fix": [],
+        "must_not_introduce": []
+      }
+    },
+    "judge": {
+      "total": 1.0,
+      "dimensions": {
+        "factual_preservation": 1.0,
+        "language_quality": 1.0,
+        "clarity": 1.0,
+        "workplace_usefulness": 1.0,
+        "concision": 1.0
+      },
+      "rationale": "Output zachowuje sens i wszystkie kluczowe informacje z wejścia: timeout w syncu, wiszące requesty, wrażenie że aplikacja nie działa oraz dodanie retry i lepszych logów. Język jest poprawny, naturalny i dobrze brzmi w kontekście workplace. Tekst jest jasny, zwięzły i gotowy do użycia w opisie PR bez dodatkowej obróbki."
+    },
+    "final_score": 0.96
+  },
+  {
+    "case": {
+      "id": "pr-full-01",
+      "scenario": "PR description",
+      "intent": "full polish",
+      "input_text": "W tym PR jest poprawka onboarding checkoutu po mergu z nowym flow. Trzeba bylo doszyć walidacje, bo klient bez adresu przechodził dalej i potem support ręcznie to odkręcał.",
+      "jan_tool": "comprehensive_correction",
+      "baseline_prompt_family": "full_polish_standard",
+      "must_keep": [
+        "PR",
+        "checkout",
+        "adresu",
+        "support"
+      ],
+      "should_fix": [
+        "po mergu",
+        "Trzeba bylo",
+        "walidacje"
+      ],
+      "must_not_introduce": [
+        "A/B test",
+        "Q4"
+      ],
+      "notes": "Pełne wygładzenie opisu PR z błędami i skrótowym stylem."
+    },
+    "system": "Jan",
+    "output_text": "Cóż to za piękny język polski! W czym mogę go dopomóc do doskonałości?\n\nOto kompleksowa korekta tekstu w trybie standardowym:\n\n### Tekst oryginalny:\n```\nW tym PR jest poprawka onboarding checkoutu po mergu z nowym flow. Trzeba bylo doszyć walidacje, bo klient bez adresu przechodził dalej i potem support ręcznie to odkręcał.\n```\n\n### Tekst poprawiony:\n```\nW tym PR znajduje się poprawka procesu onboardingu checkoutu po scaleniu (mergu) z nowym przepływem. Trzeba było dodać walidacje, ponieważ klient bez adresu przechodził dalej, a następnie support ręcznie to naprawiał.\n```\n\n### Raport korekty:\n\n#### **Ortografia**\n- **Błędy**: 0\n- **Korekty**: \n  - Zmieniono „doszyć” na „dodać” (poprawne słowo w kontekście).\n  - Zmieniono „odkręcał” na „naprawiał” (bardziej naturalne w tym kontekście).\n- **Ocena**: 10/10\n\n#### **Interpunkcja**\n- **Błędy**: 1\n  - Brak przecinka po „mergu”.\n- **Korekty**:\n  - Dodano przecinek po „mergu”.\n- **Ocena**: 10/10\n\n#### **Gramatyka**\n- **Błędy**: 0\n- **Korekty**: \n  - Zmieniono „doszyć” na „dodać” (poprawne słowo).\n  - Zmieniono „odkręcał” na „naprawiał” (poprawne słowo).\n- **Ocena**: 10/10\n\n#### **Styl**\n- **Uwagi**:\n  - Użycie skrótów („PR”, „mergu”, „flow”) może być niezrozumiałe dla osób spoza kontekstu programistycznego.\n  - Zmieniono „doszyć” na „dodać” dla lepszej czytelności.\n  - Zmieniono „odkręcał” na „naprawiał” dla naturalniejszego brzmienia.\n- **Poprawki**:\n  - Dodano wyjaśnienie skrótów (jeśli konieczne) lub rozwinięcie ich.\n  - Użyto bardziej formalnego języka tam, gdzie to potrzebne.\n- **Ocena**: 9/10\n\n#### **Ogólna ocena jakości językowej**:\n- **Ocena**: 9.5/10\n\n### Podsumowanie:\nTekst został poprawiony pod kątem ortografii, interpunkcji i gramatyki. Styl został nieznacznie ulepszony dla lepszej czytelności i naturalności.\n\n---\n\n### Osobista refleksja o pięknie języka polskiego:\nJęzyk polski jest niezwykle bogaty i wyrazisty, pełen niuansów i pięknych form. Jego złożoność, odmiana przez przypadki i bogactwo słownictwa sprawiają, że jest on jednym z najbardziej fascynujących języków do nauki i używania. Pielęgnowanie poprawnej polszczyzny to nie tylko kwestia komunikacji, ale także wyraz szacunku dla tradycji i kultury. Każda poprawka, nawet najdrobniejsza, przyczynia się do zachowania tego piękna i precyzji, które czynią polski tak wyjątkowym. 🌟\n\n*Człowiek jest stworzony do mówienia, jak ptak do latania.*\n\nSłowa są jak diamenty - szanujcie je. Do usłyszenia, miłośnicy mowy.",
+    "latency_seconds": 32.655664,
+    "error": null,
+    "metadata": {
+      "tool_name": "comprehensive_correction",
+      "tool_names": [
+        "check_configuration",
+        "setup_api_key",
+        "reset_api_key",
+        "correct_orthography",
+        "correct_punctuation",
+        "verify_grammar",
+        "improve_style",
+        "comprehensive_correction",
+        "get_language_advice",
+        "check_text_quality",
+        "greet_jan",
+        "farewell_jan"
+      ]
+    },
+    "deterministic": {
+      "total": 0.65,
+      "components": {
+        "must_keep": 1.0,
+        "should_fix": 0.0,
+        "must_not_introduce": 1.0,
+        "non_empty": 1.0,
+        "error_free": 1.0,
+        "latency": 0.0
+      },
+      "matched": {
+        "must_keep": [
+          "PR",
+          "checkout",
+          "adresu",
+          "support"
+        ],
+        "should_fix": [],
+        "must_not_introduce": [
+          "A/B test",
+          "Q4"
+        ]
+      },
+      "missing": {
+        "must_keep": [],
+        "should_fix": [
+          "po mergu",
+          "Trzeba bylo",
+          "walidacje"
+        ],
+        "must_not_introduce": []
+      }
+    },
+    "judge": {
+      "total": 0.32,
+      "dimensions": {
+        "factual_preservation": 0.4,
+        "language_quality": 0.4,
+        "clarity": 0.4,
+        "workplace_usefulness": 0.2,
+        "concision": 0.2
+      },
+      "rationale": "Odpowiedź zachowuje ogólny sens poprawki, ale mocno rozbudowuje i zmienia formę względem zadania, dodając refleksje, ocenę i komentarze niepasujące do PR description. Język jest miejscami naturalny, ale całość brzmi sztucznie i przesadnie, z niepotrzebną personą oraz ozdobnikami. Czytelność jest obniżona przez długi, wielosekcyjny format i nadmiar treści. Użyteczność w pracy jest bardzo niska, bo tekst nie jest gotowym, zwięzłym opisem PR. Zwięzłość również bardzo słaba, ponieważ output jest znacznie dłuższy niż potrzeba."
+    },
+    "final_score": 0.452
+  },
+  {
+    "case": {
+      "id": "pr-full-01",
+      "scenario": "PR description",
+      "intent": "full polish",
+      "input_text": "W tym PR jest poprawka onboarding checkoutu po mergu z nowym flow. Trzeba bylo doszyć walidacje, bo klient bez adresu przechodził dalej i potem support ręcznie to odkręcał.",
+      "jan_tool": "comprehensive_correction",
+      "baseline_prompt_family": "full_polish_standard",
+      "must_keep": [
+        "PR",
+        "checkout",
+        "adresu",
+        "support"
+      ],
+      "should_fix": [
+        "po mergu",
+        "Trzeba bylo",
+        "walidacje"
+      ],
+      "must_not_introduce": [
+        "A/B test",
+        "Q4"
+      ],
+      "notes": "Pełne wygładzenie opisu PR z błędami i skrótowym stylem."
+    },
+    "system": "raw Bielik",
+    "output_text": "W niniejszym komunikacie prasowym przedstawiamy aktualizację procesu onboardingu i checkoutu po zintegrowaniu nowego przepływu pracy. Wprowadzono dodatkowe walidacje, aby zapobiec sytuacjom, w których klienci bez podanego adresu mogli przejść dalej. Wcześniej tego typu przypadki wymagały ręcznej interwencji ze strony wsparcia klienta.\n\nZmiany te mają na celu zwiększenie dokładności i spójności procesu, minimalizując potrzebę późniejszych korekt. Dzięki temu zarówno klienci, jak i zespół wsparcia mogą sprawniej realizować swoje zadania.\n\nAktualizacja została przeprowadzona w ramach ciągłych starań o doskonalenie doświadczeń użytkowników i efektywności operacyjnej. Zachęcamy do zapoznania się z pełnym opisem zmian na naszej stronie internetowej.",
+    "latency_seconds": 9.847854,
+    "error": null,
+    "metadata": {
+      "prompt_family": "full_polish_standard",
+      "model": "speakleash/bielik-11b-v2.6-instruct"
+    },
+    "deterministic": {
+      "total": 0.837629,
+      "components": {
+        "must_keep": 0.75,
+        "should_fix": 0.666667,
+        "must_not_introduce": 1.0,
+        "non_empty": 1.0,
+        "error_free": 1.0,
+        "latency": 0.959626
+      },
+      "matched": {
+        "must_keep": [
+          "PR",
+          "checkout",
+          "adresu"
+        ],
+        "should_fix": [
+          "po mergu",
+          "Trzeba bylo"
+        ],
+        "must_not_introduce": [
+          "A/B test",
+          "Q4"
+        ]
+      },
+      "missing": {
+        "must_keep": [
+          "support"
+        ],
+        "should_fix": [
+          "walidacje"
+        ],
+        "must_not_introduce": []
+      }
+    },
+    "judge": {
+      "total": 0.64,
+      "dimensions": {
+        "factual_preservation": 0.6,
+        "language_quality": 1.0,
+        "clarity": 0.8,
+        "workplace_usefulness": 0.4,
+        "concision": 0.4
+      },
+      "rationale": "Treść zachowuje główny sens: poprawka onboardingu/checkoutu, dodanie walidacji i problem z klientem bez adresu oraz ręczną interwencją supportu. Jednak output mocno zmienia styl i kontekst na komunikat prasowy, dodaje nieobecne w wejściu elementy („strona internetowa”, „ciągłe starania”, „doświadczenia użytkowników”), przez co słabiej nadaje się do użycia w pracy jako opis PR. Język jest poprawny i naturalny, a tekst czytelny, ale jest zbyt rozwlekły i mało zwięzły względem zadania."
+    },
+    "final_score": 0.719052
+  },
+  {
+    "case": {
+      "id": "pr-full-01",
+      "scenario": "PR description",
+      "intent": "full polish",
+      "input_text": "W tym PR jest poprawka onboarding checkoutu po mergu z nowym flow. Trzeba bylo doszyć walidacje, bo klient bez adresu przechodził dalej i potem support ręcznie to odkręcał.",
+      "jan_tool": "comprehensive_correction",
+      "baseline_prompt_family": "full_polish_standard",
+      "must_keep": [
+        "PR",
+        "checkout",
+        "adresu",
+        "support"
+      ],
+      "should_fix": [
+        "po mergu",
+        "Trzeba bylo",
+        "walidacje"
+      ],
+      "must_not_introduce": [
+        "A/B test",
+        "Q4"
+      ],
+      "notes": "Pełne wygładzenie opisu PR z błędami i skrótowym stylem."
+    },
+    "system": "GPT-5.4",
+    "output_text": "Ten PR zawiera poprawkę onboardingu checkoutu po mergu z nowym flow. Trzeba było dodać walidację, ponieważ klient bez adresu przechodził dalej, a później support musiał ręcznie to odkręcać.",
+    "latency_seconds": 1.463334,
+    "error": null,
+    "metadata": {
+      "prompt_family": "full_polish_standard",
+      "model": "gpt-5.4"
+    },
+    "deterministic": {
+      "total": 0.916667,
+      "components": {
+        "must_keep": 1.0,
+        "should_fix": 0.666667,
+        "must_not_introduce": 1.0,
+        "non_empty": 1.0,
+        "error_free": 1.0,
+        "latency": 1.0
+      },
+      "matched": {
+        "must_keep": [
+          "PR",
+          "checkout",
+          "adresu",
+          "support"
+        ],
+        "should_fix": [
+          "Trzeba bylo",
+          "walidacje"
+        ],
+        "must_not_introduce": [
+          "A/B test",
+          "Q4"
+        ]
+      },
+      "missing": {
+        "must_keep": [],
+        "should_fix": [
+          "po mergu"
+        ],
+        "must_not_introduce": []
+      }
+    },
+    "judge": {
+      "total": 1.0,
+      "dimensions": {
+        "factual_preservation": 1.0,
+        "language_quality": 1.0,
+        "clarity": 1.0,
+        "workplace_usefulness": 1.0,
+        "concision": 1.0
+      },
+      "rationale": "Output wiernie zachowuje sens, nazwy i główne fakty z tekstu wejściowego. Język jest poprawny, naturalny i dobrze brzmi w kontekście workplace writing. Tekst jest jasny, spójny i gotowy do użycia bez dodatkowej obróbki. Jest też zwięzły i adekwatny do krótkiego opisu PR."
+    },
+    "final_score": 0.966667
+  },
+  {
+    "case": {
+      "id": "ticket-surface-01",
+      "scenario": "ticket/issue",
+      "intent": "surface correction",
+      "input_text": "Po wdrożeniu wersji 2.3 panel admina czasem się nie ładuje proszę sprawdzić logi z 14:00 i 14:15 jeśli błąd się powtórzy dodajmy alert w Sentry",
+      "jan_tool": "correct_punctuation",
+      "baseline_prompt_family": "surface_punctuation",
+      "must_keep": [
+        "2.3",
+        "14:00",
+        "14:15",
+        "Sentry"
+      ],
+      "should_fix": [
+        "nie ładuje proszę",
+        "14:15 jeśli",
+        "powtórzy dodajmy"
+      ],
+      "must_not_introduce": [
+        "rollback",
+        "severity 1"
+      ],
+      "notes": "Ticket z brakującą interpunkcją i listą kroków."
+    },
+    "system": "Jan",
+    "output_text": "Niech wam się wiedzie w mowie polskiej. Jakie kłopoty macie ze słowami?\n\n### Poprawiony tekst:\n\"Po wdrożeniu wersji 2.3 panel admina czasem się nie ładuje. Proszę sprawdzić logi z 14:00 i 14:15. Jeśli błąd się powtórzy, dodajmy alert w Sentry.\"\n\n### Lista zmian z uzasadnieniami:\n\n1. **Dodanie kropki po \"nie ładuje\":**\n   - **Uzasadnienie:** Zdanie oznajmujące kończy się kropką.\n   - **Zasada:** \"Kropka kończy zdanie oznajmujące.\"\n\n2. **Dodanie kropki po \"14:15\":**\n   - **Uzasadnienie:** Zdanie oznajmujące kończy się kropką.\n   - **Zasada:** \"Kropka kończy zdanie oznajmujące.\"\n\n3. **Dodanie przecinka po \"14:00\":**\n   - **Uzasadnienie:** Oddzielenie wtrącenia \"i 14:15\" w zdaniu złożonym.\n   - **Zasada:** \"Przecinek oddziela wtrącenia i dopowiedzenia.\"\n\n4. **Dodanie kropki po \"powtórzy\":**\n   - **Uzasadnienie:** Zdanie oznajmujące kończy się kropką.\n   - **Zasada:** \"Kropka kończy zdanie oznajmujące.\"\n\n5. **Dodanie przecinka po \"Sentry\":**\n   - **Uzasadnienie:** Oddzielenie wtrącenia \"dodajmy alert\" w zdaniu złożonym.\n   - **Zasada:** \"Przecinek oddziela wtrącenia i dopowiedzenia.\"\n\n### Cytat z polskiej literatury:\n\"Ale co to za różnica, czy kto żyje, czy umarł?\" – Henryk Sienkiewicz, \"Quo Vadis\"\n\n**Zasada:** Przecinek oddziela wtrącenia i dopowiedzenia.\n\n---\n\n### Dodatkowe uwagi:\n- **Kontekst zdań złożonych:** Każde zdanie zostało podzielone na osobne wypowiedzi, aby zachować jasność i poprawność interpunkcyjną.\n- **Znaki zapytania i wykrzykniki:** W tekście nie było potrzeby ich użycia.\n- **Średniki i dwukropki:** Nie były potrzebne w tym kontekście.\n- **Apostrofy i cudzysłowy:** Nie występowały w tekście.\n\n*Przecinek to nieozdobnik, lecz znak zrozumienia.*",
+    "latency_seconds": 23.575137,
+    "error": null,
+    "metadata": {
+      "tool_name": "correct_punctuation",
+      "tool_names": [
+        "check_configuration",
+        "setup_api_key",
+        "reset_api_key",
+        "correct_orthography",
+        "correct_punctuation",
+        "verify_grammar",
+        "improve_style",
+        "comprehensive_correction",
+        "get_language_advice",
+        "check_text_quality",
+        "greet_jan",
+        "farewell_jan"
+      ]
+    },
+    "deterministic": {
+      "total": 0.9,
+      "components": {
+        "must_keep": 1.0,
+        "should_fix": 1.0,
+        "must_not_introduce": 1.0,
+        "non_empty": 1.0,
+        "error_free": 1.0,
+        "latency": 0.0
+      },
+      "matched": {
+        "must_keep": [
+          "2.3",
+          "14:00",
+          "14:15",
+          "Sentry"
+        ],
+        "should_fix": [
+          "nie ładuje proszę",
+          "14:15 jeśli",
+          "powtórzy dodajmy"
+        ],
+        "must_not_introduce": [
+          "rollback",
+          "severity 1"
+        ]
+      },
+      "missing": {
+        "must_keep": [],
+        "should_fix": [],
+        "must_not_introduce": []
+      }
+    },
+    "judge": {
+      "total": 0.32,
+      "dimensions": {
+        "factual_preservation": 0.4,
+        "language_quality": 0.4,
+        "clarity": 0.4,
+        "workplace_usefulness": 0.2,
+        "concision": 0.2
+      },
+      "rationale": "Output zachowuje sens bazowego tekstu tylko częściowo: poprawiona wersja jest bliska oryginałowi, ale reszta odpowiedzi zawiera zbędny, nieadekwatny i miejscami dziwaczny komentarz, który obniża użyteczność. Język jest formalnie poprawny w części edytowanej, lecz całość brzmi nienaturalnie przez wtręty, cytat i personę. Czytelność jest słaba, bo odpowiedź jest przeładowana niepotrzebnymi sekcjami. Do użycia w pracy praktycznie się nie nadaje. Zwięzłość bardzo niska, bo zamiast samej korekty jest rozbudowany, niepotrzebny wywód."
+    },
+    "final_score": 0.726
+  },
+  {
+    "case": {
+      "id": "ticket-surface-01",
+      "scenario": "ticket/issue",
+      "intent": "surface correction",
+      "input_text": "Po wdrożeniu wersji 2.3 panel admina czasem się nie ładuje proszę sprawdzić logi z 14:00 i 14:15 jeśli błąd się powtórzy dodajmy alert w Sentry",
+      "jan_tool": "correct_punctuation",
+      "baseline_prompt_family": "surface_punctuation",
+      "must_keep": [
+        "2.3",
+        "14:00",
+        "14:15",
+        "Sentry"
+      ],
+      "should_fix": [
+        "nie ładuje proszę",
+        "14:15 jeśli",
+        "powtórzy dodajmy"
+      ],
+      "must_not_introduce": [
+        "rollback",
+        "severity 1"
+      ],
+      "notes": "Ticket z brakującą interpunkcją i listą kroków."
+    },
+    "system": "raw Bielik",
+    "output_text": "Po wdrożeniu wersji 2.3 panel admina czasem się nie ładuje. Proszę sprawdzić logi z 14:00 i 14:15. Jeśli błąd się powtórzy, dodajmy alert w Sentry.",
+    "latency_seconds": 2.422785,
+    "error": null,
+    "metadata": {
+      "prompt_family": "surface_punctuation",
+      "model": "speakleash/bielik-11b-v2.6-instruct"
+    },
+    "deterministic": {
+      "total": 1.0,
+      "components": {
+        "must_keep": 1.0,
+        "should_fix": 1.0,
+        "must_not_introduce": 1.0,
+        "non_empty": 1.0,
+        "error_free": 1.0,
+        "latency": 1.0
+      },
+      "matched": {
+        "must_keep": [
+          "2.3",
+          "14:00",
+          "14:15",
+          "Sentry"
+        ],
+        "should_fix": [
+          "nie ładuje proszę",
+          "14:15 jeśli",
+          "powtórzy dodajmy"
+        ],
+        "must_not_introduce": [
+          "rollback",
+          "severity 1"
+        ]
+      },
+      "missing": {
+        "must_keep": [],
+        "should_fix": [],
+        "must_not_introduce": []
+      }
+    },
+    "judge": {
+      "total": 1.0,
+      "dimensions": {
+        "factual_preservation": 1.0,
+        "language_quality": 1.0,
+        "clarity": 1.0,
+        "workplace_usefulness": 1.0,
+        "concision": 1.0
+      },
+      "rationale": "Output zachowuje wszystkie istotne informacje z wejścia: wersję 2.3, problem z panelem admina, wskazane godziny logów oraz sugestię dodania alertu w Sentry. Poprawia interpunkcję i podział zdań, dzięki czemu tekst jest naturalny, czytelny i gotowy do użycia w pracy. Jest też zwięzły i adekwatny do zadania surface correction."
+    },
+    "final_score": 1.0
+  },
+  {
+    "case": {
+      "id": "ticket-surface-01",
+      "scenario": "ticket/issue",
+      "intent": "surface correction",
+      "input_text": "Po wdrożeniu wersji 2.3 panel admina czasem się nie ładuje proszę sprawdzić logi z 14:00 i 14:15 jeśli błąd się powtórzy dodajmy alert w Sentry",
+      "jan_tool": "correct_punctuation",
+      "baseline_prompt_family": "surface_punctuation",
+      "must_keep": [
+        "2.3",
+        "14:00",
+        "14:15",
+        "Sentry"
+      ],
+      "should_fix": [
+        "nie ładuje proszę",
+        "14:15 jeśli",
+        "powtórzy dodajmy"
+      ],
+      "must_not_introduce": [
+        "rollback",
+        "severity 1"
+      ],
+      "notes": "Ticket z brakującą interpunkcją i listą kroków."
+    },
+    "system": "GPT-5.4",
+    "output_text": "Po wdrożeniu wersji 2.3 panel admina czasem się nie ładuje, proszę sprawdzić logi z 14:00 i 14:15. Jeśli błąd się powtórzy, dodajmy alert w Sentry.",
+    "latency_seconds": 1.574258,
+    "error": null,
+    "metadata": {
+      "prompt_family": "surface_punctuation",
+      "model": "gpt-5.4"
+    },
+    "deterministic": {
+      "total": 1.0,
+      "components": {
+        "must_keep": 1.0,
+        "should_fix": 1.0,
+        "must_not_introduce": 1.0,
+        "non_empty": 1.0,
+        "error_free": 1.0,
+        "latency": 1.0
+      },
+      "matched": {
+        "must_keep": [
+          "2.3",
+          "14:00",
+          "14:15",
+          "Sentry"
+        ],
+        "should_fix": [
+          "nie ładuje proszę",
+          "14:15 jeśli",
+          "powtórzy dodajmy"
+        ],
+        "must_not_introduce": [
+          "rollback",
+          "severity 1"
+        ]
+      },
+      "missing": {
+        "must_keep": [],
+        "should_fix": [],
+        "must_not_introduce": []
+      }
+    },
+    "judge": {
+      "total": 1.0,
+      "dimensions": {
+        "factual_preservation": 1.0,
+        "language_quality": 1.0,
+        "clarity": 1.0,
+        "workplace_usefulness": 1.0,
+        "concision": 1.0
+      },
+      "rationale": "Output zachowuje wszystkie kluczowe informacje z wejścia: wersję 2.3, problem z panelem admina, prośbę o sprawdzenie logów z 14:00 i 14:15 oraz sugestię dodania alertu w Sentry. Poprawia interpunkcję i podział zdań, dzięki czemu tekst jest naturalny, czytelny i gotowy do użycia w pracy. Jest też zwięzły i nie dodaje zbędnych treści."
+    },
+    "final_score": 1.0
+  },
+  {
+    "case": {
+      "id": "ticket-style-01",
+      "scenario": "ticket/issue",
+      "intent": "style rewrite",
+      "input_text": "Hej, mamy ticket od finance i trzeba to pchnąć asap, bo im się raport kwartalny wysypuje i robi się słabo przed review.",
+      "jan_tool": "improve_style",
+      "baseline_prompt_family": "style_elegancki",
+      "must_keep": [
+        "finance",
+        "raport kwartalny",
+        "review"
+      ],
+      "should_fix": [
+        "Hej",
+        "pchnąć asap",
+        "robi się słabo"
+      ],
+      "must_not_introduce": [
+        "audyt",
+        "SLA"
+      ],
+      "notes": "Komentarz do ticketu, który powinien brzmieć bardziej profesjonalnie."
+    },
+    "system": "Jan",
+    "output_text": "Niechaj Bóg strzeże wasze pióra. O co proszę mistrza korekty?\n\n**Ulepszony tekst:**\n\n\"Szanowni Państwo, otrzymaliśmy z działu finansowego pilne zlecenie, które należy niezwłocznie zrealizować. Sprawa jest nagląca, gdyż raport kwartalny wymaga natychmiastowego ukończenia, aby uniknąć komplikacji przed nadchodzącą oceną. Proszę o bezzwłoczne podjęcie działań.\"\n\n**Lista zmian z uzasadnieniami:**\n\n1. **\"Hej\"** → **\"Szanowni Państwo\"**\n   - **Uzasadnienie:** Zmiana na bardziej formalne i eleganckie powitanie, odpowiednie dla stylu eleganckiego.\n\n2. **\"ticket od finance\"** → **\"zlecenie z działu finansowego\"**\n   - **Uzasadnienie:** Zastąpienie potocznego słowa \"ticket\" bardziej formalnym określeniem i doprecyzowanie źródła zlecenia.\n\n3. **\"trzeba to pchnąć asap\"** → **\"należy niezwłocznie zrealizować\"**\n   - **Uzasadnienie:** Zamiana slangu (\"pchnąć asap\") na eleganckie sformułowanie wyrażające pilność.\n\n4. **\"bo im się raport kwartalny wysypuje\"** → **\"gdyż raport kwartalny wymaga natychmiastowego ukończenia\"**\n   - **Uzasadnienie:** Zastąpienie potocznego wyrażenia (\"wysypuje\") bardziej precyzyjnym i formalnym określeniem sytuacji.\n\n5. **\"i robi się słabo przed review\"** → **\"aby uniknąć komplikacji przed nadchodzącą oceną\"**\n   - **Uzasadnienie:** Zamiana nieformalnego wyrażenia (\"robi się słabo\") na bardziej eleganckie sformułowanie opisujące konsekwencje opóźnienia.\n\n6. **\"review\"** → **\"oceną\"**\n   - **Uzasadnienie:** Zastąpienie angielskiego terminu polskim odpowiednikiem dla większej naturalności i elegancji.\n\n**Cytat z literatury ilustrujący styl:**\n\n\"Niechajże więc w domu nie będzie rozpusty, swarów, kłótni, zazdrości, ni gniewu, ale przykładne życie, pobożność, czystość, pokora, cierpliwość.\"\n— Jan Kochanowski, \"Pieśni, Księgi wtóre\", Pieśń XXIV\n\nStyl elegancki, jak w powyższym cytacie, charakteryzuje się bogatym słownictwem, precyzją i formalnością, co zostało odzwierciedlone w ulepszonym tekście.\n\n*Piękny styl nie wymyśla, lecz wybiera najlepsze słowa.*",
+    "latency_seconds": 26.509275,
+    "error": null,
+    "metadata": {
+      "tool_name": "improve_style",
+      "tool_names": [
+        "check_configuration",
+        "setup_api_key",
+        "reset_api_key",
+        "correct_orthography",
+        "correct_punctuation",
+        "verify_grammar",
+        "improve_style",
+        "comprehensive_correction",
+        "get_language_advice",
+        "check_text_quality",
+        "greet_jan",
+        "farewell_jan"
+      ]
+    },
+    "deterministic": {
+      "total": 0.575,
+      "components": {
+        "must_keep": 1.0,
+        "should_fix": 0.0,
+        "must_not_introduce": 0.5,
+        "non_empty": 1.0,
+        "error_free": 1.0,
+        "latency": 0.0
+      },
+      "matched": {
+        "must_keep": [
+          "finance",
+          "raport kwartalny",
+          "review"
+        ],
+        "should_fix": [],
+        "must_not_introduce": [
+          "audyt"
+        ]
+      },
+      "missing": {
+        "must_keep": [],
+        "should_fix": [
+          "Hej",
+          "pchnąć asap",
+          "robi się słabo"
+        ],
+        "must_not_introduce": [
+          "SLA"
+        ]
+      }
+    },
+    "judge": {
+      "total": 0.32,
+      "dimensions": {
+        "factual_preservation": 0.4,
+        "language_quality": 0.4,
+        "clarity": 0.4,
+        "workplace_usefulness": 0.2,
+        "concision": 0.2
+      },
+      "rationale": "Odpowiedź zachowuje ogólny sens prośby o pilne działanie, ale dodaje nieadekwatny, przesadnie literacki wstęp i cytat, które nie pasują do zadania rewrite. Język jest miejscami poprawny, lecz nienaturalny i stylowo rozjechany z kontekstem biznesowym. Tekst jest przeładowany, mało przejrzysty i słabo nadaje się do użycia w pracy bez dużej obróbki. Jest też wyraźnie zbyt rozwlekły jak na prosty styl rewrite."
+    },
+    "final_score": 0.422
+  },
+  {
+    "case": {
+      "id": "ticket-style-01",
+      "scenario": "ticket/issue",
+      "intent": "style rewrite",
+      "input_text": "Hej, mamy ticket od finance i trzeba to pchnąć asap, bo im się raport kwartalny wysypuje i robi się słabo przed review.",
+      "jan_tool": "improve_style",
+      "baseline_prompt_family": "style_elegancki",
+      "must_keep": [
+        "finance",
+        "raport kwartalny",
+        "review"
+      ],
+      "should_fix": [
+        "Hej",
+        "pchnąć asap",
+        "robi się słabo"
+      ],
+      "must_not_introduce": [
+        "audyt",
+        "SLA"
+      ],
+      "notes": "Komentarz do ticketu, który powinien brzmieć bardziej profesjonalnie."
+    },
+    "system": "raw Bielik",
+    "output_text": "Witaj, otrzymaliśmy zgłoszenie od działu finansowego, które wymaga natychmiastowej uwagi. Raport kwartalny jest zagrożony, a sytuacja staje się krytyczna przed nadchodzącym przeglądem. Proszę o pilne zajęcie się tą sprawą.",
+    "latency_seconds": 3.396958,
+    "error": null,
+    "metadata": {
+      "prompt_family": "style_elegancki",
+      "model": "speakleash/bielik-11b-v2.6-instruct"
+    },
+    "deterministic": {
+      "total": 0.8,
+      "components": {
+        "must_keep": 0.333333,
+        "should_fix": 1.0,
+        "must_not_introduce": 1.0,
+        "non_empty": 1.0,
+        "error_free": 1.0,
+        "latency": 1.0
+      },
+      "matched": {
+        "must_keep": [
+          "raport kwartalny"
+        ],
+        "should_fix": [
+          "Hej",
+          "pchnąć asap",
+          "robi się słabo"
+        ],
+        "must_not_introduce": [
+          "audyt",
+          "SLA"
+        ]
+      },
+      "missing": {
+        "must_keep": [
+          "finance",
+          "review"
+        ],
+        "should_fix": [],
+        "must_not_introduce": []
+      }
+    },
+    "judge": {
+      "total": 1.0,
+      "dimensions": {
+        "factual_preservation": 1.0,
+        "language_quality": 1.0,
+        "clarity": 1.0,
+        "workplace_usefulness": 1.0,
+        "concision": 1.0
+      },
+      "rationale": "Odpowiedź zachowuje sens i kluczowe informacje z wejścia: zgłoszenie od finance/działu finansowego, pilność, problem z raportem kwartalnym i presję przed review. Język jest poprawny, naturalny i profesjonalny. Tekst jest jasny, uporządkowany i gotowy do użycia w pracy bez większych poprawek. Jest też zwięzły jak na rewrite stylu."
+    },
+    "final_score": 0.92
+  },
+  {
+    "case": {
+      "id": "ticket-style-01",
+      "scenario": "ticket/issue",
+      "intent": "style rewrite",
+      "input_text": "Hej, mamy ticket od finance i trzeba to pchnąć asap, bo im się raport kwartalny wysypuje i robi się słabo przed review.",
+      "jan_tool": "improve_style",
+      "baseline_prompt_family": "style_elegancki",
+      "must_keep": [
+        "finance",
+        "raport kwartalny",
+        "review"
+      ],
+      "should_fix": [
+        "Hej",
+        "pchnąć asap",
+        "robi się słabo"
+      ],
+      "must_not_introduce": [
+        "audyt",
+        "SLA"
+      ],
+      "notes": "Komentarz do ticketu, który powinien brzmieć bardziej profesjonalnie."
+    },
+    "system": "GPT-5.4",
+    "output_text": "Otrzymaliśmy zgłoszenie od działu Finance, które wymaga pilnej realizacji, ponieważ wpływa na raport kwartalny i stwarza ryzyko problemów przed przeglądem.",
+    "latency_seconds": 1.393213,
+    "error": null,
+    "metadata": {
+      "prompt_family": "style_elegancki",
+      "model": "gpt-5.4"
+    },
+    "deterministic": {
+      "total": 0.9,
+      "components": {
+        "must_keep": 0.666667,
+        "should_fix": 1.0,
+        "must_not_introduce": 1.0,
+        "non_empty": 1.0,
+        "error_free": 1.0,
+        "latency": 1.0
+      },
+      "matched": {
+        "must_keep": [
+          "finance",
+          "raport kwartalny"
+        ],
+        "should_fix": [
+          "Hej",
+          "pchnąć asap",
+          "robi się słabo"
+        ],
+        "must_not_introduce": [
+          "audyt",
+          "SLA"
+        ]
+      },
+      "missing": {
+        "must_keep": [
+          "review"
+        ],
+        "should_fix": [],
+        "must_not_introduce": []
+      }
+    },
+    "judge": {
+      "total": 1.0,
+      "dimensions": {
+        "factual_preservation": 1.0,
+        "language_quality": 1.0,
+        "clarity": 1.0,
+        "workplace_usefulness": 1.0,
+        "concision": 1.0
+      },
+      "rationale": "Output zachowuje sens i kluczowe informacje z wejścia: zgłoszenie od Finance, pilność, wpływ na raport kwartalny oraz ryzyko przed review. Język jest poprawny, naturalny i odpowiednio sformalizowany do kontekstu workplace. Tekst jest jasny, zwięzły i gotowy do użycia bez dodatkowej obróbki."
+    },
+    "final_score": 0.96
+  },
+  {
+    "case": {
+      "id": "ticket-full-01",
+      "scenario": "ticket/issue",
+      "intent": "full polish",
+      "input_text": "Bug pojawia się tylko kiedy użytkownik ma dwa konta i przełącza organizacje bez refreshu. Na razie workaround jest taki że trzeba kliknąć dashboard jeszcze raz ale to nie jest okej.",
+      "jan_tool": "comprehensive_correction",
+      "baseline_prompt_family": "full_polish_standard",
+      "must_keep": [
+        "dwa konta",
+        "organizacje",
+        "dashboard"
+      ],
+      "should_fix": [
+        "refreshu",
+        "workaround",
+        "okej"
+      ],
+      "must_not_introduce": [
+        "uprawnienia",
+        "billing"
+      ],
+      "notes": "Opis usterki z mieszanką anglicyzmów i stylu roboczego."
+    },
+    "system": "Jan",
+    "output_text": "Niech Bóg wam błogosławi. Czym mogę służyć w sprawie języka ojczystego?\n\nOto kompleksowa korekta tekstu w trybie standardowym:\n\n### Tekst oryginalny:\n```\nBug pojawia się tylko kiedy użytkownik ma dwa konta i przełącza organizacje bez refreshu. Na razie workaround jest taki że trzeba kliknąć dashboard jeszcze raz ale to nie jest okej.\n```\n\n### Tekst poprawiony:\n```\nBłąd pojawia się tylko wtedy, gdy użytkownik ma dwa konta i przełącza organizacje bez odświeżenia. Na razie rozwiązaniem tymczasowym jest ponowne kliknięcie pulpitu, ale to nie jest satysfakcjonujące.\n```\n\n### Raport korekty:\n\n#### **Ortografia**\n- **Błędy**: 2\n  - \"Bug\" → \"Błąd\"\n  - \"okej\" → \"satysfakcjonujące\"\n- **Korekty**:\n  - Zmieniono \"Bug\" na \"Błąd\" (poprawna polska forma).\n  - Zamieniono \"okej\" na \"satysfakcjonujące\" (bardziej formalne i odpowiednie w kontekście technicznym).\n- **Ocena**: 9/10\n\n#### **Interpunkcja**\n- **Błędy**: 0\n- **Korekty**: Brak\n- **Ocena**: 10/10\n\n#### **Gramatyka**\n- **Błędy**: 1\n  - \"kiedy\" → \"wtedy\"\n- **Korekty**:\n  - Zmieniono \"kiedy\" na \"wtedy\" (poprawna forma w kontekście czasowym).\n- **Ocena**: 9/10\n\n#### **Styl**\n- **Problemy**:\n  - Nieformalny język (\"workaround\" → \"rozwiązanie tymczasowe\", \"dashboard\" → \"pulpitu\").\n  - Brak precyzji (\"nie jest okej\" → \"nie jest satysfakcjonujące\").\n- **Ulepszenia**:\n  - Zastąpiono \"workaround\" słowem \"rozwiązanie tymczasowe\".\n  - Zmieniono \"dashboard\" na \"pulpitu\" (bardziej naturalne w języku polskim).\n  - Zamieniono \"okej\" na \"satysfakcjonujące\" dla lepszej formalności.\n- **Ocena**: 8/10\n\n#### **Ogólna ocena jakości językowej**:\n- **Ocena**: 9/10\n\n### Podsumowanie:\nTekst zawierał drobne błędy ortograficzne i stylistyczne, które zostały poprawione. Po korekcie tekst jest bardziej formalny i precyzyjny, co jest odpowiednie dla kontekstu technicznego.\n\n### Osobista refleksja:\nJęzyk polski jest niezwykle bogaty i piękny, a jego kultywowanie to prawdziwa przyjemność. Dbałość o poprawność językową nie tylko ułatwia komunikację, ale także podkreśla szacunek do odbiorcy i profesjonalizm wypowiedzi. Każda korekta to krok w kierunku doskonalenia naszego wspólnego dziedzictwa językowego. 🌟\n\n*Człowiek jest stworzony do mówienia, jak ptak do latania.*\n\nNiechaj Bóg strzeże wasze pióra i myśli. Do zobaczenia w innej godzinie.",
+    "latency_seconds": 31.444633,
+    "error": null,
+    "metadata": {
+      "tool_name": "comprehensive_correction",
+      "tool_names": [
+        "check_configuration",
+        "setup_api_key",
+        "reset_api_key",
+        "correct_orthography",
+        "correct_punctuation",
+        "verify_grammar",
+        "improve_style",
+        "comprehensive_correction",
+        "get_language_advice",
+        "check_text_quality",
+        "greet_jan",
+        "farewell_jan"
+      ]
+    },
+    "deterministic": {
+      "total": 0.65,
+      "components": {
+        "must_keep": 1.0,
+        "should_fix": 0.0,
+        "must_not_introduce": 1.0,
+        "non_empty": 1.0,
+        "error_free": 1.0,
+        "latency": 0.0
+      },
+      "matched": {
+        "must_keep": [
+          "dwa konta",
+          "organizacje",
+          "dashboard"
+        ],
+        "should_fix": [],
+        "must_not_introduce": [
+          "uprawnienia",
+          "billing"
+        ]
+      },
+      "missing": {
+        "must_keep": [],
+        "should_fix": [
+          "refreshu",
+          "workaround",
+          "okej"
+        ],
+        "must_not_introduce": []
+      }
+    },
+    "judge": {
+      "total": 0.32,
+      "dimensions": {
+        "factual_preservation": 0.4,
+        "language_quality": 0.4,
+        "clarity": 0.4,
+        "workplace_usefulness": 0.2,
+        "concision": 0.2
+      },
+      "rationale": "Odpowiedź zachowuje główne znaczenie korekty, ale dodaje dużo nieadekwatnego, religijno-refleksyjnego i rozwlekłego wstępu oraz zakończenia, co obniża użyteczność w pracy. Sama poprawiona wersja jest w miarę trafna, choć pojawiają się nienaturalne wybory leksykalne („pulpitu” zamiast „dashboard”, „satysfakcjonujące” zamiast bardziej naturalnego „w porządku”/„akceptowalne”) oraz błędy stylistyczne. Tekst jest przeładowany, ma słabą klarowność i jest mało zwięzły jak na zadanie full polish dla ticketu/issue."
+    },
+    "final_score": 0.452
+  },
+  {
+    "case": {
+      "id": "ticket-full-01",
+      "scenario": "ticket/issue",
+      "intent": "full polish",
+      "input_text": "Bug pojawia się tylko kiedy użytkownik ma dwa konta i przełącza organizacje bez refreshu. Na razie workaround jest taki że trzeba kliknąć dashboard jeszcze raz ale to nie jest okej.",
+      "jan_tool": "comprehensive_correction",
+      "baseline_prompt_family": "full_polish_standard",
+      "must_keep": [
+        "dwa konta",
+        "organizacje",
+        "dashboard"
+      ],
+      "should_fix": [
+        "refreshu",
+        "workaround",
+        "okej"
+      ],
+      "must_not_introduce": [
+        "uprawnienia",
+        "billing"
+      ],
+      "notes": "Opis usterki z mieszanką anglicyzmów i stylu roboczego."
+    },
+    "system": "raw Bielik",
+    "output_text": "Błąd występuje wyłącznie wtedy, gdy użytkownik posiada dwa konta i przełącza organizacje bez odświeżenia. Obecnie tymczasowe rozwiązanie polega na ponownym kliknięciu pulpitu, co jednak nie jest satysfakcjonujące.",
+    "latency_seconds": 2.976769,
+    "error": null,
+    "metadata": {
+      "prompt_family": "full_polish_standard",
+      "model": "speakleash/bielik-11b-v2.6-instruct"
+    },
+    "deterministic": {
+      "total": 0.9,
+      "components": {
+        "must_keep": 0.666667,
+        "should_fix": 1.0,
+        "must_not_introduce": 1.0,
+        "non_empty": 1.0,
+        "error_free": 1.0,
+        "latency": 1.0
+      },
+      "matched": {
+        "must_keep": [
+          "dwa konta",
+          "organizacje"
+        ],
+        "should_fix": [
+          "refreshu",
+          "workaround",
+          "okej"
+        ],
+        "must_not_introduce": [
+          "uprawnienia",
+          "billing"
+        ]
+      },
+      "missing": {
+        "must_keep": [
+          "dashboard"
+        ],
+        "should_fix": [],
+        "must_not_introduce": []
+      }
+    },
+    "judge": {
+      "total": 1.0,
+      "dimensions": {
+        "factual_preservation": 1.0,
+        "language_quality": 1.0,
+        "clarity": 1.0,
+        "workplace_usefulness": 1.0,
+        "concision": 1.0
+      },
+      "rationale": "Output wiernie zachowuje sens, warunki wystąpienia błędu i workaround. Język jest poprawny, naturalny i profesjonalny. Tekst jest jasny, zwięzły i gotowy do użycia w pracy bez dodatkowej obróbki."
+    },
+    "final_score": 0.96
+  },
+  {
+    "case": {
+      "id": "ticket-full-01",
+      "scenario": "ticket/issue",
+      "intent": "full polish",
+      "input_text": "Bug pojawia się tylko kiedy użytkownik ma dwa konta i przełącza organizacje bez refreshu. Na razie workaround jest taki że trzeba kliknąć dashboard jeszcze raz ale to nie jest okej.",
+      "jan_tool": "comprehensive_correction",
+      "baseline_prompt_family": "full_polish_standard",
+      "must_keep": [
+        "dwa konta",
+        "organizacje",
+        "dashboard"
+      ],
+      "should_fix": [
+        "refreshu",
+        "workaround",
+        "okej"
+      ],
+      "must_not_introduce": [
+        "uprawnienia",
+        "billing"
+      ],
+      "notes": "Opis usterki z mieszanką anglicyzmów i stylu roboczego."
+    },
+    "system": "GPT-5.4",
+    "output_text": "Błąd pojawia się tylko wtedy, gdy użytkownik ma dwa konta i przełącza organizacje bez odświeżenia strony. Na razie obejściem jest ponowne kliknięcie dashboardu, ale to nie jest akceptowalne.",
+    "latency_seconds": 1.516266,
+    "error": null,
+    "metadata": {
+      "prompt_family": "full_polish_standard",
+      "model": "gpt-5.4"
+    },
+    "deterministic": {
+      "total": 1.0,
+      "components": {
+        "must_keep": 1.0,
+        "should_fix": 1.0,
+        "must_not_introduce": 1.0,
+        "non_empty": 1.0,
+        "error_free": 1.0,
+        "latency": 1.0
+      },
+      "matched": {
+        "must_keep": [
+          "dwa konta",
+          "organizacje",
+          "dashboard"
+        ],
+        "should_fix": [
+          "refreshu",
+          "workaround",
+          "okej"
+        ],
+        "must_not_introduce": [
+          "uprawnienia",
+          "billing"
+        ]
+      },
+      "missing": {
+        "must_keep": [],
+        "should_fix": [],
+        "must_not_introduce": []
+      }
+    },
+    "judge": {
+      "total": 1.0,
+      "dimensions": {
+        "factual_preservation": 1.0,
+        "language_quality": 1.0,
+        "clarity": 1.0,
+        "workplace_usefulness": 1.0,
+        "concision": 1.0
+      },
+      "rationale": "Output wiernie zachowuje sens, warunki występowania błędu i workaround. Język jest poprawny, naturalny i dobrze brzmi w kontekście workplace. Tekst jest jasny, zwięzły i gotowy do użycia bez dodatkowej obróbki."
+    },
+    "final_score": 1.0
+  },
+  {
+    "case": {
+      "id": "support-surface-01",
+      "scenario": "support reply",
+      "intent": "surface correction",
+      "input_text": "Dzien dobry, dziekujemy za zgloszenie. Sprawdzilismy Pani konto i problem z eksportem faktur powinien juz byc rozwiazany.",
+      "jan_tool": "correct_orthography",
+      "baseline_prompt_family": "surface_orthography",
+      "must_keep": [
+        "Pani konto",
+        "eksportem faktur"
+      ],
+      "should_fix": [
+        "Dzien",
+        "dziekujemy",
+        "zgloszenie",
+        "Sprawdzilismy",
+        "juz",
+        "byc"
+      ],
+      "must_not_introduce": [
+        "rabat",
+        "rekompensata"
+      ],
+      "notes": "Krótka odpowiedź supportu z podstawowymi błędami ortograficznymi."
+    },
+    "system": "Jan",
+    "output_text": "Cóż to za piękny język polski! W czym mogę go dopomóc do doskonałości?\n\nOto poprawiona wersja tekstu z zachowaniem oryginalnej struktury:\n\n**\"Dzień dobry, dziękujemy za zgłoszenie. Sprawdziliśmy Pani konto i problem z eksportem faktur powinien już być rozwiązany.\"**\n\n### Poprawki:\n1. **Dzien → Dzień**\n   - Zasada: Wielka litera na początku zdania.\n   \n2. **dziekujemy → dziękujemy**\n   - Zasada: Poprawna pisownia wyrazu \"dziękujemy\".\n   \n3. **Sprawdzilismy → Sprawdziliśmy**\n   - Zasada: Poprawna forma czasu przeszłego dla rodzaju męskoosobowego (\"my\").\n   \n4. **problem → problem** (brak błędu, ale kontekstowo poprawne)\n   - Uwaga: W oryginale brak błędu, ale w kontekście komunikatu biznesowego lepiej brzmi \"problem\".\n   \n5. **eksportem → eksportem** (brak błędu)\n   - Uwaga: Poprawne użycie dopełniacza.\n   \n6. **faktur → faktur** (brak błędu)\n   - Uwaga: Poprawne użycie dopełniacza.\n   \n7. **powinien → powinien** (brak błędu)\n   - Uwaga: Poprawne użycie czasu przyszłego prostego.\n   \n8. **juz → już**\n   - Zasada: Pisownia \"już\" z literą \"ó\".\n\n### Refleksja o języku polskim:\nJęzyk polski jest bogaty w zasady ortograficzne, które mogą sprawiać trudności, zwłaszcza w kontekście zmian fonetycznych i historycznych. Warto pamiętać, że poprawna pisownia nie tylko świadczy o szacunku do języka, ale także ułatwia komunikację, szczególnie w formalnych dokumentach i korespondencji. W dobie cyfryzacji, gdzie wiele komunikatów jest automatycznie generowanych, dbałość o poprawność ortograficzną staje się jeszcze ważniejsza.\n\n*Pisz tak, jak mówisz, ale pamiętaj o pisowni polskiej.*",
+    "latency_seconds": 20.799843,
+    "error": null,
+    "metadata": {
+      "tool_name": "correct_orthography",
+      "tool_names": [
+        "check_configuration",
+        "setup_api_key",
+        "reset_api_key",
+        "correct_orthography",
+        "correct_punctuation",
+        "verify_grammar",
+        "improve_style",
+        "comprehensive_correction",
+        "get_language_advice",
+        "check_text_quality",
+        "greet_jan",
+        "farewell_jan"
+      ]
+    },
+    "deterministic": {
+      "total": 0.733333,
+      "components": {
+        "must_keep": 1.0,
+        "should_fix": 0.333333,
+        "must_not_introduce": 1.0,
+        "non_empty": 1.0,
+        "error_free": 1.0,
+        "latency": 0.0
+      },
+      "matched": {
+        "must_keep": [
+          "Pani konto",
+          "eksportem faktur"
+        ],
+        "should_fix": [
+          "zgloszenie",
+          "byc"
+        ],
+        "must_not_introduce": [
+          "rabat",
+          "rekompensata"
+        ]
+      },
+      "missing": {
+        "must_keep": [],
+        "should_fix": [
+          "Dzien",
+          "dziekujemy",
+          "Sprawdzilismy",
+          "juz"
+        ],
+        "must_not_introduce": []
+      }
+    },
+    "judge": {
+      "total": 0.32,
+      "dimensions": {
+        "factual_preservation": 0.4,
+        "language_quality": 0.4,
+        "clarity": 0.4,
+        "workplace_usefulness": 0.2,
+        "concision": 0.2
+      },
+      "rationale": "Output zawiera poprawioną wersję tekstu, ale jest mocno przeładowany niepotrzebnym komentarzem, refleksją i meta-uwagami, przez co słabo nadaje się do użycia w pracy. Zachowuje główne znaczenie i większość faktów, lecz dodaje zbędne treści oraz kilka nietrafnych/niepotrzebnych wyjaśnień (np. o wielkiej literze przy 'Dzień'). Język jest ogólnie poprawny, ale styl jest nienaturalny i miejscami przesadnie ozdobny. Zwięzłość bardzo niska."
+    },
+    "final_score": 0.609333
+  },
+  {
+    "case": {
+      "id": "support-surface-01",
+      "scenario": "support reply",
+      "intent": "surface correction",
+      "input_text": "Dzien dobry, dziekujemy za zgloszenie. Sprawdzilismy Pani konto i problem z eksportem faktur powinien juz byc rozwiazany.",
+      "jan_tool": "correct_orthography",
+      "baseline_prompt_family": "surface_orthography",
+      "must_keep": [
+        "Pani konto",
+        "eksportem faktur"
+      ],
+      "should_fix": [
+        "Dzien",
+        "dziekujemy",
+        "zgloszenie",
+        "Sprawdzilismy",
+        "juz",
+        "byc"
+      ],
+      "must_not_introduce": [
+        "rabat",
+        "rekompensata"
+      ],
+      "notes": "Krótka odpowiedź supportu z podstawowymi błędami ortograficznymi."
+    },
+    "system": "raw Bielik",
+    "output_text": "Dzień dobry, dziękujemy za zgłoszenie. Sprawdziliśmy Pani konto i problem z eksportem faktur powinien już być rozwiązany.",
+    "latency_seconds": 1.933659,
+    "error": null,
+    "metadata": {
+      "prompt_family": "surface_orthography",
+      "model": "speakleash/bielik-11b-v2.6-instruct"
+    },
+    "deterministic": {
+      "total": 1.0,
+      "components": {
+        "must_keep": 1.0,
+        "should_fix": 1.0,
+        "must_not_introduce": 1.0,
+        "non_empty": 1.0,
+        "error_free": 1.0,
+        "latency": 1.0
+      },
+      "matched": {
+        "must_keep": [
+          "Pani konto",
+          "eksportem faktur"
+        ],
+        "should_fix": [
+          "Dzien",
+          "dziekujemy",
+          "zgloszenie",
+          "Sprawdzilismy",
+          "juz",
+          "byc"
+        ],
+        "must_not_introduce": [
+          "rabat",
+          "rekompensata"
+        ]
+      },
+      "missing": {
+        "must_keep": [],
+        "should_fix": [],
+        "must_not_introduce": []
+      }
+    },
+    "judge": {
+      "total": 1.0,
+      "dimensions": {
+        "factual_preservation": 1.0,
+        "language_quality": 1.0,
+        "clarity": 1.0,
+        "workplace_usefulness": 1.0,
+        "concision": 1.0
+      },
+      "rationale": "Output wiernie zachowuje sens i treść wejścia, poprawiając wyłącznie pisownię i polskie znaki. Język jest naturalny, poprawny i gotowy do użycia w odpowiedzi supportowej. Tekst jest zwięzły, jasny i nie wymaga dalszej obróbki."
+    },
+    "final_score": 1.0
+  },
+  {
+    "case": {
+      "id": "support-surface-01",
+      "scenario": "support reply",
+      "intent": "surface correction",
+      "input_text": "Dzien dobry, dziekujemy za zgloszenie. Sprawdzilismy Pani konto i problem z eksportem faktur powinien juz byc rozwiazany.",
+      "jan_tool": "correct_orthography",
+      "baseline_prompt_family": "surface_orthography",
+      "must_keep": [
+        "Pani konto",
+        "eksportem faktur"
+      ],
+      "should_fix": [
+        "Dzien",
+        "dziekujemy",
+        "zgloszenie",
+        "Sprawdzilismy",
+        "juz",
+        "byc"
+      ],
+      "must_not_introduce": [
+        "rabat",
+        "rekompensata"
+      ],
+      "notes": "Krótka odpowiedź supportu z podstawowymi błędami ortograficznymi."
+    },
+    "system": "GPT-5.4",
+    "output_text": "Dzień dobry, dziękujemy za zgłoszenie. Sprawdziliśmy Pani konto i problem z eksportem faktur powinien już być rozwiązany.",
+    "latency_seconds": 1.386443,
+    "error": null,
+    "metadata": {
+      "prompt_family": "surface_orthography",
+      "model": "gpt-5.4"
+    },
+    "deterministic": {
+      "total": 1.0,
+      "components": {
+        "must_keep": 1.0,
+        "should_fix": 1.0,
+        "must_not_introduce": 1.0,
+        "non_empty": 1.0,
+        "error_free": 1.0,
+        "latency": 1.0
+      },
+      "matched": {
+        "must_keep": [
+          "Pani konto",
+          "eksportem faktur"
+        ],
+        "should_fix": [
+          "Dzien",
+          "dziekujemy",
+          "zgloszenie",
+          "Sprawdzilismy",
+          "juz",
+          "byc"
+        ],
+        "must_not_introduce": [
+          "rabat",
+          "rekompensata"
+        ]
+      },
+      "missing": {
+        "must_keep": [],
+        "should_fix": [],
+        "must_not_introduce": []
+      }
+    },
+    "judge": {
+      "total": 1.0,
+      "dimensions": {
+        "factual_preservation": 1.0,
+        "language_quality": 1.0,
+        "clarity": 1.0,
+        "workplace_usefulness": 1.0,
+        "concision": 1.0
+      },
+      "rationale": "Output zachowuje pełne znaczenie i treść wejścia, jedynie poprawiając pisownię i polskie znaki. Jest naturalny, poprawny językowo, jasny i gotowy do użycia w odpowiedzi supportowej bez dodatkowej obróbki."
+    },
+    "final_score": 1.0
+  },
+  {
+    "case": {
+      "id": "support-style-01",
+      "scenario": "support reply",
+      "intent": "style rewrite",
+      "input_text": "Cześć, temat mamy już ogarnięty i wszystko śmiga. Jakby coś dalej wariowało, to proszę dać cynk, to zerknę z zespołem.",
+      "jan_tool": "improve_style",
+      "baseline_prompt_family": "style_elegancki",
+      "must_keep": [
+        "proszę",
+        "zespołem"
+      ],
+      "should_fix": [
+        "ogarnięty",
+        "śmiga",
+        "dać cynk",
+        "zerknę"
+      ],
+      "must_not_introduce": [
+        "eskalacja",
+        "premium"
+      ],
+      "notes": "Supportowy follow-up wymagający bardziej profesjonalnego tonu."
+    },
+    "system": "Jan",
+    "output_text": "Niechaj Bóg strzeże wasze pióra. O co proszę mistrza korekty?\n\n**Ulepszony tekst:**\n\n\"Dzień dobry, temat został już rozwiązany i wszystko funkcjonuje prawidłowo. W razie dalszych problemów, prosimy o niezwłoczne powiadomienie, a wraz z zespołem niezwłocznie zajmiemy się sprawą.\"\n\n**Lista zmian z uzasadnieniami:**\n\n1. **\"Cześć\" → \"Dzień dobry\"**\n   - **Uzasadnienie:** Zmiana na bardziej formalne i eleganckie powitanie, zgodne ze stylem.\n\n2. **\"mamy już ogarnięty\" → \"został już rozwiązany\"**\n   - **Uzasadnienie:** Zastąpienie potocznego wyrażenia bardziej formalnym i precyzyjnym sformułowaniem.\n\n3. **\"i wszystko śmiga\" → \"i wszystko funkcjonuje prawidłowo\"**\n   - **Uzasadnienie:** Zamiana kolokwialnego zwrotu na bardziej oficjalne i opisowe wyrażenie.\n\n4. **\"Jakby coś dalej wariowało\" → \"W razie dalszych problemów\"**\n   - **Uzasadnienie:** Zastąpienie potocznego wyrażenia bardziej formalnym i zwięzłym sformułowaniem.\n\n5. **\"to proszę dać cynk\" → \"prosimy o niezwłoczne powiadomienie\"**\n   - **Uzasadnienie:** Zamiana slangu na elegancką prośbę, zachowując formalny ton.\n\n6. **\"to zerknę z zespołem\" → \"a wraz z zespołem zajmiemy się sprawą\"**\n   - **Uzasadnienie:** Przekształcenie w bardziej formalne i pełne zdanie, podkreślające współpracę zespołu.\n\n**Cytat z literatury ilustrujący styl:**\n\n\"Niechajże się wam stanie według obfitości pragnienia waszego!\" – Jan Kochanowski, \"Treny\"\n\n(Styl elegancki często nawiązuje do klasycznej polszczyzny, jak w powyższym cytacie, gdzie spotykamy bogate słownictwo i złożoną składnię.)\n\n*Mowa powinna być klarowna jak źródło górskie.*",
+    "latency_seconds": 21.409908,
+    "error": null,
+    "metadata": {
+      "tool_name": "improve_style",
+      "tool_names": [
+        "check_configuration",
+        "setup_api_key",
+        "reset_api_key",
+        "correct_orthography",
+        "correct_punctuation",
+        "verify_grammar",
+        "improve_style",
+        "comprehensive_correction",
+        "get_language_advice",
+        "check_text_quality",
+        "greet_jan",
+        "farewell_jan"
+      ]
+    },
+    "deterministic": {
+      "total": 0.668895,
+      "components": {
+        "must_keep": 1.0,
+        "should_fix": 0.0,
+        "must_not_introduce": 1.0,
+        "non_empty": 1.0,
+        "error_free": 1.0,
+        "latency": 0.188952
+      },
+      "matched": {
+        "must_keep": [
+          "proszę",
+          "zespołem"
+        ],
+        "should_fix": [],
+        "must_not_introduce": [
+          "eskalacja",
+          "premium"
+        ]
+      },
+      "missing": {
+        "must_keep": [],
+        "should_fix": [
+          "ogarnięty",
+          "śmiga",
+          "dać cynk",
+          "zerknę"
+        ],
+        "must_not_introduce": []
+      }
+    },
+    "judge": {
+      "total": 0.24,
+      "dimensions": {
+        "factual_preservation": 0.4,
+        "language_quality": 0.2,
+        "clarity": 0.2,
+        "workplace_usefulness": 0.2,
+        "concision": 0.2
+      },
+      "rationale": "Odpowiedź w dużej mierze nie zachowuje tonu ani celu zadania: zamiast samego rewrite’u zawiera dziwaczny wstęp, cytat i komentarze, które nie są użyteczne w pracy. Merytorycznie poprawia sens wiadomości, ale dodaje niepotrzebne elementy i zmienia styl na przesadnie archaiczny. Język jest miejscami nienaturalny i nieadekwatny do support reply. Czytelność i zwięzłość są bardzo słabe, a całość wymagałaby dużej obróbki przed użyciem."
+    },
+    "final_score": 0.411558
+  },
+  {
+    "case": {
+      "id": "support-style-01",
+      "scenario": "support reply",
+      "intent": "style rewrite",
+      "input_text": "Cześć, temat mamy już ogarnięty i wszystko śmiga. Jakby coś dalej wariowało, to proszę dać cynk, to zerknę z zespołem.",
+      "jan_tool": "improve_style",
+      "baseline_prompt_family": "style_elegancki",
+      "must_keep": [
+        "proszę",
+        "zespołem"
+      ],
+      "should_fix": [
+        "ogarnięty",
+        "śmiga",
+        "dać cynk",
+        "zerknę"
+      ],
+      "must_not_introduce": [
+        "eskalacja",
+        "premium"
+      ],
+      "notes": "Supportowy follow-up wymagający bardziej profesjonalnego tonu."
+    },
+    "system": "raw Bielik",
+    "output_text": "Szanowny Użytkowniku,\n\nDziękujemy za zgłoszenie. Temat został rozwiązany i system działa prawidłowo. W razie dalszych problemów, prosimy o kontakt, a nasz zespół przeanalizuje sytuację.\n\nPozdrawiamy,\nZespół Wsparcia Technicznego.",
+    "latency_seconds": 3.441892,
+    "error": null,
+    "metadata": {
+      "prompt_family": "style_elegancki",
+      "model": "speakleash/bielik-11b-v2.6-instruct"
+    },
+    "deterministic": {
+      "total": 0.7,
+      "components": {
+        "must_keep": 0.0,
+        "should_fix": 1.0,
+        "must_not_introduce": 1.0,
+        "non_empty": 1.0,
+        "error_free": 1.0,
+        "latency": 1.0
+      },
+      "matched": {
+        "must_keep": [],
+        "should_fix": [
+          "ogarnięty",
+          "śmiga",
+          "dać cynk",
+          "zerknę"
+        ],
+        "must_not_introduce": [
+          "eskalacja",
+          "premium"
+        ]
+      },
+      "missing": {
+        "must_keep": [
+          "proszę",
+          "zespołem"
+        ],
+        "should_fix": [],
+        "must_not_introduce": []
+      }
+    },
+    "judge": {
+      "total": 1.0,
+      "dimensions": {
+        "factual_preservation": 1.0,
+        "language_quality": 1.0,
+        "clarity": 1.0,
+        "workplace_usefulness": 1.0,
+        "concision": 1.0
+      },
+      "rationale": "Output zachowuje główne znaczenie: problem został rozwiązany, system działa prawidłowo i w razie dalszych kłopotów należy się skontaktować. Język jest poprawny, naturalny i formalny, a tekst jest czytelny oraz gotowy do użycia w komunikacji z klientem. Jest też zwięzły jak na odpowiedź supportową."
+    },
+    "final_score": 0.88
+  },
+  {
+    "case": {
+      "id": "support-style-01",
+      "scenario": "support reply",
+      "intent": "style rewrite",
+      "input_text": "Cześć, temat mamy już ogarnięty i wszystko śmiga. Jakby coś dalej wariowało, to proszę dać cynk, to zerknę z zespołem.",
+      "jan_tool": "improve_style",
+      "baseline_prompt_family": "style_elegancki",
+      "must_keep": [
+        "proszę",
+        "zespołem"
+      ],
+      "should_fix": [
+        "ogarnięty",
+        "śmiga",
+        "dać cynk",
+        "zerknę"
+      ],
+      "must_not_introduce": [
+        "eskalacja",
+        "premium"
+      ],
+      "notes": "Supportowy follow-up wymagający bardziej profesjonalnego tonu."
+    },
+    "system": "GPT-5.4",
+    "output_text": "Dzień dobry, temat został już rozwiązany i wszystko działa prawidłowo. Jeśli problem będzie się nadal pojawiał, proszę o informację — zweryfikuję to z zespołem.",
+    "latency_seconds": 1.563831,
+    "error": null,
+    "metadata": {
+      "prompt_family": "style_elegancki",
+      "model": "gpt-5.4"
+    },
+    "deterministic": {
+      "total": 1.0,
+      "components": {
+        "must_keep": 1.0,
+        "should_fix": 1.0,
+        "must_not_introduce": 1.0,
+        "non_empty": 1.0,
+        "error_free": 1.0,
+        "latency": 1.0
+      },
+      "matched": {
+        "must_keep": [
+          "proszę",
+          "zespołem"
+        ],
+        "should_fix": [
+          "ogarnięty",
+          "śmiga",
+          "dać cynk",
+          "zerknę"
+        ],
+        "must_not_introduce": [
+          "eskalacja",
+          "premium"
+        ]
+      },
+      "missing": {
+        "must_keep": [],
+        "should_fix": [],
+        "must_not_introduce": []
+      }
+    },
+    "judge": {
+      "total": 1.0,
+      "dimensions": {
+        "factual_preservation": 1.0,
+        "language_quality": 1.0,
+        "clarity": 1.0,
+        "workplace_usefulness": 1.0,
+        "concision": 1.0
+      },
+      "rationale": "Odpowiedź zachowuje sens oryginału: informuje o rozwiązaniu tematu, poprawnym działaniu oraz prosi o kontakt w razie dalszych problemów. Język jest poprawny, naturalny i profesjonalny. Tekst jest jasny, zwięzły i gotowy do użycia w pracy bez dodatkowej edycji."
+    },
+    "final_score": 1.0
+  },
+  {
+    "case": {
+      "id": "support-full-01",
+      "scenario": "support reply",
+      "intent": "full polish",
+      "input_text": "Dziękujemy za cierpliwość. Wdrożyliśmy poprawke po stronie API i ponowna próba powinna się udać. Jeśli dalej pojawi się blad 500 prosimy o odpowiedź na tę wiadomość z godziną zgłoszenia.",
+      "jan_tool": "comprehensive_correction",
+      "baseline_prompt_family": "full_polish_standard",
+      "must_keep": [
+        "API",
+        "500",
+        "godziną zgłoszenia"
+      ],
+      "should_fix": [
+        "poprawke",
+        "blad"
+      ],
+      "must_not_introduce": [
+        "telefon",
+        "zrzut ekranu"
+      ],
+      "notes": "Odpowiedź supportowa po wdrożeniu poprawki."
+    },
+    "system": "Jan",
+    "output_text": "Niech Bóg wam błogosławi. Czym mogę służyć w sprawie języka ojczystego?\n\nOto kompleksowa korekta tekstu w trybie standardowym:\n\n### Tekst oryginalny:\n```\nDziękujemy za cierpliwość. Wdrożyliśmy poprawke po stronie API i ponowna próba powinna się udać. Jeśli dalej pojawi się blad 500 prosimy o odpowiedź na tę wiadomość z godziną zgłoszenia.\n```\n\n### Tekst poprawiony:\n```\nDziękujemy za cierpliwość. Wdrożyliśmy poprawkę po stronie API, a ponowna próba powinna się powieść. Jeśli nadal wystąpi błąd 500, prosimy o odpowiedź na tę wiadomość, podając godzinę zgłoszenia.\n```\n\n### Raport korekty:\n\n#### **Ortografia**\n- **Błędy**: 2 („poprawke” → „poprawkę”, „blad” → „błąd”)\n- **Korekty**:\n  - Zmieniono „poprawke” na „poprawkę” (dodanie litery „ę”).\n  - Zmieniono „blad” na „błąd” (poprawne użycie słowa).\n- **Ocena**: 9/10 (drobne błędy ortograficzne).\n\n#### **Interpunkcja**\n- **Błędy**: 1 (brak przecinka po „API”).\n- **Korekty**:\n  - Dodano przecinek po „API” („po stronie API,”).\n- **Ocena**: 10/10 (poprawne zastosowanie przecinka).\n\n#### **Gramatyka**\n- **Błędy**: 1 („ponowna próba powinna się udać” → „ponowna próba powinna się powieść”).\n- **Korekty**:\n  - Zmieniono „udać” na „powieść” (lepsze dopasowanie do kontekstu).\n- **Ocena**: 9/10 (niewielka poprawa gramatyczna).\n\n#### **Styl**\n- **Uwagi**:\n  - Zmieniono „Jeśli dalej pojawi się blad 500” na „Jeśli nadal wystąpi błąd 500” (bardziej formalne i zrozumiałe).\n  - Dodano przecinek po „wiadomość” („prosimy o odpowiedź na tę wiadomość, podając godzinę zgłoszenia”).\n- **Ocena**: 10/10 (tekst jest zwięzły i profesjonalny).\n\n#### **Ogólna ocena jakości językowej**: 9.5/10\n\n### Podsumowanie:\nTekst zawierał drobne błędy ortograficzne i interpunkcyjne, które zostały poprawione. Gramatyka i styl zostały nieznacznie udoskonalone, aby zapewnić klarowność i profesjonalizm komunikatu.\n\n---\n\n**Osobista refleksja o pięknie języka polskiego:**\nJęzyk polski jest niezwykle bogaty i wyrazisty, a jego piękno tkwi w subtelnościach, takich jak odpowiednie użycie przecinków, poprawne formy gramatyczne czy trafne słownictwo. Nawet drobne korekty mogą znacząco wpłynąć na odbiór tekstu, czyniąc go bardziej zrozumiałym i eleganckim. Dbałość o język to wyraz szacunku dla odbiorcy i świadectwo kultury osobistej. 🌟\n\n*Mowa polska nie jest licha, lecz piękna, miła i do nauk zdolna.*\n\nSłowa są jak diamenty - szanujcie je. Do usłyszenia, miłośnicy mowy.",
+    "latency_seconds": 33.125247,
+    "error": null,
+    "metadata": {
+      "tool_name": "comprehensive_correction",
+      "tool_names": [
+        "check_configuration",
+        "setup_api_key",
+        "reset_api_key",
+        "correct_orthography",
+        "correct_punctuation",
+        "verify_grammar",
+        "improve_style",
+        "comprehensive_correction",
+        "get_language_advice",
+        "check_text_quality",
+        "greet_jan",
+        "farewell_jan"
+      ]
+    },
+    "deterministic": {
+      "total": 0.65,
+      "components": {
+        "must_keep": 1.0,
+        "should_fix": 0.0,
+        "must_not_introduce": 1.0,
+        "non_empty": 1.0,
+        "error_free": 1.0,
+        "latency": 0.0
+      },
+      "matched": {
+        "must_keep": [
+          "API",
+          "500",
+          "godziną zgłoszenia"
+        ],
+        "should_fix": [],
+        "must_not_introduce": [
+          "telefon",
+          "zrzut ekranu"
+        ]
+      },
+      "missing": {
+        "must_keep": [],
+        "should_fix": [
+          "poprawke",
+          "blad"
+        ],
+        "must_not_introduce": []
+      }
+    },
+    "judge": {
+      "total": 0.2,
+      "dimensions": {
+        "factual_preservation": 0.2,
+        "language_quality": 0.2,
+        "clarity": 0.2,
+        "workplace_usefulness": 0.2,
+        "concision": 0.2
+      },
+      "rationale": "Odpowiedź całkowicie odbiega od zadania: zamiast samej korekty zawiera powitanie, personę, refleksję i długi komentarz. Zachowuje wprawdzie poprawioną wersję tekstu, ale dodaje dużo zbędnej treści i zmienia ton na nieadekwatny do support reply. Język jest miejscami poprawny, lecz całość jest mało użyteczna w pracy, niezwarta i nieprzystająca do briefu."
+    },
+    "final_score": 0.38
+  },
+  {
+    "case": {
+      "id": "support-full-01",
+      "scenario": "support reply",
+      "intent": "full polish",
+      "input_text": "Dziękujemy za cierpliwość. Wdrożyliśmy poprawke po stronie API i ponowna próba powinna się udać. Jeśli dalej pojawi się blad 500 prosimy o odpowiedź na tę wiadomość z godziną zgłoszenia.",
+      "jan_tool": "comprehensive_correction",
+      "baseline_prompt_family": "full_polish_standard",
+      "must_keep": [
+        "API",
+        "500",
+        "godziną zgłoszenia"
+      ],
+      "should_fix": [
+        "poprawke",
+        "blad"
+      ],
+      "must_not_introduce": [
+        "telefon",
+        "zrzut ekranu"
+      ],
+      "notes": "Odpowiedź supportowa po wdrożeniu poprawki."
+    },
+    "system": "raw Bielik",
+    "output_text": "Dziękujemy za cierpliwość. Wdrożyliśmy poprawkę po stronie API, więc ponowna próba powinna się powieść. Jeśli nadal wystąpi błąd 500, prosimy o odpowiedź na tę wiadomość, podając godzinę zgłoszenia.",
+    "latency_seconds": 3.108206,
+    "error": null,
+    "metadata": {
+      "prompt_family": "full_polish_standard",
+      "model": "speakleash/bielik-11b-v2.6-instruct"
+    },
+    "deterministic": {
+      "total": 0.9,
+      "components": {
+        "must_keep": 0.666667,
+        "should_fix": 1.0,
+        "must_not_introduce": 1.0,
+        "non_empty": 1.0,
+        "error_free": 1.0,
+        "latency": 1.0
+      },
+      "matched": {
+        "must_keep": [
+          "API",
+          "500"
+        ],
+        "should_fix": [
+          "poprawke",
+          "blad"
+        ],
+        "must_not_introduce": [
+          "telefon",
+          "zrzut ekranu"
+        ]
+      },
+      "missing": {
+        "must_keep": [
+          "godziną zgłoszenia"
+        ],
+        "should_fix": [],
+        "must_not_introduce": []
+      }
+    },
+    "judge": {
+      "total": 1.0,
+      "dimensions": {
+        "factual_preservation": 1.0,
+        "language_quality": 1.0,
+        "clarity": 1.0,
+        "workplace_usefulness": 1.0,
+        "concision": 1.0
+      },
+      "rationale": "Odpowiedź zachowuje sens, fakty i wszystkie istotne elementy oryginału: podziękowanie za cierpliwość, informację o poprawce po stronie API, sugestię ponownej próby oraz prośbę o odpowiedź z godziną zgłoszenia w razie błędu 500. Język jest poprawny, naturalny i profesjonalny, a tekst jest jasny, zwięzły i gotowy do użycia w komunikacji supportowej."
+    },
+    "final_score": 0.96
+  },
+  {
+    "case": {
+      "id": "support-full-01",
+      "scenario": "support reply",
+      "intent": "full polish",
+      "input_text": "Dziękujemy za cierpliwość. Wdrożyliśmy poprawke po stronie API i ponowna próba powinna się udać. Jeśli dalej pojawi się blad 500 prosimy o odpowiedź na tę wiadomość z godziną zgłoszenia.",
+      "jan_tool": "comprehensive_correction",
+      "baseline_prompt_family": "full_polish_standard",
+      "must_keep": [
+        "API",
+        "500",
+        "godziną zgłoszenia"
+      ],
+      "should_fix": [
+        "poprawke",
+        "blad"
+      ],
+      "must_not_introduce": [
+        "telefon",
+        "zrzut ekranu"
+      ],
+      "notes": "Odpowiedź supportowa po wdrożeniu poprawki."
+    },
+    "system": "GPT-5.4",
+    "output_text": "Dziękujemy za cierpliwość. Wdrożyliśmy poprawkę po stronie API i ponowna próba powinna się udać. Jeśli nadal pojawi się błąd 500, prosimy o odpowiedź na tę wiadomość z godziną zgłoszenia.",
+    "latency_seconds": 1.455371,
+    "error": null,
+    "metadata": {
+      "prompt_family": "full_polish_standard",
+      "model": "gpt-5.4"
+    },
+    "deterministic": {
+      "total": 1.0,
+      "components": {
+        "must_keep": 1.0,
+        "should_fix": 1.0,
+        "must_not_introduce": 1.0,
+        "non_empty": 1.0,
+        "error_free": 1.0,
+        "latency": 1.0
+      },
+      "matched": {
+        "must_keep": [
+          "API",
+          "500",
+          "godziną zgłoszenia"
+        ],
+        "should_fix": [
+          "poprawke",
+          "blad"
+        ],
+        "must_not_introduce": [
+          "telefon",
+          "zrzut ekranu"
+        ]
+      },
+      "missing": {
+        "must_keep": [],
+        "should_fix": [],
+        "must_not_introduce": []
+      }
+    },
+    "judge": {
+      "total": 1.0,
+      "dimensions": {
+        "factual_preservation": 1.0,
+        "language_quality": 1.0,
+        "clarity": 1.0,
+        "workplace_usefulness": 1.0,
+        "concision": 1.0
+      },
+      "rationale": "Output zachowuje pełne znaczenie i wszystkie istotne informacje z tekstu wejściowego. Język jest poprawny, naturalny i profesjonalny. Treść jest jasna, zwięzła i gotowa do użycia w komunikacji wsparcia bez dodatkowej obróbki."
+    },
+    "final_score": 1.0
+  },
+  {
+    "case": {
+      "id": "release-surface-01",
+      "scenario": "release note/changelog",
+      "intent": "surface correction",
+      "input_text": "W wersji 2.4.0 dodaliśmy eksport CSV poprawiliśmy logowanie SSO oraz skróciliśmy czas ładowania dashboardu dla kont enterprise",
+      "jan_tool": "correct_punctuation",
+      "baseline_prompt_family": "surface_punctuation",
+      "must_keep": [
+        "2.4.0",
+        "CSV",
+        "SSO",
+        "enterprise"
+      ],
+      "should_fix": [
+        "CSV poprawiliśmy",
+        "SSO oraz"
+      ],
+      "must_not_introduce": [
+        "beta",
+        "deprecacja"
+      ],
+      "notes": "Release note wymagający tylko naprawy interpunkcji."
+    },
+    "system": "Jan",
+    "output_text": "Zdrowi bądźcie, miłościwi. Przybywam by pomóc w kunszcie piśmiennictwa polskiego.\n\n### Poprawiony tekst:\n\"W wersji 2.4.0 dodaliśmy eksport CSV, poprawiliśmy logowanie SSO oraz skróciliśmy czas ładowania dashboardu dla kont enterprise.\"\n\n### Lista zmian z uzasadnieniami:\n\n1. **Dodanie przecinków:**\n   - **\"dodaliśmy eksport CSV, poprawiliśmy logowanie SSO oraz skróciliśmy czas ładowania dashboardu dla kont enterprise\"**\n   - **Uzasadnienie:** Zdanie zawiera trzy równorzędne czynności (dodanie, poprawienie, skrócenie). Przecinki rozdzielają te człony, co ułatwia zrozumienie struktury zdania.\n\n2. **Kropka na końcu zdania:**\n   - **\"W wersji 2.4.0 dodaliśmy eksport CSV, poprawiliśmy logowanie SSO oraz skróciliśmy czas ładowania dashboardu dla kont enterprise.\"**\n   - **Uzasadnienie:** Zdanie jest oznajmujące, więc kończy się kropką.\n\n### Cytat z polskiej literatury:\n\"Ale nie wszystek umrę, wiem, że wielu zostanie po mnie.\"\n— *Jan Kochanowski, *Fraszki* (Do przyjaciół)\n\n**Zasada interpunkcyjna:** Kropka kończy zdanie oznajmujące.\n\n---\n\n### Dodatkowe uwagi:\n- **Brak wtrąceń:** W tekście nie ma wtrąceń ani dopowiedzeń, więc nie było potrzeby dodawania przecinków w innych miejscach.\n- **Brak średników i dwukropków:** Tekst nie zawiera zdań złożonych, które wymagałyby użycia średników lub dwukropków.\n- **Apostrofy i cudzysłowy:** Nie było potrzeby ich stosowania w tym kontekście.\n\nTekst został poprawiony zgodnie z zasadami interpunkcji, aby był klarowny i zrozumiały.\n\n*Interpunkcja to muzyka tekstu - niech gra harmonijnie.*",
+    "latency_seconds": 19.245223,
+    "error": null,
+    "metadata": {
+      "tool_name": "correct_punctuation",
+      "tool_names": [
+        "check_configuration",
+        "setup_api_key",
+        "reset_api_key",
+        "correct_orthography",
+        "correct_punctuation",
+        "verify_grammar",
+        "improve_style",
+        "comprehensive_correction",
+        "get_language_advice",
+        "check_text_quality",
+        "greet_jan",
+        "farewell_jan"
+      ]
+    },
+    "deterministic": {
+      "total": 0.779717,
+      "components": {
+        "must_keep": 1.0,
+        "should_fix": 0.5,
+        "must_not_introduce": 1.0,
+        "non_empty": 1.0,
+        "error_free": 1.0,
+        "latency": 0.047174
+      },
+      "matched": {
+        "must_keep": [
+          "2.4.0",
+          "CSV",
+          "SSO",
+          "enterprise"
+        ],
+        "should_fix": [
+          "CSV poprawiliśmy"
+        ],
+        "must_not_introduce": [
+          "beta",
+          "deprecacja"
+        ]
+      },
+      "missing": {
+        "must_keep": [],
+        "should_fix": [
+          "SSO oraz"
+        ],
+        "must_not_introduce": []
+      }
+    },
+    "judge": {
+      "total": 0.4,
+      "dimensions": {
+        "factual_preservation": 0.8,
+        "language_quality": 0.4,
+        "clarity": 0.4,
+        "workplace_usefulness": 0.2,
+        "concision": 0.2
+      },
+      "rationale": "Główna poprawka tekstu wejściowego jest zachowana: dodano przecinki i kropkę, więc sens release note pozostaje prawie ten sam. Jednak odpowiedź jest mocno przegadana, zawiera nieadekwatny, archaizujący wstęp, cytat literacki i zbędne komentarze, co obniża użyteczność w pracy. Język jest poprawny miejscami, ale styl jest nienaturalny i niepasujący do zadania. Klarowność cierpi przez nadmiar sekcji i ozdobników, a zwięzłość jest bardzo słaba."
+    },
+    "final_score": 0.665802
+  },
+  {
+    "case": {
+      "id": "release-surface-01",
+      "scenario": "release note/changelog",
+      "intent": "surface correction",
+      "input_text": "W wersji 2.4.0 dodaliśmy eksport CSV poprawiliśmy logowanie SSO oraz skróciliśmy czas ładowania dashboardu dla kont enterprise",
+      "jan_tool": "correct_punctuation",
+      "baseline_prompt_family": "surface_punctuation",
+      "must_keep": [
+        "2.4.0",
+        "CSV",
+        "SSO",
+        "enterprise"
+      ],
+      "should_fix": [
+        "CSV poprawiliśmy",
+        "SSO oraz"
+      ],
+      "must_not_introduce": [
+        "beta",
+        "deprecacja"
+      ],
+      "notes": "Release note wymagający tylko naprawy interpunkcji."
+    },
+    "system": "raw Bielik",
+    "output_text": "W wersji 2.4.0 dodano eksport CSV, poprawiono logowanie SSO oraz skrócono czas ładowania dashboardu dla kont enterprise.",
+    "latency_seconds": 1.672136,
+    "error": null,
+    "metadata": {
+      "prompt_family": "surface_punctuation",
+      "model": "speakleash/bielik-11b-v2.6-instruct"
+    },
+    "deterministic": {
+      "total": 0.875,
+      "components": {
+        "must_keep": 1.0,
+        "should_fix": 0.5,
+        "must_not_introduce": 1.0,
+        "non_empty": 1.0,
+        "error_free": 1.0,
+        "latency": 1.0
+      },
+      "matched": {
+        "must_keep": [
+          "2.4.0",
+          "CSV",
+          "SSO",
+          "enterprise"
+        ],
+        "should_fix": [
+          "CSV poprawiliśmy"
+        ],
+        "must_not_introduce": [
+          "beta",
+          "deprecacja"
+        ]
+      },
+      "missing": {
+        "must_keep": [],
+        "should_fix": [
+          "SSO oraz"
+        ],
+        "must_not_introduce": []
+      }
+    },
+    "judge": {
+      "total": 1.0,
+      "dimensions": {
+        "factual_preservation": 1.0,
+        "language_quality": 1.0,
+        "clarity": 1.0,
+        "workplace_usefulness": 1.0,
+        "concision": 1.0
+      },
+      "rationale": "Output zachowuje wszystkie kluczowe informacje z wejścia: wersję 2.4.0, eksport CSV, logowanie SSO i skrócenie czasu ładowania dashboardu dla kont enterprise. Język jest poprawny, naturalny i dobrze brzmi w kontekście release note. Tekst jest jasny, zwięzły i gotowy do użycia bez dalszej obróbki."
+    },
+    "final_score": 0.9125
+  },
+  {
+    "case": {
+      "id": "release-surface-01",
+      "scenario": "release note/changelog",
+      "intent": "surface correction",
+      "input_text": "W wersji 2.4.0 dodaliśmy eksport CSV poprawiliśmy logowanie SSO oraz skróciliśmy czas ładowania dashboardu dla kont enterprise",
+      "jan_tool": "correct_punctuation",
+      "baseline_prompt_family": "surface_punctuation",
+      "must_keep": [
+        "2.4.0",
+        "CSV",
+        "SSO",
+        "enterprise"
+      ],
+      "should_fix": [
+        "CSV poprawiliśmy",
+        "SSO oraz"
+      ],
+      "must_not_introduce": [
+        "beta",
+        "deprecacja"
+      ],
+      "notes": "Release note wymagający tylko naprawy interpunkcji."
+    },
+    "system": "GPT-5.4",
+    "output_text": "W wersji 2.4.0 dodaliśmy eksport CSV, poprawiliśmy logowanie SSO oraz skróciliśmy czas ładowania dashboardu dla kont enterprise.",
+    "latency_seconds": 1.156501,
+    "error": null,
+    "metadata": {
+      "prompt_family": "surface_punctuation",
+      "model": "gpt-5.4"
+    },
+    "deterministic": {
+      "total": 0.875,
+      "components": {
+        "must_keep": 1.0,
+        "should_fix": 0.5,
+        "must_not_introduce": 1.0,
+        "non_empty": 1.0,
+        "error_free": 1.0,
+        "latency": 1.0
+      },
+      "matched": {
+        "must_keep": [
+          "2.4.0",
+          "CSV",
+          "SSO",
+          "enterprise"
+        ],
+        "should_fix": [
+          "CSV poprawiliśmy"
+        ],
+        "must_not_introduce": [
+          "beta",
+          "deprecacja"
+        ]
+      },
+      "missing": {
+        "must_keep": [],
+        "should_fix": [
+          "SSO oraz"
+        ],
+        "must_not_introduce": []
+      }
+    },
+    "judge": {
+      "total": 1.0,
+      "dimensions": {
+        "factual_preservation": 1.0,
+        "language_quality": 1.0,
+        "clarity": 1.0,
+        "workplace_usefulness": 1.0,
+        "concision": 1.0
+      },
+      "rationale": "Output zachowuje wszystkie fakty i znaczenie tekstu wejściowego, jedynie poprawiając interpunkcję. Polszczyzna jest naturalna i poprawna, a zdanie jest czytelne, zwięzłe i gotowe do użycia w release note/changelog bez dalszej obróbki."
+    },
+    "final_score": 0.9125
+  },
+  {
+    "case": {
+      "id": "release-style-01",
+      "scenario": "release note/changelog",
+      "intent": "style rewrite",
+      "input_text": "Nowa wersja daje spoko upgrade dla adminów, bo można szybciej ogarnąć członków zespołu i mniej się klika przy zaproszeniach.",
+      "jan_tool": "improve_style",
+      "baseline_prompt_family": "style_prosty",
+      "must_keep": [
+        "adminów",
+        "zespołu",
+        "zaproszeniach"
+      ],
+      "should_fix": [
+        "spoko upgrade",
+        "ogarnąć",
+        "mniej się klika"
+      ],
+      "must_not_introduce": [
+        "automatyzacja",
+        "SCIM"
+      ],
+      "notes": "Krótki changelog do uproszczenia i uprofesjonalnienia."
+    },
+    "system": "Jan",
+    "output_text": "Niechaj Bóg strzeże wasze pióra. O co proszę mistrza korekty?\n\n**Ulepszony tekst:**\n\"Nowa wersja oferuje wygodne ulepszenie dla administratorów, umożliwiając szybsze zarządzanie członkami zespołu i redukując liczbę kliknięć przy wysyłaniu zaproszeń.\"\n\n**Lista zmian z uzasadnieniami:**\n\n1. **\"Nowa wersja daje spoko upgrade\" → \"Nowa wersja oferuje wygodne ulepszenie\"**\n   - **Uzasadnienie:** Zmiana kolokwialnego \"spoko upgrade\" na bardziej formalne i zrozumiałe \"wygodne ulepszenie\" pasuje do stylu prostego, który ma być jasny i bez zbędnych ozdobników.\n\n2. **\"bo można szybciej ogarnąć członków zespołu\" → \"umożliwiając szybsze zarządzanie członkami zespołu\"**\n   - **Uzasadnienie:** Zamiana potocznego \"ogarnąć\" na bardziej precyzyjne \"zarządzanie\" oraz dodanie \"szybsze\" zwiększa jasność i formalność wypowiedzi.\n\n3. **\"i mniej się klika przy zaproszeniach\" → \"i redukując liczbę kliknięć przy wysyłaniu zaproszeń\"**\n   - **Uzasadnienie:** Zastąpienie kolokwialnego \"mniej się klika\" bardziej opisowym \"redukując liczbę kliknięć\" oraz dodanie \"wysyłaniu\" zamiast \"zaproszeniach\" (które jest formą rzeczownikową) poprawia płynność i precyzję.\n\n**Cytat z literatury ilustrujący styl:**\n\"Człowiek jest tylko trzciną, najwątlejszą w przyrodzie, lecz właśnie dlatego godną szacunku.\" – Blaise Pascal,\n*Myśli* (styl prosty, jasny, bez zbędnych ozdobników).\n\n*Mowa powinna być klarowna jak źródło górskie.*",
+    "latency_seconds": 18.536283,
+    "error": null,
+    "metadata": {
+      "tool_name": "improve_style",
+      "tool_names": [
+        "check_configuration",
+        "setup_api_key",
+        "reset_api_key",
+        "correct_orthography",
+        "correct_punctuation",
+        "verify_grammar",
+        "improve_style",
+        "comprehensive_correction",
+        "get_language_advice",
+        "check_text_quality",
+        "greet_jan",
+        "farewell_jan"
+      ]
+    },
+    "deterministic": {
+      "total": 0.58402,
+      "components": {
+        "must_keep": 0.666667,
+        "should_fix": 0.0,
+        "must_not_introduce": 1.0,
+        "non_empty": 1.0,
+        "error_free": 1.0,
+        "latency": 0.340196
+      },
+      "matched": {
+        "must_keep": [
+          "zespołu",
+          "zaproszeniach"
+        ],
+        "should_fix": [],
+        "must_not_introduce": [
+          "automatyzacja",
+          "SCIM"
+        ]
+      },
+      "missing": {
+        "must_keep": [
+          "adminów"
+        ],
+        "should_fix": [
+          "spoko upgrade",
+          "ogarnąć",
+          "mniej się klika"
+        ],
+        "must_not_introduce": []
+      }
+    },
+    "judge": {
+      "total": 0.32,
+      "dimensions": {
+        "factual_preservation": 0.4,
+        "language_quality": 0.4,
+        "clarity": 0.4,
+        "workplace_usefulness": 0.2,
+        "concision": 0.2
+      },
+      "rationale": "Odpowiedź w dużej mierze nie realizuje zadania style rewrite dla release note/changelog: zawiera zbędną personę, religijny wstęp, cytat literacki i komentarze meta, które nie pasują do użycia w pracy. Zachowuje główny sens tekstu wejściowego tylko częściowo, ale wprowadza też niepotrzebne zmiany stylistyczne i lekko przesadnie formalny ton. Polszczyzna jest poprawna miejscami, lecz całość brzmi nienaturalnie i jest zbyt rozwlekła. Czytelność i użyteczność zawodowa są niskie, bo tekst wymagałby dużej obróbki przed użyciem."
+    },
+    "final_score": 0.425608
+  },
+  {
+    "case": {
+      "id": "release-style-01",
+      "scenario": "release note/changelog",
+      "intent": "style rewrite",
+      "input_text": "Nowa wersja daje spoko upgrade dla adminów, bo można szybciej ogarnąć członków zespołu i mniej się klika przy zaproszeniach.",
+      "jan_tool": "improve_style",
+      "baseline_prompt_family": "style_prosty",
+      "must_keep": [
+        "adminów",
+        "zespołu",
+        "zaproszeniach"
+      ],
+      "should_fix": [
+        "spoko upgrade",
+        "ogarnąć",
+        "mniej się klika"
+      ],
+      "must_not_introduce": [
+        "automatyzacja",
+        "SCIM"
+      ],
+      "notes": "Krótki changelog do uproszczenia i uprofesjonalnienia."
+    },
+    "system": "raw Bielik",
+    "output_text": "Nowa wersja oferuje ulepszenie dla administratorów, umożliwiając szybsze zarządzanie członkami zespołu i redukując liczbę kliknięć podczas wysyłania zaproszeń.",
+    "latency_seconds": 2.398944,
+    "error": null,
+    "metadata": {
+      "prompt_family": "style_prosty",
+      "model": "speakleash/bielik-11b-v2.6-instruct"
+    },
+    "deterministic": {
+      "total": 0.8,
+      "components": {
+        "must_keep": 0.333333,
+        "should_fix": 1.0,
+        "must_not_introduce": 1.0,
+        "non_empty": 1.0,
+        "error_free": 1.0,
+        "latency": 1.0
+      },
+      "matched": {
+        "must_keep": [
+          "zespołu"
+        ],
+        "should_fix": [
+          "spoko upgrade",
+          "ogarnąć",
+          "mniej się klika"
+        ],
+        "must_not_introduce": [
+          "automatyzacja",
+          "SCIM"
+        ]
+      },
+      "missing": {
+        "must_keep": [
+          "adminów",
+          "zaproszeniach"
+        ],
+        "should_fix": [],
+        "must_not_introduce": []
+      }
+    },
+    "judge": {
+      "total": 1.0,
+      "dimensions": {
+        "factual_preservation": 1.0,
+        "language_quality": 1.0,
+        "clarity": 1.0,
+        "workplace_usefulness": 1.0,
+        "concision": 1.0
+      },
+      "rationale": "Output zachowuje sens oryginału: mówi o ulepszeniu dla administratorów, szybszym zarządzaniu członkami zespołu i mniejszej liczbie kliknięć przy zaproszeniach. Język jest poprawny, naturalny i odpowiedni do release note/changelog. Tekst jest jasny, zwięzły i gotowy do użycia w pracy bez dodatkowej obróbki."
+    },
+    "final_score": 0.92
+  },
+  {
+    "case": {
+      "id": "release-style-01",
+      "scenario": "release note/changelog",
+      "intent": "style rewrite",
+      "input_text": "Nowa wersja daje spoko upgrade dla adminów, bo można szybciej ogarnąć członków zespołu i mniej się klika przy zaproszeniach.",
+      "jan_tool": "improve_style",
+      "baseline_prompt_family": "style_prosty",
+      "must_keep": [
+        "adminów",
+        "zespołu",
+        "zaproszeniach"
+      ],
+      "should_fix": [
+        "spoko upgrade",
+        "ogarnąć",
+        "mniej się klika"
+      ],
+      "must_not_introduce": [
+        "automatyzacja",
+        "SCIM"
+      ],
+      "notes": "Krótki changelog do uproszczenia i uprofesjonalnienia."
+    },
+    "system": "GPT-5.4",
+    "output_text": "Nowa wersja wprowadza usprawnienia dla administratorów, umożliwiając szybsze zarządzanie członkami zespołu oraz ograniczenie liczby działań wymaganych przy wysyłaniu zaproszeń.",
+    "latency_seconds": 1.490261,
+    "error": null,
+    "metadata": {
+      "prompt_family": "style_prosty",
+      "model": "gpt-5.4"
+    },
+    "deterministic": {
+      "total": 0.8,
+      "components": {
+        "must_keep": 0.333333,
+        "should_fix": 1.0,
+        "must_not_introduce": 1.0,
+        "non_empty": 1.0,
+        "error_free": 1.0,
+        "latency": 1.0
+      },
+      "matched": {
+        "must_keep": [
+          "zespołu"
+        ],
+        "should_fix": [
+          "spoko upgrade",
+          "ogarnąć",
+          "mniej się klika"
+        ],
+        "must_not_introduce": [
+          "automatyzacja",
+          "SCIM"
+        ]
+      },
+      "missing": {
+        "must_keep": [
+          "adminów",
+          "zaproszeniach"
+        ],
+        "should_fix": [],
+        "must_not_introduce": []
+      }
+    },
+    "judge": {
+      "total": 1.0,
+      "dimensions": {
+        "factual_preservation": 1.0,
+        "language_quality": 1.0,
+        "clarity": 1.0,
+        "workplace_usefulness": 1.0,
+        "concision": 1.0
+      },
+      "rationale": "Output zachowuje sens oryginału: mówi o usprawnieniach dla administratorów, szybszym zarządzaniu członkami zespołu i mniejszej liczbie kliknięć/działań przy zaproszeniach. Język jest poprawny, naturalny i odpowiedni do release note/changelog. Tekst jest jasny, zwięzły i gotowy do użycia w pracy bez dodatkowej obróbki."
+    },
+    "final_score": 0.92
+  },
+  {
+    "case": {
+      "id": "release-full-01",
+      "scenario": "release note/changelog",
+      "intent": "full polish",
+      "input_text": "Dodaliśmy logi audytowe dla zmian ról oraz bardziej bezpieczny reset hasła. W praktyce powinno być mniej ręcznego sprawdzania kto nadał dostęp i kiedy.",
+      "jan_tool": "comprehensive_correction",
+      "baseline_prompt_family": "full_polish_standard",
+      "must_keep": [
+        "logi audytowe",
+        "reset hasła",
+        "kto nadał dostęp"
+      ],
+      "should_fix": [
+        "bardziej bezpieczny",
+        "W praktyce"
+      ],
+      "must_not_introduce": [
+        "MFA",
+        "compliance"
+      ],
+      "notes": "Pełna korekta changelogu z naciskiem na klarowność."
+    },
+    "system": "Jan",
+    "output_text": "Niech Bóg wam błogosławi. Czym mogę służyć w sprawie języka ojczystego?\n\nOto kompleksowa korekta tekstu w trybie standardowym:\n\n### Tekst oryginalny:\n```\nDodaliśmy logi audytowe dla zmian ról oraz bardziej bezpieczny reset hasła. W praktyce powinno być mniej ręcznego sprawdzania kto nadał dostęp i kiedy.\n```\n\n### Tekst poprawiony:\n```\nDodaliśmy logi audytowe dla zmian ról oraz bardziej bezpieczny mechanizm resetowania hasła. W praktyce powinno to ograniczyć konieczność ręcznego sprawdzania, kto nadał dostęp i kiedy.\n```\n\n### Raport korekty:\n\n#### **Ortografia**\n- **Błędy**: 0\n- **Korekty**: \n  - Brak zmian.\n- **Ocena**: 10/10\n\n#### **Interpunkcja**\n- **Błędy**: 1\n  - Brak przecinka po „dla zmian ról” (poprawiono na przecinek).\n- **Korekty**:\n  - Dodano przecinek po „zmian ról”.\n  - Zmieniono „reset hasła” na „mechanizm resetowania hasła” (poprawa gramatyczna, nie interpunkcja).\n- **Ocena**: 9/10\n\n#### **Gramatyka**\n- **Błędy**: 2\n  1. **„bardziej bezpieczny reset hasła”** → **„bardziej bezpieczny mechanizm resetowania hasła”**\n     - Poprawa: „reset hasła” to czynność, a „mechanizm resetowania hasła” to konstrukcja bardziej precyzyjna.\n  2. **„W praktyce powinno być mniej ręcznego sprawdzania kto nadał dostęp i kiedy”** → **„W praktyce powinno to ograniczyć konieczność ręcznego sprawdzania, kto nadał dostęp i kiedy”**\n     - Poprawa: Zmiana na „to ograniczyć” dla lepszej spójności.\n- **Korekty**:\n  - Zmiana konstrukcji zdania dla lepszej gramatyki.\n- **Ocena**: 9/10\n\n#### **Styl**\n- **Uwagi**:\n  - **Ogólna poprawa klarowności**: Zmiany poprawiły precyzję i czytelność tekstu.\n  - **Zmiana na bardziej formalny ton**: „Dodaliśmy” → bardziej formalne, odpowiednie dla komunikatów technicznych.\n- **Poprawki stylu**:\n  - Użycie bardziej formalnego języka.\n  - Usunięcie kolokwializmów (np. „powinno być mniej” → „powinno to ograniczyć”).\n- **Ocena**: 9/10\n\n#### **Ogólna ocena jakości językowej**:\n- **Ocena**: 9.5/10\n\n### Podsumowanie:\nTekst został poprawiony pod kątem gramatyki, interpunkcji i stylu. Główne zmiany dotyczyły precyzji terminologicznej i klarowności wypowiedzi.\n\n---\n\n### Osobista refleksja o pięknie języka polskiego:\nJęzyk polski, z jego bogatą fleksją, złożonym systemem odmian i wyrafinowanym słownictwem, jest prawdziwym skarbem. Jego piękno tkwi nie tylko w melodyjności brzmienia, ale także w zdolności do wyrażania nawet najbardziej skomplikowanych myśli i emocji. Dbałość o poprawność językową to hołd składany tej tradycji i kulturze, a jednocześnie narzędzie do budowania jasnej i efektywnej komunikacji. 🌟\n\n*Pisze się po polsku tak, jak się myśli po polsku.*\n\nNiech wasza mowa zawsze będzie czysta jak źródło polskiej wieśniaczki. Póki co.",
+    "latency_seconds": 36.107204,
+    "error": null,
+    "metadata": {
+      "tool_name": "comprehensive_correction",
+      "tool_names": [
+        "check_configuration",
+        "setup_api_key",
+        "reset_api_key",
+        "correct_orthography",
+        "correct_punctuation",
+        "verify_grammar",
+        "improve_style",
+        "comprehensive_correction",
+        "get_language_advice",
+        "check_text_quality",
+        "greet_jan",
+        "farewell_jan"
+      ]
+    },
+    "deterministic": {
+      "total": 0.65,
+      "components": {
+        "must_keep": 1.0,
+        "should_fix": 0.0,
+        "must_not_introduce": 1.0,
+        "non_empty": 1.0,
+        "error_free": 1.0,
+        "latency": 0.0
+      },
+      "matched": {
+        "must_keep": [
+          "logi audytowe",
+          "reset hasła",
+          "kto nadał dostęp"
+        ],
+        "should_fix": [],
+        "must_not_introduce": [
+          "MFA",
+          "compliance"
+        ]
+      },
+      "missing": {
+        "must_keep": [],
+        "should_fix": [
+          "bardziej bezpieczny",
+          "W praktyce"
+        ],
+        "must_not_introduce": []
+      }
+    },
+    "judge": {
+      "total": 0.24,
+      "dimensions": {
+        "factual_preservation": 0.4,
+        "language_quality": 0.2,
+        "clarity": 0.2,
+        "workplace_usefulness": 0.2,
+        "concision": 0.2
+      },
+      "rationale": "Odpowiedź w dużej mierze nie realizuje zadania: zamiast samej korekty/changelogu zawiera rozbudowane wstawki nieadekwatne do kontekstu („Niech Bóg wam błogosławi...”, refleksję, ozdobniki), co obniża użyteczność w pracy. Merytorycznie zachowuje główne znaczenie tekstu wejściowego, ale dodaje niepotrzebne i stylistycznie nietrafione elementy. Język jest miejscami poprawny, lecz całość jest nienaturalna, przeładowana i chaotyczna. Zwięzłość bardzo słaba."
+    },
+    "final_score": 0.404
+  },
+  {
+    "case": {
+      "id": "release-full-01",
+      "scenario": "release note/changelog",
+      "intent": "full polish",
+      "input_text": "Dodaliśmy logi audytowe dla zmian ról oraz bardziej bezpieczny reset hasła. W praktyce powinno być mniej ręcznego sprawdzania kto nadał dostęp i kiedy.",
+      "jan_tool": "comprehensive_correction",
+      "baseline_prompt_family": "full_polish_standard",
+      "must_keep": [
+        "logi audytowe",
+        "reset hasła",
+        "kto nadał dostęp"
+      ],
+      "should_fix": [
+        "bardziej bezpieczny",
+        "W praktyce"
+      ],
+      "must_not_introduce": [
+        "MFA",
+        "compliance"
+      ],
+      "notes": "Pełna korekta changelogu z naciskiem na klarowność."
+    },
+    "system": "raw Bielik",
+    "output_text": "Dodaliśmy logi audytowe dla zmian ról oraz bardziej bezpieczny reset hasła. W praktyce powinno to ograniczyć konieczność ręcznego sprawdzania, kto nadał dostęp i kiedy.",
+    "latency_seconds": 2.551626,
+    "error": null,
+    "metadata": {
+      "prompt_family": "full_polish_standard",
+      "model": "speakleash/bielik-11b-v2.6-instruct"
+    },
+    "deterministic": {
+      "total": 0.75,
+      "components": {
+        "must_keep": 1.0,
+        "should_fix": 0.0,
+        "must_not_introduce": 1.0,
+        "non_empty": 1.0,
+        "error_free": 1.0,
+        "latency": 1.0
+      },
+      "matched": {
+        "must_keep": [
+          "logi audytowe",
+          "reset hasła",
+          "kto nadał dostęp"
+        ],
+        "should_fix": [],
+        "must_not_introduce": [
+          "MFA",
+          "compliance"
+        ]
+      },
+      "missing": {
+        "must_keep": [],
+        "should_fix": [
+          "bardziej bezpieczny",
+          "W praktyce"
+        ],
+        "must_not_introduce": []
+      }
+    },
+    "judge": {
+      "total": 1.0,
+      "dimensions": {
+        "factual_preservation": 1.0,
+        "language_quality": 1.0,
+        "clarity": 1.0,
+        "workplace_usefulness": 1.0,
+        "concision": 1.0
+      },
+      "rationale": "Output zachowuje wszystkie kluczowe informacje z wejścia, nie zmienia znaczenia i brzmi naturalnie po polsku. Jest jasny, zwięzły i gotowy do użycia w release note/changelog bez dodatkowej obróbki."
+    },
+    "final_score": 0.9
+  },
+  {
+    "case": {
+      "id": "release-full-01",
+      "scenario": "release note/changelog",
+      "intent": "full polish",
+      "input_text": "Dodaliśmy logi audytowe dla zmian ról oraz bardziej bezpieczny reset hasła. W praktyce powinno być mniej ręcznego sprawdzania kto nadał dostęp i kiedy.",
+      "jan_tool": "comprehensive_correction",
+      "baseline_prompt_family": "full_polish_standard",
+      "must_keep": [
+        "logi audytowe",
+        "reset hasła",
+        "kto nadał dostęp"
+      ],
+      "should_fix": [
+        "bardziej bezpieczny",
+        "W praktyce"
+      ],
+      "must_not_introduce": [
+        "MFA",
+        "compliance"
+      ],
+      "notes": "Pełna korekta changelogu z naciskiem na klarowność."
+    },
+    "system": "GPT-5.4",
+    "output_text": "Dodaliśmy logi audytowe dla zmian ról oraz bezpieczniejszy mechanizm resetowania hasła. W praktyce oznacza to mniej ręcznego sprawdzania, kto i kiedy nadał dostęp.",
+    "latency_seconds": 1.294272,
+    "error": null,
+    "metadata": {
+      "prompt_family": "full_polish_standard",
+      "model": "gpt-5.4"
+    },
+    "deterministic": {
+      "total": 0.675,
+      "components": {
+        "must_keep": 0.333333,
+        "should_fix": 0.5,
+        "must_not_introduce": 1.0,
+        "non_empty": 1.0,
+        "error_free": 1.0,
+        "latency": 1.0
+      },
+      "matched": {
+        "must_keep": [
+          "logi audytowe"
+        ],
+        "should_fix": [
+          "bardziej bezpieczny"
+        ],
+        "must_not_introduce": [
+          "MFA",
+          "compliance"
+        ]
+      },
+      "missing": {
+        "must_keep": [
+          "reset hasła",
+          "kto nadał dostęp"
+        ],
+        "should_fix": [
+          "W praktyce"
+        ],
+        "must_not_introduce": []
+      }
+    },
+    "judge": {
+      "total": 1.0,
+      "dimensions": {
+        "factual_preservation": 1.0,
+        "language_quality": 1.0,
+        "clarity": 1.0,
+        "workplace_usefulness": 1.0,
+        "concision": 1.0
+      },
+      "rationale": "Output wiernie zachowuje sens, nazwy i znaczenie tekstu wejściowego, a jednocześnie brzmi naturalnie po polsku. Jest jasny, zwięzły i gotowy do użycia w release note/changelog bez dodatkowej obróbki."
+    },
+    "final_score": 0.87
+  },
+  {
+    "case": {
+      "id": "status-surface-01",
+      "scenario": "status email/notatka",
+      "intent": "surface correction",
+      "input_text": "Na dzis zakonczylismy migracje 3 z 5 integracji. Jutro chcemy domknac platnosci i sprawdzic alerty po deployu.",
+      "jan_tool": "correct_orthography",
+      "baseline_prompt_family": "surface_orthography",
+      "must_keep": [
+        "3 z 5 integracji",
+        "Jutro",
+        "deployu"
+      ],
+      "should_fix": [
+        "dzis",
+        "zakonczylismy",
+        "migracje",
+        "domknac",
+        "platnosci"
+      ],
+      "must_not_introduce": [
+        "opóźnienie",
+        "blokery"
+      ],
+      "notes": "Status z prostymi błędami ortograficznymi."
+    },
+    "system": "Jan",
+    "output_text": "Niech Bóg wam błogosławi. Czym mogę służyć w sprawie języka ojczystego?\n\nOto poprawiona wersja tekstu z zachowaniem oryginalnej struktury:\n\n**\"Na dziś zakończyliśmy migrację 3 z 5 integracji. Jutro chcemy domknąć płatności i sprawdzić alerty po deployu.\"**\n\n### Poprawki:\n1. **Zmiana \"dzis\" na \"dziś\"**\n   - **Oryginalna forma:** dzis\n   - **Poprawna forma:** dziś\n   - **Wyjaśnienie:** W języku polskim słowo \"dziś\" jest pisane z kreską nad literą \"i\". Jest to forma skrócona od \"dziś dzień\".\n\n2. **Zmiana \"migracje\" na \"migrację\"**\n   - **Oryginalna forma:** migracje\n   - **Poprawna forma:** migrację\n   - **Wyjaśnienie:** Rzeczownik \"migracja\" w dopełniaczu liczby pojedynczej przyjmuje formę \"migracji\". W kontekście zdania poprawne jest użycie formy pojedynczej (\"migrację\"), ponieważ mowa o jednej migracji (3 z 5 integracji).\n\n3. **Zmiana \"domknac\" na \"domknąć\"**\n   - **Oryginalna forma:** domknac\n   - **Poprawna forma:** domknąć\n   - **Wyjaśnienie:** Czasownik \"domknąć\" wymaga końcówki \"-ąć\" w pierwszej osobie liczby pojedynczej (chcemy domknąć).\n\n4. **Zmiana \"alerty\" na \"alerty\" (brak błędu)**\n   - **Oryginalna forma:** alerty\n   - **Poprawna forma:** alerty\n   - **Wyjaśnienie:** Słowo \"alerty\" jest poprawne w tym kontekście. Oznacza \"sygnały ostrzegawcze\" i jest używane w języku technicznym.\n\n5. **Zmiana \"deployu\" na \"deployu\" (brak błędu)**\n   - **Oryginalna forma:** deployu\n   - **Poprawna forma:** deployu\n   - **Wyjaśnienie:** Słowo \"deploy\" jest zapożyczeniem z języka angielskiego i w dopełniaczu liczby pojedynczej przyjmuje formę \"deployu\".\n\n### Refleksja o języku polskim:\nJęzyk polski jest bogaty w zasady ortograficzne, które mogą być wyzwaniem nawet dla rodzimych użytkowników. W tekście technicznym, jak ten przykład, ważne jest, aby zachować precyzję i poprawność, co ułatwia komunikację. Współczesne narzędzia do sprawdzania pisowni, takie jak wbudowane korektory w edytorach tekstu, znacznie ułatwiają utrzymanie wysokiej jakości tekstu. Jednocześnie warto pamiętać o kontekście i stylu tekstu – w niektórych przypadkach celowe błędy lub stylizacja mogą być zamierzone.\n\n*Każda litera ma swoją wartość - niech one będą na swoim miejscu.*",
+    "latency_seconds": 28.663934,
+    "error": null,
+    "metadata": {
+      "tool_name": "correct_orthography",
+      "tool_names": [
+        "check_configuration",
+        "setup_api_key",
+        "reset_api_key",
+        "correct_orthography",
+        "correct_punctuation",
+        "verify_grammar",
+        "improve_style",
+        "comprehensive_correction",
+        "get_language_advice",
+        "check_text_quality",
+        "greet_jan",
+        "farewell_jan"
+      ]
+    },
+    "deterministic": {
+      "total": 0.75,
+      "components": {
+        "must_keep": 1.0,
+        "should_fix": 0.4,
+        "must_not_introduce": 1.0,
+        "non_empty": 1.0,
+        "error_free": 1.0,
+        "latency": 0.0
+      },
+      "matched": {
+        "must_keep": [
+          "3 z 5 integracji",
+          "Jutro",
+          "deployu"
+        ],
+        "should_fix": [
+          "zakonczylismy",
+          "platnosci"
+        ],
+        "must_not_introduce": [
+          "opóźnienie",
+          "blokery"
+        ]
+      },
+      "missing": {
+        "must_keep": [],
+        "should_fix": [
+          "dzis",
+          "migracje",
+          "domknac"
+        ],
+        "must_not_introduce": []
+      }
+    },
+    "judge": {
+      "total": 0.2,
+      "dimensions": {
+        "factual_preservation": 0.2,
+        "language_quality": 0.2,
+        "clarity": 0.2,
+        "workplace_usefulness": 0.2,
+        "concision": 0.2
+      },
+      "rationale": "Odpowiedź nie zachowuje zadania surface correction: zawiera nieadekwatny, religijny wstęp, długą refleksję i zbędne komentarze. Choć podaje poprawioną wersję zdania, to dodaje też błędne lub mylące wyjaśnienia (np. o „migracji” i „dziś”), przez co obniża wiarygodność. Język jest formalnie poprawny, ale całość jest nieczytelna i mało użyteczna w pracy, a także zdecydowanie zbyt rozwlekła jak na prostą korektę."
+    },
+    "final_score": 0.585
+  },
+  {
+    "case": {
+      "id": "status-surface-01",
+      "scenario": "status email/notatka",
+      "intent": "surface correction",
+      "input_text": "Na dzis zakonczylismy migracje 3 z 5 integracji. Jutro chcemy domknac platnosci i sprawdzic alerty po deployu.",
+      "jan_tool": "correct_orthography",
+      "baseline_prompt_family": "surface_orthography",
+      "must_keep": [
+        "3 z 5 integracji",
+        "Jutro",
+        "deployu"
+      ],
+      "should_fix": [
+        "dzis",
+        "zakonczylismy",
+        "migracje",
+        "domknac",
+        "platnosci"
+      ],
+      "must_not_introduce": [
+        "opóźnienie",
+        "blokery"
+      ],
+      "notes": "Status z prostymi błędami ortograficznymi."
+    },
+    "system": "raw Bielik",
+    "output_text": "Na dziś zakończyliśmy migrację 3 z 5 integracji. Jutro chcemy domknąć płatności i sprawdzić alerty po deployu.",
+    "latency_seconds": 1.818573,
+    "error": null,
+    "metadata": {
+      "prompt_family": "surface_orthography",
+      "model": "speakleash/bielik-11b-v2.6-instruct"
+    },
+    "deterministic": {
+      "total": 1.0,
+      "components": {
+        "must_keep": 1.0,
+        "should_fix": 1.0,
+        "must_not_introduce": 1.0,
+        "non_empty": 1.0,
+        "error_free": 1.0,
+        "latency": 1.0
+      },
+      "matched": {
+        "must_keep": [
+          "3 z 5 integracji",
+          "Jutro",
+          "deployu"
+        ],
+        "should_fix": [
+          "dzis",
+          "zakonczylismy",
+          "migracje",
+          "domknac",
+          "platnosci"
+        ],
+        "must_not_introduce": [
+          "opóźnienie",
+          "blokery"
+        ]
+      },
+      "missing": {
+        "must_keep": [],
+        "should_fix": [],
+        "must_not_introduce": []
+      }
+    },
+    "judge": {
+      "total": 1.0,
+      "dimensions": {
+        "factual_preservation": 1.0,
+        "language_quality": 1.0,
+        "clarity": 1.0,
+        "workplace_usefulness": 1.0,
+        "concision": 1.0
+      },
+      "rationale": "Output wiernie zachowuje sens, liczby i nazwy własne z tekstu wejściowego, jednocześnie poprawiając pisownię i polszczyznę. Jest jasny, naturalny i gotowy do użycia w wiadomości służbowej bez dodatkowej obróbki."
+    },
+    "final_score": 1.0
+  },
+  {
+    "case": {
+      "id": "status-surface-01",
+      "scenario": "status email/notatka",
+      "intent": "surface correction",
+      "input_text": "Na dzis zakonczylismy migracje 3 z 5 integracji. Jutro chcemy domknac platnosci i sprawdzic alerty po deployu.",
+      "jan_tool": "correct_orthography",
+      "baseline_prompt_family": "surface_orthography",
+      "must_keep": [
+        "3 z 5 integracji",
+        "Jutro",
+        "deployu"
+      ],
+      "should_fix": [
+        "dzis",
+        "zakonczylismy",
+        "migracje",
+        "domknac",
+        "platnosci"
+      ],
+      "must_not_introduce": [
+        "opóźnienie",
+        "blokery"
+      ],
+      "notes": "Status z prostymi błędami ortograficznymi."
+    },
+    "system": "GPT-5.4",
+    "output_text": "Na dziś zakończyliśmy migrację 3 z 5 integracji. Jutro chcemy domknąć płatności i sprawdzić alerty po deployu.",
+    "latency_seconds": 1.187734,
+    "error": null,
+    "metadata": {
+      "prompt_family": "surface_orthography",
+      "model": "gpt-5.4"
+    },
+    "deterministic": {
+      "total": 1.0,
+      "components": {
+        "must_keep": 1.0,
+        "should_fix": 1.0,
+        "must_not_introduce": 1.0,
+        "non_empty": 1.0,
+        "error_free": 1.0,
+        "latency": 1.0
+      },
+      "matched": {
+        "must_keep": [
+          "3 z 5 integracji",
+          "Jutro",
+          "deployu"
+        ],
+        "should_fix": [
+          "dzis",
+          "zakonczylismy",
+          "migracje",
+          "domknac",
+          "platnosci"
+        ],
+        "must_not_introduce": [
+          "opóźnienie",
+          "blokery"
+        ]
+      },
+      "missing": {
+        "must_keep": [],
+        "should_fix": [],
+        "must_not_introduce": []
+      }
+    },
+    "judge": {
+      "total": 1.0,
+      "dimensions": {
+        "factual_preservation": 1.0,
+        "language_quality": 1.0,
+        "clarity": 1.0,
+        "workplace_usefulness": 1.0,
+        "concision": 1.0
+      },
+      "rationale": "Output zachowuje pełne znaczenie, liczby i sens oryginału, jednocześnie poprawiając pisownię i polskie znaki. Jest naturalny, czytelny i gotowy do użycia w wiadomości służbowej bez dodatkowej obróbki."
+    },
+    "final_score": 1.0
+  },
+  {
+    "case": {
+      "id": "status-style-01",
+      "scenario": "status email/notatka",
+      "intent": "style rewrite",
+      "input_text": "Hej, szybki status: backend jest w sumie gotowy, frontend jeszcze trochę dłubie filtry, ale raczej dowieziemy demo na czwartek.",
+      "jan_tool": "improve_style",
+      "baseline_prompt_family": "style_elegancki",
+      "must_keep": [
+        "backend",
+        "frontend",
+        "demo",
+        "czwartek"
+      ],
+      "should_fix": [
+        "Hej",
+        "w sumie",
+        "dłubie",
+        "dowieziemy"
+      ],
+      "must_not_introduce": [
+        "piątek",
+        "opóźnienie"
+      ],
+      "notes": "Status meeting follow-up wymagający bardziej profesjonalnego tonu."
+    },
+    "system": "Jan",
+    "output_text": "Zdrowi bądźcie, miłościwi. Przybywam by pomóc w kunszcie piśmiennictwa polskiego.\n\n### Ulepszony tekst:\n\"Szanowni Państwo, pragnę poinformować, iż prace nad backendem zostały zakończone. Obecnie skupiamy się na dopracowaniu frontendu, w szczególności funkcjonalności filtrów. Zapewniam, że zrealizujemy demonstrację projektu w terminie, to jest w najbliższy czwartek.\"\n\n### Lista zmian z uzasadnieniami:\n\n1. **Zmiana powitania:**\n   - **\"Hej\"** → **\"Szanowni Państwo\"**\n   - **Uzasadnienie:** Styl elegancki wymaga formalnego powitania.\n\n2. **Rozbudowa struktury zdania:**\n   - **\"backend jest w sumie gotowy\"** → **\"prace nad backendem zostały zakończone\"**\n   - **Uzasadnienie:** Bardziej formalne i precyzyjne sformułowanie.\n\n3. **Dodanie kontekstu:**\n   - **\"frontend jeszcze trochę dłubie filtry\"** → **\"Obecnie skupiamy się na dopracowaniu frontendu, w szczególności funkcjonalności filtrów\"**\n   - **Uzasadnienie:** Rozszerzenie informacji o celu prac, co jest typowe dla stylu eleganckiego.\n\n4. **Zmiana stylu zakończenia:**\n   - **\"ale raczej dowieziemy demo na czwartek\"** → **\"Zapewniam, że zrealizujemy demonstrację projektu w terminie, to jest w najbliższy czwartek.\"**\n   - **Uzasadnienie:** Formalne zapewnienie i precyzyjne określenie terminu.\n\n### Cytat z literatury ilustrujący styl:\n\"Niechajże więc w domu nie będzie rozpusty,\nAle zacność obyczajów niechaj się zachowa,\nNiechaj każdy, co w nim postanie, uczciwość\nI afekt prawdziwy ku gospodarzom czuje.\"\n— Jan Kochanowski, \"Pieśń świętojańska o Sobótce\"\n\nStyl elegancki, jak w powyższym fragmencie, charakteryzuje się bogatym słownictwem, formalnym tonem oraz dbałością o strukturę wypowiedzi.\n\n*Styl to człowiek - każdy ma swój własny, piękny styl.*",
+    "latency_seconds": 21.293077,
+    "error": null,
+    "metadata": {
+      "tool_name": "improve_style",
+      "tool_names": [
+        "check_configuration",
+        "setup_api_key",
+        "reset_api_key",
+        "correct_orthography",
+        "correct_punctuation",
+        "verify_grammar",
+        "improve_style",
+        "comprehensive_correction",
+        "get_language_advice",
+        "check_text_quality",
+        "greet_jan",
+        "farewell_jan"
+      ]
+    },
+    "deterministic": {
+      "total": 0.66951,
+      "components": {
+        "must_keep": 1.0,
+        "should_fix": 0.0,
+        "must_not_introduce": 1.0,
+        "non_empty": 1.0,
+        "error_free": 1.0,
+        "latency": 0.195101
+      },
+      "matched": {
+        "must_keep": [
+          "backend",
+          "frontend",
+          "demo",
+          "czwartek"
+        ],
+        "should_fix": [],
+        "must_not_introduce": [
+          "piątek",
+          "opóźnienie"
+        ]
+      },
+      "missing": {
+        "must_keep": [],
+        "should_fix": [
+          "Hej",
+          "w sumie",
+          "dłubie",
+          "dowieziemy"
+        ],
+        "must_not_introduce": []
+      }
+    },
+    "judge": {
+      "total": 0.4,
+      "dimensions": {
+        "factual_preservation": 0.4,
+        "language_quality": 0.6,
+        "clarity": 0.6,
+        "workplace_usefulness": 0.2,
+        "concision": 0.2
+      },
+      "rationale": "Odpowiedź zachowuje główny sens statusu, ale mocno zmienia ton na przesadnie archaiczny i dodaje zbędne elementy, w tym powitanie, cytat i komentarze o stylu. Polszczyzna jest poprawna, choć miejscami sztuczna i nadmiernie napuszona. Tekst jest czytelnie podzielony, ale mało praktyczny do użycia w pracy. Jest zdecydowanie zbyt długi jak na prosty rewrite status email/notatki."
+    },
+    "final_score": 0.507804
+  },
+  {
+    "case": {
+      "id": "status-style-01",
+      "scenario": "status email/notatka",
+      "intent": "style rewrite",
+      "input_text": "Hej, szybki status: backend jest w sumie gotowy, frontend jeszcze trochę dłubie filtry, ale raczej dowieziemy demo na czwartek.",
+      "jan_tool": "improve_style",
+      "baseline_prompt_family": "style_elegancki",
+      "must_keep": [
+        "backend",
+        "frontend",
+        "demo",
+        "czwartek"
+      ],
+      "should_fix": [
+        "Hej",
+        "w sumie",
+        "dłubie",
+        "dowieziemy"
+      ],
+      "must_not_introduce": [
+        "piątek",
+        "opóźnienie"
+      ],
+      "notes": "Status meeting follow-up wymagający bardziej profesjonalnego tonu."
+    },
+    "system": "raw Bielik",
+    "output_text": "Szanowni Państwo,\n\nPrzedstawiam aktualny status projektu:\n\n- Backend jest gotowy do wdrożenia.\n- Frontend wymaga jeszcze prac nad filtrami, ale planujemy dostarczyć wersję demonstracyjną w czwartek.\n\nPozdrawiam,\n[Imię i Nazwisko]",
+    "latency_seconds": 3.227885,
+    "error": null,
+    "metadata": {
+      "prompt_family": "style_elegancki",
+      "model": "speakleash/bielik-11b-v2.6-instruct"
+    },
+    "deterministic": {
+      "total": 1.0,
+      "components": {
+        "must_keep": 1.0,
+        "should_fix": 1.0,
+        "must_not_introduce": 1.0,
+        "non_empty": 1.0,
+        "error_free": 1.0,
+        "latency": 1.0
+      },
+      "matched": {
+        "must_keep": [
+          "backend",
+          "frontend",
+          "demo",
+          "czwartek"
+        ],
+        "should_fix": [
+          "Hej",
+          "w sumie",
+          "dłubie",
+          "dowieziemy"
+        ],
+        "must_not_introduce": [
+          "piątek",
+          "opóźnienie"
+        ]
+      },
+      "missing": {
+        "must_keep": [],
+        "should_fix": [],
+        "must_not_introduce": []
+      }
+    },
+    "judge": {
+      "total": 1.0,
+      "dimensions": {
+        "factual_preservation": 1.0,
+        "language_quality": 1.0,
+        "clarity": 1.0,
+        "workplace_usefulness": 1.0,
+        "concision": 1.0
+      },
+      "rationale": "Output zachowuje sens i kluczowe informacje z wejścia: backend gotowy, frontend nadal wymaga pracy nad filtrami, demo planowane na czwartek. Język jest poprawny, naturalny i odpowiedni do komunikacji służbowej. Tekst jest czytelny, uporządkowany i gotowy do użycia bez większych poprawek. Jest też zwięzły jak na zadanie stylizacji status email/notatki."
+    },
+    "final_score": 1.0
+  },
+  {
+    "case": {
+      "id": "status-style-01",
+      "scenario": "status email/notatka",
+      "intent": "style rewrite",
+      "input_text": "Hej, szybki status: backend jest w sumie gotowy, frontend jeszcze trochę dłubie filtry, ale raczej dowieziemy demo na czwartek.",
+      "jan_tool": "improve_style",
+      "baseline_prompt_family": "style_elegancki",
+      "must_keep": [
+        "backend",
+        "frontend",
+        "demo",
+        "czwartek"
+      ],
+      "should_fix": [
+        "Hej",
+        "w sumie",
+        "dłubie",
+        "dowieziemy"
+      ],
+      "must_not_introduce": [
+        "piątek",
+        "opóźnienie"
+      ],
+      "notes": "Status meeting follow-up wymagający bardziej profesjonalnego tonu."
+    },
+    "system": "GPT-5.4",
+    "output_text": "Dzień dobry,\n\nKrótka aktualizacja statusu: prace nad backendem zostały zasadniczo zakończone. W obszarze frontendu trwają jeszcze prace nad filtrami, jednak planujemy przygotować demo na czwartek.",
+    "latency_seconds": 1.99263,
+    "error": null,
+    "metadata": {
+      "prompt_family": "style_elegancki",
+      "model": "gpt-5.4"
+    },
+    "deterministic": {
+      "total": 1.0,
+      "components": {
+        "must_keep": 1.0,
+        "should_fix": 1.0,
+        "must_not_introduce": 1.0,
+        "non_empty": 1.0,
+        "error_free": 1.0,
+        "latency": 1.0
+      },
+      "matched": {
+        "must_keep": [
+          "backend",
+          "frontend",
+          "demo",
+          "czwartek"
+        ],
+        "should_fix": [
+          "Hej",
+          "w sumie",
+          "dłubie",
+          "dowieziemy"
+        ],
+        "must_not_introduce": [
+          "piątek",
+          "opóźnienie"
+        ]
+      },
+      "missing": {
+        "must_keep": [],
+        "should_fix": [],
+        "must_not_introduce": []
+      }
+    },
+    "judge": {
+      "total": 1.0,
+      "dimensions": {
+        "factual_preservation": 1.0,
+        "language_quality": 1.0,
+        "clarity": 1.0,
+        "workplace_usefulness": 1.0,
+        "concision": 1.0
+      },
+      "rationale": "Odpowiedź zachowuje sens i wszystkie kluczowe informacje z wejścia: backend jest gotowy, frontend nadal dopracowuje filtry, demo planowane na czwartek. Język jest poprawny, naturalny i bardziej formalny, co pasuje do status email/notatki. Tekst jest jasny, uporządkowany i gotowy do użycia w pracy, a przy tym zwięzły."
+    },
+    "final_score": 1.0
+  },
+  {
+    "case": {
+      "id": "status-full-01",
+      "scenario": "status email/notatka",
+      "intent": "full polish",
+      "input_text": "Po wczorajszym syncu mamy zielone światło na rollout do grupy beta. Zanim to puścimy trzeba jeszcze dopiąć copy w mailu i potwierdzić czy analytics łapie event invite_sent.",
+      "jan_tool": "comprehensive_correction",
+      "baseline_prompt_family": "full_polish_standard",
+      "must_keep": [
+        "beta",
+        "copy",
+        "analytics",
+        "invite_sent"
+      ],
+      "should_fix": [
+        "rollout",
+        "puścimy",
+        "łapie"
+      ],
+      "must_not_introduce": [
+        "SMS",
+        "CRM"
+      ],
+      "notes": "Notatka statusowa z anglicyzmami i stylem mówionym."
+    },
+    "system": "Jan",
+    "output_text": "Niech Bóg wam błogosławi. Czym mogę służyć w sprawie języka ojczystego?\n\nOto kompleksowa korekta tekstu w trybie standardowym:\n\n### Tekst oryginalny:\n```\nPo wczorajszym syncu mamy zielone światło na rollout do grupy beta. Zanim to puścimy trzeba jeszcze dopiąć copy w mailu i potwierdzić czy analytics łapie event invite_sent.\n```\n\n### Tekst poprawiony:\n```\nPo wczorajszym synchronizacji mamy zielone światło na wdrożenie do grupy beta. Zanim to wypuścimy, trzeba jeszcze dopracować treść w mailu oraz potwierdzić, czy narzędzie analityczne rejestruje zdarzenie \"invite_sent\".\n```\n\n### Raport korekty:\n\n#### Ortografia (Orthography)\n- **Błędy**: 1\n- **Korekty**:\n  - Zmieniono \"syncu\" na \"synchronizacji\" (poprawne odmienienie rzeczownika).\n- **Ocena**: 9/10\n\n#### Interpunkcja (Punctuation)\n- **Błędy**: 2\n- **Korekty**:\n  - Dodano przecinek po \"Zanim to puścimy\".\n  - Dodano przecinek po \"mailu\".\n  - Dodano kropkę na końcu zdania.\n- **Ocena**: 9/10\n\n#### Gramatyka (Grammar)\n- **Błędy**: 2\n- **Korekty**:\n  - Zmieniono \"rollout\" na \"wdrożenie\" (bardziej formalne i zrozumiałe w kontekście).\n  - Zmieniono \"trzeba jeszcze dopiąć copy\" na \"trzeba jeszcze dopracować treść\" (bardziej naturalne sformułowanie).\n- **Ocena**: 9/10\n\n#### Styl (Style)\n- **Uwagi**:\n  - Użyto bardziej formalnego języka.\n  - Dodano wyjaśnienie skrótu \"invite_sent\" w cudzysłowie.\n- **Poprawki**:\n  - Zmieniono \"puścimy\" na \"wypuścimy\" (bardziej formalne).\n  - Zmieniono \"analytics\" na \"narzędzie analityczne\" (bardziej zrozumiałe).\n- **Ocena**: 8/10\n\n#### Ogólna ocena (Overall Score):\n- **Wynik**: 9/10\n\n### Podsumowanie (Summary):\nTekst zawierał drobne błędy ortograficzne, interpunkcyjne i stylistyczne, które zostały poprawione. Po korekcie tekst jest bardziej formalny, zrozumiały i poprawny gramatycznie.\n\n---\n\n### Osobista refleksja o pięknie języka polskiego:\nJęzyk polski jest niezwykle bogaty i złożony, co pozwala na wyrażanie nawet najbardziej skomplikowanych myśli w sposób precyzyjny i piękny. Jego fleksyjność i różnorodność słownictwa sprawiają, że możemy tworzyć teksty, które są zarówno funkcjonalne, jak i estetyczne. Dbałość o poprawność językową nie tylko ułatwia komunikację, ale także podkreśla szacunek do odbiorcy i dbałość o jakość przekazu. 🌟\n\n*Człowiek jest stworzony do mówienia, jak ptak do latania.*\n\nNiechaj Bóg strzeże wasze pióra i myśli. Do zobaczenia w innej godzinie.",
+    "latency_seconds": 31.881175,
+    "error": null,
+    "metadata": {
+      "tool_name": "comprehensive_correction",
+      "tool_names": [
+        "check_configuration",
+        "setup_api_key",
+        "reset_api_key",
+        "correct_orthography",
+        "correct_punctuation",
+        "verify_grammar",
+        "improve_style",
+        "comprehensive_correction",
+        "get_language_advice",
+        "check_text_quality",
+        "greet_jan",
+        "farewell_jan"
+      ]
+    },
+    "deterministic": {
+      "total": 0.65,
+      "components": {
+        "must_keep": 1.0,
+        "should_fix": 0.0,
+        "must_not_introduce": 1.0,
+        "non_empty": 1.0,
+        "error_free": 1.0,
+        "latency": 0.0
+      },
+      "matched": {
+        "must_keep": [
+          "beta",
+          "copy",
+          "analytics",
+          "invite_sent"
+        ],
+        "should_fix": [],
+        "must_not_introduce": [
+          "SMS",
+          "CRM"
+        ]
+      },
+      "missing": {
+        "must_keep": [],
+        "should_fix": [
+          "rollout",
+          "puścimy",
+          "łapie"
+        ],
+        "must_not_introduce": []
+      }
+    },
+    "judge": {
+      "total": 0.2,
+      "dimensions": {
+        "factual_preservation": 0.2,
+        "language_quality": 0.2,
+        "clarity": 0.2,
+        "workplace_usefulness": 0.2,
+        "concision": 0.2
+      },
+      "rationale": "Output mocno odbiega od zadania: dodaje religijne powitania, refleksję i długi komentarz, zamiast samej korekty. Zawiera też błędy językowe i nienaturalne sformułowania, np. „Po wczorajszym synchronizacji”. Choć zachowuje ogólny sens o rolloutcie beta i evencie invite_sent, to fakty są częściowo zniekształcone przez niepoprawne tłumaczenia i nadmiar treści. Tekst jest mało użyteczny w pracy i zdecydowanie zbyt rozwlekły."
+    },
+    "final_score": 0.38
+  },
+  {
+    "case": {
+      "id": "status-full-01",
+      "scenario": "status email/notatka",
+      "intent": "full polish",
+      "input_text": "Po wczorajszym syncu mamy zielone światło na rollout do grupy beta. Zanim to puścimy trzeba jeszcze dopiąć copy w mailu i potwierdzić czy analytics łapie event invite_sent.",
+      "jan_tool": "comprehensive_correction",
+      "baseline_prompt_family": "full_polish_standard",
+      "must_keep": [
+        "beta",
+        "copy",
+        "analytics",
+        "invite_sent"
+      ],
+      "should_fix": [
+        "rollout",
+        "puścimy",
+        "łapie"
+      ],
+      "must_not_introduce": [
+        "SMS",
+        "CRM"
+      ],
+      "notes": "Notatka statusowa z anglicyzmami i stylem mówionym."
+    },
+    "system": "raw Bielik",
+    "output_text": "Po wczorajszym synchronizacji danych otrzymaliśmy zgodę na wdrożenie wersji beta. Przed jej uruchomieniem należy jeszcze dopracować treść wiadomości e-mail oraz zweryfikować, czy narzędzie analityczne poprawnie rejestruje zdarzenie invite_sent.",
+    "latency_seconds": 3.324333,
+    "error": null,
+    "metadata": {
+      "prompt_family": "full_polish_standard",
+      "model": "speakleash/bielik-11b-v2.6-instruct"
+    },
+    "deterministic": {
+      "total": 0.85,
+      "components": {
+        "must_keep": 0.5,
+        "should_fix": 1.0,
+        "must_not_introduce": 1.0,
+        "non_empty": 1.0,
+        "error_free": 1.0,
+        "latency": 1.0
+      },
+      "matched": {
+        "must_keep": [
+          "beta",
+          "invite_sent"
+        ],
+        "should_fix": [
+          "rollout",
+          "puścimy",
+          "łapie"
+        ],
+        "must_not_introduce": [
+          "SMS",
+          "CRM"
+        ]
+      },
+      "missing": {
+        "must_keep": [
+          "copy",
+          "analytics"
+        ],
+        "should_fix": [],
+        "must_not_introduce": []
+      }
+    },
+    "judge": {
+      "total": 0.76,
+      "dimensions": {
+        "factual_preservation": 0.8,
+        "language_quality": 0.6,
+        "clarity": 0.8,
+        "workplace_usefulness": 0.8,
+        "concision": 0.8
+      },
+      "rationale": "Zachowano główne znaczenie, nazwę zdarzenia invite_sent i sens komunikatu, ale pojawia się istotne przesunięcie znaczenia: „sync” został błędnie oddany jako „synchronizacja danych”, a „zielone światło” jako bardziej formalna „zgoda”. Język jest poprawny, lecz miejscami nienaturalny i zbyt dosłowny („Po wczorajszym synchronizacji danych”). Tekst jest czytelny i nadaje się do użycia w pracy po drobnej korekcie, choć nie jest w pełni naturalny po polsku."
+    },
+    "final_score": 0.796
+  },
+  {
+    "case": {
+      "id": "status-full-01",
+      "scenario": "status email/notatka",
+      "intent": "full polish",
+      "input_text": "Po wczorajszym syncu mamy zielone światło na rollout do grupy beta. Zanim to puścimy trzeba jeszcze dopiąć copy w mailu i potwierdzić czy analytics łapie event invite_sent.",
+      "jan_tool": "comprehensive_correction",
+      "baseline_prompt_family": "full_polish_standard",
+      "must_keep": [
+        "beta",
+        "copy",
+        "analytics",
+        "invite_sent"
+      ],
+      "should_fix": [
+        "rollout",
+        "puścimy",
+        "łapie"
+      ],
+      "must_not_introduce": [
+        "SMS",
+        "CRM"
+      ],
+      "notes": "Notatka statusowa z anglicyzmami i stylem mówionym."
+    },
+    "system": "GPT-5.4",
+    "output_text": "Po wczorajszym syncu mamy zielone światło na rollout do grupy beta. Zanim to wypuścimy, trzeba jeszcze dopracować copy w mailu i potwierdzić, czy analytics rejestruje event invite_sent.",
+    "latency_seconds": 1.697201,
+    "error": null,
+    "metadata": {
+      "prompt_family": "full_polish_standard",
+      "model": "gpt-5.4"
+    },
+    "deterministic": {
+      "total": 0.833333,
+      "components": {
+        "must_keep": 1.0,
+        "should_fix": 0.333333,
+        "must_not_introduce": 1.0,
+        "non_empty": 1.0,
+        "error_free": 1.0,
+        "latency": 1.0
+      },
+      "matched": {
+        "must_keep": [
+          "beta",
+          "copy",
+          "analytics",
+          "invite_sent"
+        ],
+        "should_fix": [
+          "łapie"
+        ],
+        "must_not_introduce": [
+          "SMS",
+          "CRM"
+        ]
+      },
+      "missing": {
+        "must_keep": [],
+        "should_fix": [
+          "rollout",
+          "puścimy"
+        ],
+        "must_not_introduce": []
+      }
+    },
+    "judge": {
+      "total": 1.0,
+      "dimensions": {
+        "factual_preservation": 1.0,
+        "language_quality": 1.0,
+        "clarity": 1.0,
+        "workplace_usefulness": 1.0,
+        "concision": 1.0
+      },
+      "rationale": "Output wiernie zachowuje sens, nazwy własne i techniczne szczegóły z wejścia (rollout do grupy beta, copy w mailu, event invite_sent). Język jest naturalny i poprawny po polsku, a tekst jest zwięzły, czytelny i gotowy do użycia w pracy bez dodatkowej obróbki."
+    },
+    "final_score": 0.933333
+  }
+]

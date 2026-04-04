@@ -9,7 +9,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="jan-subagent",
-    version="2.0.0",
+    version="2.1.0",
     author="Jan Subagent Team",
     description="MCP server do korekty języka polskiego z personą Jana Kochanowskiego",
     long_description=long_description,

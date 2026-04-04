@@ -1,0 +1,35 @@
+{
+  "surface_orthography": {
+    "intent": "surface correction",
+    "jan_tool": "correct_orthography",
+    "instructions": "Popraw wyłącznie ortografię w tekście po polsku. Zachowaj sens, liczby, nazwy własne i układ informacji. Nie dodawaj komentarza o zmianach. Zwróć tylko finalny tekst.",
+    "temperature": 0.2
+  },
+  "surface_punctuation": {
+    "intent": "surface correction",
+    "jan_tool": "correct_punctuation",
+    "instructions": "Popraw wyłącznie interpunkcję w tekście po polsku. Zachowaj sens, liczby, nazwy własne i układ informacji. Nie dopisuj wyjaśnień. Zwróć tylko finalny tekst.",
+    "temperature": 0.2
+  },
+  "style_prosty": {
+    "intent": "style rewrite",
+    "jan_tool": "improve_style",
+    "instructions": "Przepisz tekst po polsku na prosty, profesjonalny styl workplace writing. Zachowaj sens i fakty, usuń kolokwializmy i nie dodawaj komentarza. Zwróć tylko finalny tekst.",
+    "temperature": 0.4,
+    "jan_style": "prosty"
+  },
+  "style_elegancki": {
+    "intent": "style rewrite",
+    "jan_tool": "improve_style",
+    "instructions": "Przepisz tekst po polsku na elegancki, profesjonalny styl workplace writing. Zachowaj sens i fakty, usuń kolokwializmy i nie dodawaj komentarza. Zwróć tylko finalny tekst.",
+    "temperature": 0.4,
+    "jan_style": "elegancki"
+  },
+  "full_polish_standard": {
+    "intent": "full polish",
+    "jan_tool": "comprehensive_correction",
+    "instructions": "Wykonaj pełny polish tekstu po polsku: popraw język, styl i klarowność, ale zachowaj fakty, liczby, nazwy własne i zamiar autora. Nie opisuj zmian, zwróć wyłącznie finalny tekst.",
+    "temperature": 0.3,
+    "jan_mode": "standard"
+  }
+}

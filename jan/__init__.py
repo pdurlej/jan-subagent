@@ -4,7 +4,7 @@ Jan - Subagent MCP Jana Kochanowskiego do korekty języka polskiego
 
 from typing import Any
 
-__version__ = "2.0.0"
+__version__ = "2.1.0"
 __author__ = "Jan Subagent Team"
 
 # Importy podstawowe (zoptymalizowane)

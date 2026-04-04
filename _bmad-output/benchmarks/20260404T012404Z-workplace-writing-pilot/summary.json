@@ -1,0 +1,245 @@
+{
+  "overall": {
+    "GPT-5.4": {
+      "final_score": 0.9681666666666666,
+      "deterministic_score": 0.9266666666666666,
+      "judge_score": 1.0,
+      "latency_seconds": 1.4690002807331135,
+      "error_rate": 0.0
+    },
+    "Jan": {
+      "final_score": 0.49945706020418085,
+      "deterministic_score": 0.687990116031286,
+      "judge_score": 0.30133333333333334,
+      "latency_seconds": 26.276727819400307,
+      "error_rate": 0.0
+    },
+    "raw Bielik": {
+      "final_score": 0.9237034470845712,
+      "deterministic_score": 0.8875086177114281,
+      "judge_score": 0.952,
+      "latency_seconds": 3.206286716732575,
+      "error_rate": 0.0
+    }
+  },
+  "by_scenario": {
+    "PR description": {
+      "GPT-5.4": {
+        "final_score": 0.9755555555555555,
+        "deterministic_score": 0.9388888888888889,
+        "judge_score": 1.0,
+        "latency_seconds": 1.442341124999075,
+        "error_rate": 0.0
+      },
+      "Jan": {
+        "final_score": 0.5075834856437428,
+        "deterministic_score": 0.6864587141093569,
+        "judge_score": 0.3466666666666667,
+        "latency_seconds": 27.18665945833345,
+        "error_rate": 0.0
+      },
+      "raw Bielik": {
+        "final_score": 0.8690172354228562,
+        "deterministic_score": 0.9125430885571404,
+        "judge_score": 0.84,
+        "latency_seconds": 5.273512028001278,
+        "error_rate": 0.0
+      }
+    },
+    "ticket/issue": {
+      "GPT-5.4": {
+        "final_score": 0.9866666666666667,
+        "deterministic_score": 0.9666666666666667,
+        "judge_score": 1.0,
+        "latency_seconds": 1.4945789446671067,
+        "error_rate": 0.0
+      },
+      "Jan": {
+        "final_score": 0.5333333333333333,
+        "deterministic_score": 0.7083333333333334,
+        "judge_score": 0.32,
+        "latency_seconds": 27.176348319667643,
+        "error_rate": 0.0
+      },
+      "raw Bielik": {
+        "final_score": 0.96,
+        "deterministic_score": 0.9,
+        "judge_score": 1.0,
+        "latency_seconds": 2.932170777998787,
+        "error_rate": 0.0
+      }
+    },
+    "support reply": {
+      "GPT-5.4": {
+        "final_score": 1.0,
+        "deterministic_score": 1.0,
+        "judge_score": 1.0,
+        "latency_seconds": 1.4685482779993133,
+        "error_rate": 0.0
+      },
+      "Jan": {
+        "final_score": 0.466963807310409,
+        "deterministic_score": 0.6840761849426892,
+        "judge_score": 0.25333333333333335,
+        "latency_seconds": 25.11166623600002,
+        "error_rate": 0.0
+      },
+      "raw Bielik": {
+        "final_score": 0.9466666666666667,
+        "deterministic_score": 0.8666666666666667,
+        "judge_score": 1.0,
+        "latency_seconds": 2.827918763666579,
+        "error_rate": 0.0
+      }
+    },
+    "release note/changelog": {
+      "GPT-5.4": {
+        "final_score": 0.9008333333333333,
+        "deterministic_score": 0.7833333333333333,
+        "judge_score": 1.0,
+        "latency_seconds": 1.3136782499993085,
+        "error_rate": 0.0
+      },
+      "Jan": {
+        "final_score": 0.49846999186815716,
+        "deterministic_score": 0.6712456406078956,
+        "judge_score": 0.32,
+        "latency_seconds": 24.62956973566664,
+        "error_rate": 0.0
+      },
+      "raw Bielik": {
+        "final_score": 0.9108333333333333,
+        "deterministic_score": 0.8083333333333333,
+        "judge_score": 1.0,
+        "latency_seconds": 2.2075686943317123,
+        "error_rate": 0.0
+      }
+    },
+    "status email/notatka": {
+      "GPT-5.4": {
+        "final_score": 0.9777777777777777,
+        "deterministic_score": 0.9444444444444444,
+        "judge_score": 1.0,
+        "latency_seconds": 1.6258548060007645,
+        "error_rate": 0.0
+      },
+      "Jan": {
+        "final_score": 0.49093468286526204,
+        "deterministic_score": 0.6898367071631551,
+        "judge_score": 0.26666666666666666,
+        "latency_seconds": 27.279395347333775,
+        "error_rate": 0.0
+      },
+      "raw Bielik": {
+        "final_score": 0.932,
+        "deterministic_score": 0.95,
+        "judge_score": 0.92,
+        "latency_seconds": 2.7902633196645183,
+        "error_rate": 0.0
+      }
+    }
+  },
+  "by_intent": {
+    "surface correction": {
+      "GPT-5.4": {
+        "final_score": 0.9824999999999999,
+        "deterministic_score": 0.975,
+        "judge_score": 1.0,
+        "latency_seconds": 1.299204075200396,
+        "error_rate": 0.0
+      },
+      "Jan": {
+        "final_score": 0.6322270965416651,
+        "deterministic_score": 0.7626101379166645,
+        "judge_score": 0.328,
+        "latency_seconds": 24.22731710020016,
+        "error_rate": 0.0
+      },
+      "raw Bielik": {
+        "final_score": 0.9824999999999999,
+        "deterministic_score": 0.975,
+        "judge_score": 1.0,
+        "latency_seconds": 1.9055605167988687,
+        "error_rate": 0.0
+      }
+    },
+    "style rewrite": {
+      "GPT-5.4": {
+        "final_score": 0.968,
+        "deterministic_score": 0.92,
+        "judge_score": 1.0,
+        "latency_seconds": 1.6225079670002742,
+        "error_rate": 0.0
+      },
+      "Jan": {
+        "final_score": 0.45254408407087743,
+        "deterministic_score": 0.6513602101771935,
+        "judge_score": 0.32,
+        "latency_seconds": 21.560081658000126,
+        "error_rate": 0.0
+      },
+      "raw Bielik": {
+        "final_score": 0.9216,
+        "deterministic_score": 0.84,
+        "judge_score": 0.976,
+        "latency_seconds": 3.3515420001996974,
+        "error_rate": 0.0
+      }
+    },
+    "full polish": {
+      "GPT-5.4": {
+        "final_score": 0.954,
+        "deterministic_score": 0.885,
+        "judge_score": 1.0,
+        "latency_seconds": 1.4852887999986706,
+        "error_rate": 0.0
+      },
+      "Jan": {
+        "final_score": 0.4136,
+        "deterministic_score": 0.65,
+        "judge_score": 0.256,
+        "latency_seconds": 33.04278470000063,
+        "error_rate": 0.0
+      },
+      "raw Bielik": {
+        "final_score": 0.8670103412537137,
+        "deterministic_score": 0.8475258531342843,
+        "judge_score": 0.88,
+        "latency_seconds": 4.361757633199159,
+        "error_rate": 0.0
+      }
+    }
+  },
+  "top_use_cases_for_jan": [
+    {
+      "scenario": "release note/changelog",
+      "jan_score": 0.49846999186815716,
+      "leader": "raw Bielik",
+      "leader_score": 0.9108333333333333,
+      "delta_to_leader": -0.4123633414651761
+    },
+    {
+      "scenario": "ticket/issue",
+      "jan_score": 0.5333333333333333,
+      "leader": "GPT-5.4",
+      "leader_score": 0.9866666666666667,
+      "delta_to_leader": -0.45333333333333337
+    }
+  ],
+  "weak_spots_for_jan": [
+    {
+      "scenario": "support reply",
+      "jan_score": 0.466963807310409,
+      "leader": "GPT-5.4",
+      "leader_score": 1.0,
+      "delta_to_leader": -0.533036192689591
+    },
+    {
+      "scenario": "status email/notatka",
+      "jan_score": 0.49093468286526204,
+      "leader": "GPT-5.4",
+      "leader_score": 0.9777777777777777,
+      "delta_to_leader": -0.4868430949125157
+    }
+  ]
+}

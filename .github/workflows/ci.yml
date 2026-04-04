@@ -27,6 +27,9 @@ jobs:
       - name: Run unit tests
         run: pytest -q
 
+      - name: Run benchmark harness checks
+        run: python3 scripts/test_benchmark_harness.py
+
       - name: Compile package
         run: python -m compileall -q jan
 

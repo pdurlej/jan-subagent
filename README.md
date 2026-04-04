@@ -29,6 +29,38 @@ Pełna nota wydania: [docs/VERSION_2_1_0.md](/Users/pd/Developer/jan/docs/VERSIO
 - Konfiguracja ładowana z `NVIDIA_API_KEY` lub `~/.jan/config.json`.
 - Lazy import `jan.mcp`, bez side-effectów przy `python -m`.
 
+## Gdzie używać Jana
+
+Jan ma dziś najwięcej sensu wtedy, gdy pracujesz w kliencie MCP i często poprawiasz krótkie lub średnie teksty po polsku bez ręcznego prompt engineeringu.
+
+- opisy PR i changelogi
+- release notes
+- tickety i opisy issue
+- szybkie poprawki ortografii, interpunkcji i stylu
+- szybki quality check tekstu
+- przypadki, gdzie chcesz stabilny kontrakt narzędzia zamiast ogólnego promptu do modelu
+
+Najmocniejsze use-case'y z obecnego pilota to `release note/changelog`, gdzie Jan był liderem scenariusza, oraz `PR description`, gdzie był bardzo blisko lidera.
+
+Najmniej korzystne use-case'y względem `GPT-5.4` to nadal:
+
+- `support reply`
+- `status email/notatka`
+
+W tych dwóch scenariuszach Jan nadal działa dobrze, ale `GPT-5.4` ma większy zapas jakości.
+
+## Jan vs GPT-5.4 vs raw Bielik
+
+Jan nie jest próbą bycia „najlepszym modelem ogólnym”. To warstwa produktowa nad korektą polszczyzny, zbudowana pod MCP i workplace writing.
+
+- Nad `raw Bielik` Jan daje gotowe narzędzia MCP, przewidywalny kontrakt odpowiedzi i mniej pracy promptowej.
+- Nad `raw Bielik` Jan wygrał też obecny pilot workplace writing literalnym wynikiem produktu: `94.0%` vs `93.1%`.
+- Nad `raw Bielik` Jan był też szybszy w tym pilocie: `2.58s` vs `3.24s`.
+- Wobec `GPT-5.4` Jan nadal przegrywa minimalnie ogólny wynik pilota: `94.0%` vs `96.5%`.
+- Wobec `GPT-5.4` Jan wygrywa specjalizacją produktu: konkretne tool calls, polski-first workflow i stabilne, paste-ready odpowiedzi bez dorabiania promptów od zera.
+- Jeśli chcesz ogólny, bardzo mocny model do szerokich zadań pisarskich, `GPT-5.4` pozostaje mocniejszym baseline'em.
+- Jeśli chcesz narzędzie do polskiej korekty osadzone w MCP, oparte o Bielika i gotowe do codziennego użycia w repo lub kliencie, Jan jest lepszym punktem wejścia niż surowe API modelu.
+
 ## Instalacja
 
 ### Wymagania
@@ -232,6 +264,22 @@ Benchmark ma teraz dwa widoki:
 - `Normalized Diagnostic Score` jako diagnostykę kosztu wrappera Jana
 
 `Normalized Diagnostic Score` nie zastępuje literalnego wyniku produktu. Służy tylko do odpowiedzi na pytanie, ile jakości kosztuje opakowanie odpowiedzi Jana.
+
+Aktualny snapshot po refactorze paste-ready:
+
+| System | Primary Literal Score | Avg latency |
+| --- | ---: | ---: |
+| `GPT-5.4` | `96.5%` | `1.48s` |
+| `Jan` | `94.0%` | `2.58s` |
+| `raw Bielik` | `93.1%` | `3.24s` |
+
+Najważniejszy ruch produktu po refactorze:
+
+- Jan urósł z `49.9%` do `94.0%` literal final score
+- latency Jana spadła z `26.28s` do `2.58s`
+- `surface correction` wzrosło z `63.2%` do `98.2%`
+
+To potwierdza, że wcześniejszy problem siedział głównie w wrapperze odpowiedzi, a nie w samym rdzeniu korekty.
 
 CI-safe walidacja harnessu:
 

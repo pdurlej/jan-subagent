@@ -11,6 +11,19 @@
 
 Jan zachowuje charakter i brand Jana Kochanowskiego, ale domyślny workplace UX jest już w pełni `paste-ready`.
 
+## Dlaczego Jan jest praktyczny
+
+Najprostsza obietnica produktu jest taka:
+
+- bierzesz typowe, surowe angielskie notki z GitHuba
+- wrzucasz je do `compose_release_notes(...)`
+- dostajesz gotowe, polskie release notesy albo changelog dla współpracowników
+
+I możesz to odpalić za darmo w trybie prototypowania, korzystając z klucza NVIDIA Developer Program do hosted endpointów NIM. NVIDIA podaje, że członkowie programu mają darmowy dostęp do endpointów NIM do prototypowania:
+
+- [Run NIM Anywhere](https://docs.api.nvidia.com/nim/docs/run-anywhere)
+- [API Catalog Quickstart Guide](https://docs.api.nvidia.com/nim/docs/api-quickstart)
+
 ## Co zmieniło się w 3.0.0
 
 - główny wedge produktu to `repo-native workflows`, nie ogólna korekta tekstu
@@ -154,6 +167,29 @@ Brak tokenów nie tworzy sztucznego kontekstu. Workflow degraduje się do tego, 
 - Python 3.10+
 - MCP client, np. Claude Desktop albo Cursor
 - NVIDIA API key dla Bielika
+
+### Jak dostać darmowy NVIDIA API key krok po kroku
+
+Poniższy flow opiera się na oficjalnym quickstarcie NVIDIA API Catalog i dokumentacji NIM:
+
+1. Wejdź na [build.nvidia.com](https://build.nvidia.com/).
+2. Wyszukaj model albo endpoint, którego chcesz używać. Dla Jana najważniejsze jest to, żeby mieć działający klucz do hosted endpointów NVIDIA.
+3. Otwórz stronę modelu i kliknij `Get API Key` w prawym panelu.
+4. Podaj adres e-mail i dokończ logowanie albo rejestrację. Według dokumentacji NVIDIA zapisze Cię to do NVIDIA Developer Program.
+5. Po powrocie na stronę modelu skopiuj wygenerowany klucz API i zapisz go lokalnie w bezpiecznym miejscu.
+6. Ustaw go lokalnie jako `NVIDIA_API_KEY`, np. w `.env` albo w `~/.jan/config.json`.
+7. Uruchom Jana i sprawdź smoke test:
+
+```bash
+NVIDIA_API_KEY="twoj-klucz" .venv/bin/python -m jan.jan_subagent_opencode
+```
+
+Oficjalne źródła:
+
+- [API Catalog Quickstart Guide](https://docs.api.nvidia.com/nim/docs/api-quickstart)
+- [Run NIM Anywhere](https://docs.api.nvidia.com/nim/docs/run-anywhere)
+
+W dokumentacji NVIDIA jest wprost napisane, że członkowie programu deweloperskiego mają darmowy dostęp do endpointów NIM do prototypowania. Traktuj to jako darmowy start dla zespołu i sprawdzenie workflowu przed ewentualnym wdrożeniem produkcyjnym.
 
 ### Instalacja lokalna
 

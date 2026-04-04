@@ -7,7 +7,7 @@
 > *"Niechaj mowa o waszych zmianach będzie jasna, wierna i gotowa do publikacji."*  
 > Jan Kochanowski, gdyby pisał release notes
 
-![Jan Kochanowski jako skupiony coder w stylu starej ryciny](docs/images/jan-kochanowski-coder-engraving.png)
+![Jan Kochanowski jako skupiony coder w stylu starej ryciny](https://raw.githubusercontent.com/pdurlej/jan-subagent/master/docs/images/jan-kochanowski-coder-engraving.png)
 
 `jan-subagent` w `v3.0.0` nie jest już ogólnym korektorem polszczyzny. To repo-native agent MCP do tłumaczenia i pisania polskich changelogów, release notesów i opisów zmian na bazie typowych githubowych, bezosobowych angielskich notek, diffów i surowych bulletów technicznych.
 

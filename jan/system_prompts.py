@@ -4,6 +4,8 @@ System prompts dla modelu Bielik 11B.
 
 from __future__ import annotations
 
+from .policy import JanPolicy
+
 RESPONSE_CONTRACTS = {
     "plain_text": """
 Kontrakt odpowiedzi:
@@ -148,6 +150,48 @@ Twoje zadanie:
 - nie dodawaj cytatów ani literackich dygresji
 """
 
+WORKFLOW_BASE_PROMPT = """
+Jesteś repo-native agentem do polskojęzycznej komunikacji zmian w software delivery.
+
+Twoje zasady:
+- piszesz po polsku dla zespołów technicznych lub odbiorców biznesowych zgodnie z wybranym audience
+- tworzysz artefakty gotowe do wklejenia: opisy PR, release notes, tickety i rollout notes
+- nie dodajesz nowych faktów, których nie ma w przekazanym kontekście źródłowym
+- zachowujesz nazwy własne, identyfikatory, klucze Jira, wersje, liczby i terminy z kontekstu
+- stosujesz sekcje i strukturę wynikającą z policy packa
+- używasz tylko sekcji jawnie wymaganych dla danego artefaktu; nie dodawaj własnych sekcji
+- nie wstawiasz placeholderów, przykładowych linków, TODO ani pól do późniejszego uzupełnienia
+- jeśli jakaś informacja nie wynika ze źródeł, pomijasz ją zamiast zgadywać
+- nie dopowiadasz domyślnego kontekstu typu "lokalnie", "w środowisku testowym", "w produkcji" ani podobnych, jeśli nie ma go w źródłach
+- nie używasz persony Jana Kochanowskiego w domyślnym outputcie workflowów produkcyjnych
+"""
+
+WORKFLOW_RESPONSE_CONTRACTS = {
+    "final": """
+Kontrakt odpowiedzi:
+- Zwróć wyłącznie finalny tekst gotowy do wklejenia.
+- Zachowaj wymagane nagłówki sekcji wynikające z artefaktu.
+- Użyj dokładnie tych sekcji, które są wymagane dla artefaktu, i żadnych dodatkowych.
+- Nie dodawaj komentarza o sobie, raportu walidacji ani dygresji.
+""",
+    "review": """
+Kontrakt odpowiedzi:
+- Zwróć wyłącznie poprawny JSON.
+- Nie dodawaj code fence'ów, komentarzy ani tekstu przed lub po JSON.
+- Użyj schematu:
+{
+  "final_text": "string",
+  "source_trace": [
+    {
+      "segment": "string",
+      "source_ids": ["string"],
+      "note": "string"
+    }
+  ]
+}
+""",
+}
+
 SYSTEM_PROMPTS = {
     "main": JAN_KOCHANOWSKI_SYSTEM_PROMPT,
     "orthography": ORTHOGRAPHY_CORRECTION_PROMPT,
@@ -208,6 +252,48 @@ def get_system_prompt(
 
     contract = build_response_contract(normalized_prompt_type, response_mode)
     return f"{base_prompt.strip()}\n\n{contract}"
+
+
+def get_repo_native_system_prompt(
+    workflow_name: str,
+    artifact_key: str,
+    policy: JanPolicy,
+    audience: str,
+    response_mode: str = "final",
+) -> str:
+    """Buduje system prompt dla workflowów repo-native."""
+
+    template = policy.get_artifact_template(artifact_key)
+    audience_pack = policy.get_audience(audience)
+    contract = WORKFLOW_RESPONSE_CONTRACTS[response_mode]
+
+    sections = "\n".join(f"- {section}" for section in policy.get_required_sections(artifact_key))
+    glossary = "\n".join(
+        f"- {entry.preferred}: zamiast {', '.join(entry.aliases)}" if entry.aliases else f"- {entry.preferred}"
+        for entry in policy.glossary
+    ) or "- brak dodatkowych reguł glossary"
+    do_not_translate = "\n".join(f"- {token}" for token in policy.do_not_translate) or "- brak"
+    global_banned = "\n".join(f"- {token}" for token in policy.banned_phrases) or "- brak"
+    audience_banned = "\n".join(f"- {token}" for token in audience_pack.banned_terms) or "- brak"
+    audience_notes = "\n".join(f"- {note}" for note in audience_pack.notes) or "- brak"
+
+    return (
+        f"{WORKFLOW_BASE_PROMPT.strip()}\n\n"
+        f"Workflow: {workflow_name}\n"
+        f"Artefakt: {template.title}\n"
+        f"Audience: {audience}\n\n"
+        f"Instrukcje artefaktu:\n"
+        f"- {template.instructions}\n"
+        f"Wymagane sekcje:\n{sections}\n\n"
+        f"Audience policy:\n"
+        f"- {audience_pack.description}\n"
+        f"Dodatkowe notatki audience:\n{audience_notes}\n"
+        f"Zakazane terminy dla audience:\n{audience_banned}\n\n"
+        f"Glossary:\n{glossary}\n\n"
+        f"Do not translate:\n{do_not_translate}\n\n"
+        f"Global banned phrases:\n{global_banned}\n\n"
+        f"{contract.strip()}"
+    )
 
 
 if __name__ == "__main__":

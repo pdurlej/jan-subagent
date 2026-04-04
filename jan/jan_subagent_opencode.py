@@ -10,6 +10,7 @@ from .kochanowski_quotes import KochanowskiPersona
 from .system_prompts import get_system_prompt
 from .config import config
 from .api_client import bielik
+from .workflow_engine import execute_repo_native_workflow
 from .output_utils import (
     choose_light_greeting,
     extract_json_payload,
@@ -117,7 +118,7 @@ def check_configuration() -> str:
     """Sprawdź konfigurację Jana"""
     summary = config.get_config_summary()
 
-    msg = "### Konfiguracja Jana Kochanowskiego\n\n"
+    msg = "### Konfiguracja Jana Repo-Native\n\n"
     msg += f"**API Key skonfigurowany:** {format_status_icon(summary['is_configured'])}\n"
     msg += f"**Environment Variable:** {format_status_icon(summary['has_env_key'])}\n"
     msg += f"**Config File:** {format_status_icon(summary['has_config_key'])}\n\n"
@@ -126,6 +127,11 @@ def check_configuration() -> str:
     msg += f"**API Base:** {summary['api_base']}\n"
     msg += f"**Default Temperature:** {summary['default_temperature']}\n"
     msg += f"**Max Tokens:** {summary['max_tokens']}\n\n"
+    msg += f"**GitHub token:** {format_status_icon(summary['github_token_configured'])}\n"
+    msg += f"**GitHub repo:** {summary['github_repository'] or 'auto-detect'}\n"
+    msg += f"**Jira base URL:** {summary['jira_base_url'] or 'nie ustawiono'}\n"
+    msg += f"**Jira token:** {format_status_icon(summary['jira_token_configured'])}\n"
+    msg += f"**Policy file:** {summary['policy_file']}\n\n"
 
     if not summary["is_configured"]:
         msg += "> ⚠️ **API Key nie jest ustawiony!**\n"
@@ -183,13 +189,113 @@ def reset_api_key() -> str:
 # ==================== MCP TOOLS - KOREKTA ====================
 
 
+def _ensure_model_ready() -> str | None:
+    if not bielik.is_ready():
+        return bielik.call("", "")
+    return None
+
+
+@mcp.tool()
+def write_pr_description(
+    raw_notes: str = "",
+    git_range: str | None = None,
+    github_pr: int | None = None,
+    jira_keys: list[str] | None = None,
+    audience: str = "reviewer",
+    response_mode: str = "final",
+) -> str:
+    """Repo-native workflow dla opisu PR po polsku."""
+    unavailable = _ensure_model_ready()
+    if unavailable:
+        return unavailable
+    return execute_repo_native_workflow(
+        "write_pr_description",
+        raw_notes=raw_notes,
+        git_range=git_range,
+        github_pr=github_pr,
+        jira_keys=jira_keys,
+        audience=audience,
+        response_mode=response_mode,
+    )
+
+
+@mcp.tool()
+def compose_release_notes(
+    raw_notes: str = "",
+    git_range: str | None = None,
+    github_prs: list[int] | None = None,
+    jira_keys: list[str] | None = None,
+    audience: str = "internal",
+    response_mode: str = "final",
+) -> str:
+    """Repo-native workflow dla changelogu i release notes."""
+    unavailable = _ensure_model_ready()
+    if unavailable:
+        return unavailable
+    return execute_repo_native_workflow(
+        "compose_release_notes",
+        raw_notes=raw_notes,
+        git_range=git_range,
+        github_prs=github_prs,
+        jira_keys=jira_keys,
+        audience=audience,
+        response_mode=response_mode,
+    )
+
+
+@mcp.tool()
+def rewrite_issue(
+    raw_notes: str = "",
+    github_issue: int | None = None,
+    jira_key: str | None = None,
+    audience: str = "internal",
+    response_mode: str = "final",
+) -> str:
+    """Repo-native workflow do przepisywania zgłoszeń i ticketów."""
+    unavailable = _ensure_model_ready()
+    if unavailable:
+        return unavailable
+    return execute_repo_native_workflow(
+        "rewrite_issue",
+        raw_notes=raw_notes,
+        github_issue=github_issue,
+        jira_key=jira_key,
+        audience=audience,
+        response_mode=response_mode,
+    )
+
+
+@mcp.tool()
+def write_rollout_note(
+    raw_notes: str = "",
+    git_range: str | None = None,
+    github_prs: list[int] | None = None,
+    jira_keys: list[str] | None = None,
+    audience: str = "internal",
+    response_mode: str = "final",
+) -> str:
+    """Repo-native workflow dla notatki rolloutowej."""
+    unavailable = _ensure_model_ready()
+    if unavailable:
+        return unavailable
+    return execute_repo_native_workflow(
+        "write_rollout_note",
+        raw_notes=raw_notes,
+        git_range=git_range,
+        github_prs=github_prs,
+        jira_keys=jira_keys,
+        audience=audience,
+        response_mode=response_mode,
+    )
+
+
 @mcp.tool()
 def correct_orthography(
     text: str,
     include_greeting: bool = False,
     include_explanation: bool = False,
 ) -> str:
-    """Poprawa ortografii tekstu polskiego"""
+    """[LEGACY] Poprawa ortografii tekstu polskiego."""
     if not bielik.is_ready():
         return bielik.call("", "")  # Zwraca komunikat o braku API key
 
@@ -212,7 +318,7 @@ def correct_punctuation(
     include_greeting: bool = False,
     include_explanation: bool = False,
 ) -> str:
-    """Korekta interpunkcji tekstu polskiego"""
+    """[LEGACY] Korekta interpunkcji tekstu polskiego."""
     if not bielik.is_ready():
         return bielik.call("", "")
 
@@ -231,7 +337,7 @@ def correct_punctuation(
 
 @mcp.tool()
 def verify_grammar(text: str, include_greeting: bool = False) -> str:
-    """Weryfikacja gramatyki tekstu polskiego"""
+    """[LEGACY] Weryfikacja gramatyki tekstu polskiego."""
     if not bielik.is_ready():
         return bielik.call("", "")
 
@@ -251,7 +357,7 @@ def improve_style(
     include_greeting: bool = False,
     include_explanation: bool = False,
 ) -> str:
-    """Ulepszenie stylu tekstu polskiego"""
+    """[LEGACY] Ulepszenie stylu tekstu polskiego."""
     if not bielik.is_ready():
         return bielik.call("", "")
 
@@ -278,7 +384,7 @@ def comprehensive_correction(
     include_greeting: bool = False,
     include_explanation: bool = False,
 ) -> str:
-    """Kompleksowa korekta tekstu polskiego"""
+    """[LEGACY] Kompleksowa korekta tekstu polskiego."""
     if not bielik.is_ready():
         return bielik.call("", "")
 
@@ -297,7 +403,7 @@ def comprehensive_correction(
 
 @mcp.tool()
 def get_language_advice(topic: str) -> str:
-    """Porada językowa w stylu Jana Kochanowskiego"""
+    """Nie-core: porada językowa w stylu Jana Kochanowskiego."""
     if not bielik.is_ready():
         return bielik.call("", "")
 
@@ -313,7 +419,7 @@ def get_language_advice(topic: str) -> str:
 
 @mcp.tool()
 def check_text_quality(text: str) -> str:
-    """Szybka ocena jakości tekstu"""
+    """Legacy utility i wewnętrzny QA helper dla workflowów."""
     if not bielik.is_ready():
         return bielik.call("", "")
 

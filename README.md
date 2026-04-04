@@ -1,65 +1,151 @@
-# 📜 Jan Subagent - MCP server do korekty polszczyzny
+# 📜 Jan - MCP do polskich changelogów i release notesów z notek GitHuba
 
-![Version](https://img.shields.io/badge/version-2.1.0-blue)
+![Version](https://img.shields.io/badge/version-3.0.0-blue)
 ![Python](https://img.shields.io/badge/python-3.10+-green)
 ![License](https://img.shields.io/badge/license-MIT-orange)
 
-> *"Niechaj Bóg strzeże wasze pióra i myśli"* - Jan Kochanowski
+> *"Niechaj mowa o waszych zmianach będzie jasna, wierna i gotowa do publikacji."*  
+> Jan Kochanowski, gdyby pisał release notes
 
-`jan-subagent` to MCP server do korekty języka polskiego z personą Jana Kochanowskiego i integracją z NVIDIA Bielik. Wydanie `2.1.0` przesuwa Jana w stronę paste-ready workplace writing przy zachowaniu persony w narzędziach poradniczych.
+`jan-subagent` w `v3.0.0` nie jest już ogólnym korektorem polszczyzny. To repo-native agent MCP do tłumaczenia i pisania polskich changelogów, release notesów i opisów zmian na bazie typowych githubowych, bezosobowych angielskich notek, diffów i surowych bulletów technicznych.
 
-## Co się zmieniło w 2.1.0
+Jan zachowuje charakter i brand Jana Kochanowskiego, ale domyślny workplace UX jest już w pełni `paste-ready`.
 
-- Correction tools są domyślnie `paste-ready` i zwracają tylko finalny tekst.
-- Explainery są dostępne tylko jako `opt-in` przez `include_explanation=True`.
-- `verify_grammar()` zwraca parseowalny JSON bez wrappera persony.
-- `check_text_quality()` zwraca krótki plain-text scorecard.
-- Benchmark workplace writing ma teraz `Primary Literal Score` i `Normalized Diagnostic Score`.
-- To wydanie nie dodaje osobnego trybu edukacyjnego; domyślny fokus pozostaje na workplace writing.
+## Co zmieniło się w 3.0.0
 
-Pełna nota wydania: [docs/VERSION_2_1_0.md](/Users/pd/Developer/jan/docs/VERSION_2_1_0.md)
+- główny wedge produktu to `repo-native workflows`, nie ogólna korekta tekstu
+- primary MCP surface to named workflows dla tech teamów
+- `jan.yml` w repo działa jako memory-as-code dla templates, glossary, audience packs i validation policy
+- source context może pochodzić z local git, GitHub i Jira
+- workflowy mają trust layer: fact preservation, `no_new_facts`, template compliance, glossary adherence i audience-policy compliance
+- `response_mode="review"` zwraca JSON z `final_text`, `source_trace` i `validator_report`
+- stare tools korektorskie zostają tylko jako `legacy`
 
-## Cechy
+Pełna nota wydania: [docs/VERSION_3_0_0.md](/Users/pd/Developer/jan/docs/VERSION_3_0_0.md)  
+Mapa migracji: [docs/MIGRATION_3_0_0.md](/Users/pd/Developer/jan/docs/MIGRATION_3_0_0.md)
 
-- Paste-ready correction tools dla workplace writing.
-- Persona Jana Kochanowskiego w poradach językowych i lekkich interakcjach.
-- Integracja z NVIDIA Bielik przez OpenAI-compatible API.
-- Narzędzia MCP do ortografii, interpunkcji, gramatyki, stylu i szybkiej oceny tekstu.
-- Automatyczna konfiguracja API key przez `setup_api_key`.
-- Konfiguracja ładowana z `NVIDIA_API_KEY` lub `~/.jan/config.json`.
-- Lazy import `jan.mcp`, bez side-effectów przy `python -m`.
+## Pozycja produktu
 
-## Gdzie używać Jana
+Jan nie próbuje być „najlepszym LLM-em ogólnym”. Ma być najlepszym narzędziem MCP do codziennego zamieniania surowych angielskich notek z GitHuba na publikowalne polskie changelogi i release notesy.
 
-Jan ma dziś najwięcej sensu wtedy, gdy pracujesz w kliencie MCP i często poprawiasz krótkie lub średnie teksty po polsku bez ręcznego prompt engineeringu.
+Najwięcej sensu ma dziś w:
 
-- opisy PR i changelogi
-- release notes
-- tickety i opisy issue
-- szybkie poprawki ortografii, interpunkcji i stylu
-- szybki quality check tekstu
-- przypadki, gdzie chcesz stabilny kontrakt narzędzia zamiast ogólnego promptu do modelu
+- tłumaczeniu i wygładzaniu release notes z angielskich bulletów
+- opisach PR
+- release notes i changelogach
+- przepisywaniu ticketów i issue
+- notatkach rolloutowych
+- repo-native workflowach, gdzie liczy się `time-to-paste`, `fact preservation` i zgodność z template’em zespołu
 
-Najmocniejsze use-case'y z obecnego pilota to `release note/changelog`, gdzie Jan był liderem scenariusza, oraz `PR description`, gdzie był bardzo blisko lidera.
+Najmocniejszy sygnał z dotychczasowego pilota:
 
-Najmniej korzystne use-case'y względem `GPT-5.4` to nadal:
+- po refactorze `paste-ready` Jan urósł z `49.9%` do `94.0%` `Primary Literal Score`
+- średnia latency spadła z `26.28s` do `2.58s`
+- Jan wyprzedził `raw Bielik` jako produkt, choć nadal minimalnie przegrywa ogólny wynik z `GPT-5.4`
 
-- `support reply`
-- `status email/notatka`
+Szczegóły: [docs/benchmarks/workplace-writing-pilot.md](/Users/pd/Developer/jan/docs/benchmarks/workplace-writing-pilot.md)
 
-W tych dwóch scenariuszach Jan nadal działa dobrze, ale `GPT-5.4` ma większy zapas jakości.
+## Primary MCP workflows
 
-## Jan vs GPT-5.4 vs raw Bielik
+```python
+write_pr_description(
+    raw_notes: str = "",
+    git_range: str | None = None,
+    github_pr: int | None = None,
+    jira_keys: list[str] | None = None,
+    audience: str = "reviewer",
+    response_mode: str = "final",
+) -> str
 
-Jan nie jest próbą bycia „najlepszym modelem ogólnym”. To warstwa produktowa nad korektą polszczyzny, zbudowana pod MCP i workplace writing.
+compose_release_notes(
+    raw_notes: str = "",
+    git_range: str | None = None,
+    github_prs: list[int] | None = None,
+    jira_keys: list[str] | None = None,
+    audience: str = "internal",
+    response_mode: str = "final",
+) -> str
 
-- Nad `raw Bielik` Jan daje gotowe narzędzia MCP, przewidywalny kontrakt odpowiedzi i mniej pracy promptowej.
-- Nad `raw Bielik` Jan wygrał też obecny pilot workplace writing literalnym wynikiem produktu: `94.0%` vs `93.1%`.
-- Nad `raw Bielik` Jan był też szybszy w tym pilocie: `2.58s` vs `3.24s`.
-- Wobec `GPT-5.4` Jan nadal przegrywa minimalnie ogólny wynik pilota: `94.0%` vs `96.5%`.
-- Wobec `GPT-5.4` Jan wygrywa specjalizacją produktu: konkretne tool calls, polski-first workflow i stabilne, paste-ready odpowiedzi bez dorabiania promptów od zera.
-- Jeśli chcesz ogólny, bardzo mocny model do szerokich zadań pisarskich, `GPT-5.4` pozostaje mocniejszym baseline'em.
-- Jeśli chcesz narzędzie do polskiej korekty osadzone w MCP, oparte o Bielika i gotowe do codziennego użycia w repo lub kliencie, Jan jest lepszym punktem wejścia niż surowe API modelu.
+rewrite_issue(
+    raw_notes: str = "",
+    github_issue: int | None = None,
+    jira_key: str | None = None,
+    audience: str = "internal",
+    response_mode: str = "final",
+) -> str
+
+write_rollout_note(
+    raw_notes: str = "",
+    git_range: str | None = None,
+    github_prs: list[int] | None = None,
+    jira_keys: list[str] | None = None,
+    audience: str = "internal",
+    response_mode: str = "final",
+) -> str
+```
+
+### Response modes
+
+- `final`  
+  Zwraca wyłącznie paste-ready tekst z wymaganymi sekcjami artefaktu.
+
+- `review`  
+  Zwraca JSON:
+
+```json
+{
+  "final_text": "string",
+  "source_trace": [
+    {
+      "segment": "string",
+      "source_ids": ["string"],
+      "note": "string"
+    }
+  ],
+  "validator_report": {}
+}
+```
+
+## Legacy tools
+
+Te tools zostają callable dla kompatybilności, ale nie są już głównym surface’em produktu:
+
+- `correct_orthography`
+- `correct_punctuation`
+- `verify_grammar`
+- `improve_style`
+- `comprehensive_correction`
+- `check_text_quality`
+
+`greet_jan`, `farewell_jan` i `get_language_advice` zostają jako brand skin i opt-in delight pack. To jest świadomy easter egg, nie główny workflow produktu.
+
+## jan.yml
+
+Repo-level `jan.yml` działa jako policy pack dla workflowów. Trzyma:
+
+- `glossary`
+- `do_not_translate`
+- `banned_phrases`
+- `artifact_templates`
+- `required_sections`
+- `audiences`
+- `validation`
+- `github`
+- `jira`
+
+To jest memory-as-code dla zespołu. Reguły nie są powtarzane w promptach ręcznie przy każdym użyciu.
+
+W tym repo przykładowy policy pack jest w [jan.yml](/Users/pd/Developer/jan/jan.yml).
+
+## Source context
+
+Jan może pracować z trzema warstwami kontekstu:
+
+1. `raw_notes`
+2. local git: branch, changed files, commits, diff excerpt
+3. GitHub i Jira, jeśli są dostępne tokeny
+
+Brak tokenów nie tworzy sztucznego kontekstu. Workflow degraduje się do tego, co jest naprawdę dostępne, i raportuje warningi w `review`.
 
 ## Instalacja
 
@@ -82,8 +168,6 @@ python3 -m venv .venv
 
 Repo zawiera gotowy sample config: [mcp_config.json](/Users/pd/Developer/jan/mcp_config.json)
 
-Uzupełnij w nim własne ścieżki:
-
 ```json
 {
   "mcpServers": {
@@ -100,246 +184,118 @@ Uzupełnij w nim własne ścieżki:
 }
 ```
 
-Najbezpieczniej wskazać interpreter z wirtualnego środowiska, bo globalne `python3` może nie mieć zainstalowanego pakietu `mcp`.
+### Konfiguracja kluczy i source context
 
-### Pierwsza konfiguracja API key
+Najważniejsze envy:
 
-1. Uzyskaj NVIDIA API key na [build.nvidia.com](https://build.nvidia.com/) albo [NGC API Keys](https://org.ngc.nvidia.com/setup/api-keys).
-2. Uruchom klienta MCP z Janem.
-3. Przy pierwszym użyciu `@jan` poprosi o klucz:
+- `NVIDIA_API_KEY`
+- `GITHUB_TOKEN`
+- `GITHUB_REPOSITORY`
+- `JIRA_BASE_URL`
+- `JIRA_EMAIL`
+- `JIRA_API_TOKEN`
+- `JAN_POLICY_FILE`
 
-```text
-@jan popraw ten tekst
-```
+Pełny przykład: [.env.example](/Users/pd/Developer/jan/.env.example)
 
-4. Ustaw klucz przez narzędzie MCP:
+## Benchmarking
 
-```text
-Użyj setup_api_key z api_key: "nvapi-xxxx-xxxx-xxxx-xxxx"
-```
+### Benchmark v1: workplace writing pilot
 
-Klucz zostanie zapisany w `~/.jan/config.json`.
+Ten benchmark zostaje jako regression suite. Mierzy literalny wynik produktu i pilnuje, żeby Jan nie wrócił do verbose wrappera.
 
-### Ręczna konfiguracja przez `.env`
+- metodologia: [docs/benchmark-methodology.md](/Users/pd/Developer/jan/docs/benchmark-methodology.md)
+- public-safe raport: [docs/benchmarks/workplace-writing-pilot.md](/Users/pd/Developer/jan/docs/benchmarks/workplace-writing-pilot.md)
 
-Fallback nadal działa, ale nie jest preferowany. Przykład zmiennych znajdziesz w [.env.example](/Users/pd/Developer/jan/.env.example).
+### Benchmark v2: repo-native delivery workflows
 
-## Narzędzia MCP
+Nowy harness benchmarkowy działa na osi:
 
-### Konfiguracja
+- `artifact`
+- `context richness`
+- `audience`
 
-```python
-check_configuration() -> str
-setup_api_key(api_key: str) -> str
-reset_api_key() -> str
-```
+Lane’y:
 
-`check_configuration()` zwraca status konfiguracji, model, base URL i domyślne parametry. Statusy są prezentowane jako `✅/❌`.
+- `text_only`
+- `structured_context`
+- `policy_pack`
 
-### Korekta językowa
+North-star KPI:
 
-```python
-correct_orthography(text: str, include_greeting: bool = False, include_explanation: bool = False) -> str
-correct_punctuation(text: str, include_greeting: bool = False, include_explanation: bool = False) -> str
-verify_grammar(text: str, include_greeting: bool = False) -> str
-improve_style(text: str, style: str = "elegancki", include_greeting: bool = False, include_explanation: bool = False) -> str
-comprehensive_correction(text: str, mode: str = "standard", include_greeting: bool = False, include_explanation: bool = False) -> str
-get_language_advice(topic: str) -> str
-check_text_quality(text: str) -> str
-greet_jan(name: str = "miłościw") -> str
-farewell_jan() -> str
-```
+- zero/one-edit acceptance rate
+- fact preservation
+- `no_new_facts`
+- template compliance
+- glossary adherence
+- time-to-paste
+- p95 latency
 
-Domyślnie correction tools zwracają wyłącznie finalny tekst. Jeśli chcesz krótki explain mode, ustaw `include_explanation=True`.
-`include_greeting=True` nadal działa, ale dodaje tylko jedną krótką linię przed wynikiem zamiast dawnego, rozbudowanego wrappera Jana.
+Artefakty i harness:
 
-Obsługiwane style dla `improve_style`:
+- dataset: [benchmarks/delivery_workflows_v2.jsonl](/Users/pd/Developer/jan/benchmarks/delivery_workflows_v2.jsonl)
+- module: [jan/delivery_benchmark.py](/Users/pd/Developer/jan/jan/delivery_benchmark.py)
+- CI-safe test: [scripts/test_delivery_benchmark.py](/Users/pd/Developer/jan/scripts/test_delivery_benchmark.py)
+- live runner: [scripts/run_delivery_benchmark.py](/Users/pd/Developer/jan/scripts/run_delivery_benchmark.py)
 
-- `elegancki`
-- `prosty`
-- `poetycki`
-- `naukowy`
-- `ulotny`
+## BMAD / BMADX
 
-Obsługiwane tryby dla `comprehensive_correction`:
+Repo pracuje teraz na fundamencie `X4` dla pivotu `v3.0.0`.
 
-- `conservative`
-- `standard`
-- `aggressive`
+Trwałe artefakty:
 
-## Przykłady użycia
+- PRD: [_bmad-output/planning-artifacts/jan-v3-prd.md](/Users/pd/Developer/jan/_bmad-output/planning-artifacts/jan-v3-prd.md)
+- architektura: [_bmad-output/planning-artifacts/jan-v3-architecture.md](/Users/pd/Developer/jan/_bmad-output/planning-artifacts/jan-v3-architecture.md)
+- project context: [_bmad-output/project-context.md](/Users/pd/Developer/jan/_bmad-output/project-context.md)
+- FUBAR bundle: [_bmad-output/planning-artifacts/jan-v3-fubar](/Users/pd/Developer/jan/_bmad-output/planning-artifacts/jan-v3-fubar)
 
-### Prosta korekta ortografii
+Zasada pozostaje prosta:
 
-```text
-Użyj correct_orthography z tekstem:
-"Cześć! Napisalem tekst z błedami."
-```
-
-### Krótki explain mode
-
-```text
-Użyj improve_style z tekstem:
-"Hej, temat mamy już ogarnięty i wszystko śmiga."
-
-ustawiając include_explanation na true.
-```
-
-### Porada językowa
-
-```text
-Użyj get_language_advice z tematem:
-"ó vs u"
-```
-
-### Powitanie z adresatem
-
-```python
-from jan.jan_subagent_opencode import greet_jan
-
-print(greet_jan("Pawle"))
-```
+- `BMAD > BMADX`
+- `project-context.md` jest source-of-truth dla tego pivotu
 
 ## Architektura repo
 
 ```text
 jan/
 ├── jan/
-│   ├── __init__.py
 │   ├── api_client.py
 │   ├── config.py
+│   ├── delivery_benchmark.py
 │   ├── jan_subagent_opencode.py
-│   ├── kochanowski_quotes.py
 │   ├── output_utils.py
+│   ├── policy.py
+│   ├── source_adapters.py
+│   ├── source_context.py
 │   ├── system_prompts.py
+│   ├── workflow_engine.py
 │   └── workplace_benchmark.py
-├── docs/
-│   ├── VERSION_1_1_0.md
-│   ├── VERSION_2_0_0.md
-│   ├── VERSION_2_1_0.md
-│   ├── benchmark-methodology.md
-│   ├── benchmarks/
-│   └── new-thread-start.md
-├── tests/
-├── examples/
 ├── benchmarks/
+├── docs/
 ├── scripts/
-├── references/
-├── agents/
-├── state/
 ├── _bmad/
 ├── _bmad-output/
-├── .github/
-├── mcp_config.json
-└── setup.py
+├── jan.yml
+└── mcp_config.json
 ```
 
-## BMAD
-
-Repo jest przygotowane do pracy zarówno z maintenance scaffoldem BMAD, jak i pełną warstwą projektową.
-
-- Punkt wejścia do workflowów projektowych: `bmad-help`
-- Maintenance sync:
+## Validation commands
 
 ```bash
-python3 scripts/test_sync_bmad_method.py
-python3 scripts/sync_bmad_method.py check --json
-```
-
-Pełna instalacja projektowa znajduje się w `_bmad/`, a wygenerowane artefakty trafiają do `_bmad-output/`.
-
-## Benchmarking
-
-Repo zawiera pilot benchmarkowy workplace writing porównujący:
-
-- `Jan` przez realny MCP `stdio`
-- `raw Bielik`
-- `GPT-5.4`
-
-Dataset, prompty i rubric są w `benchmarks/`, metodologia w [docs/benchmark-methodology.md](/Users/pd/Developer/jan/docs/benchmark-methodology.md), a public-safe notatka pilota w [docs/benchmarks/workplace-writing-pilot.md](/Users/pd/Developer/jan/docs/benchmarks/workplace-writing-pilot.md).
-
-Benchmark ma teraz dwa widoki:
-
-- `Primary Literal Score` jako główny KPI produktu
-- `Normalized Diagnostic Score` jako diagnostykę kosztu wrappera Jana
-
-`Normalized Diagnostic Score` nie zastępuje literalnego wyniku produktu. Służy tylko do odpowiedzi na pytanie, ile jakości kosztuje opakowanie odpowiedzi Jana.
-
-Aktualny snapshot po refactorze paste-ready:
-
-| System | Primary Literal Score | Avg latency |
-| --- | ---: | ---: |
-| `GPT-5.4` | `96.5%` | `1.48s` |
-| `Jan` | `94.0%` | `2.58s` |
-| `raw Bielik` | `93.1%` | `3.24s` |
-
-Najważniejszy ruch produktu po refactorze:
-
-- Jan urósł z `49.9%` do `94.0%` literal final score
-- latency Jana spadła z `26.28s` do `2.58s`
-- `surface correction` wzrosło z `63.2%` do `98.2%`
-
-To potwierdza, że wcześniejszy problem siedział głównie w wrapperze odpowiedzi, a nie w samym rdzeniu korekty.
-
-CI-safe walidacja harnessu:
-
-```bash
-.venv/bin/python scripts/test_benchmark_harness.py
-```
-
-Live pilot:
-
-```bash
-.venv/bin/python scripts/run_workplace_benchmark.py
-```
-
-Artefakty live runu trafiają do `_bmad-output/benchmarks/<timestamp>/`.
-
-## Testowanie
-
-```bash
-pytest -q
+python3 -m pytest -q
 .venv/bin/python -m compileall -q jan
 .venv/bin/python -m jan.jan_subagent_opencode
 .venv/bin/python scripts/test_benchmark_harness.py
+.venv/bin/python scripts/test_delivery_benchmark.py
 python3 scripts/test_sync_bmad_method.py
 python3 scripts/sync_bmad_method.py check --json
 ```
 
-## Dokumentacja API
+Live benchmark v2:
 
-### `BielikClient`
-
-```python
-from jan.api_client import BielikClient
-
-client = BielikClient()
-response = client.call(
-    system_prompt="Jesteś ekspertem...",
-    user_message="Popraw tekst...",
-    temperature=0.3,
-    max_tokens=4096,
-)
+```bash
+.venv/bin/python scripts/run_delivery_benchmark.py --systems Jan raw-bielik gpt-5.4
 ```
-
-### `KochanowskiPersona`
-
-```python
-from jan.kochanowski_quotes import KochanowskiPersona
-
-greeting = KochanowskiPersona.get_greeting()
-reflection = KochanowskiPersona.get_reflection("orthography")
-```
-
-## Współpraca
-
-1. Utwórz branch roboczy.
-2. Utrzymuj README, sample config i testy w zgodzie z runtime `jan.jan_subagent_opencode`.
-3. Przy zmianach release/BMAD aktualizuj [docs/new-thread-start.md](/Users/pd/Developer/jan/docs/new-thread-start.md).
-
-## Licencja
-
-MIT License - patrz [LICENSE](/Users/pd/Developer/jan/LICENSE).
 
 ## Kontakt
 
@@ -348,4 +304,4 @@ MIT License - patrz [LICENSE](/Users/pd/Developer/jan/LICENSE).
 
 ---
 
-*"Mowa polska to skarb narodu. Niech go chronicie i rozwijacie."* - Jan Subagent
+*Jan wciąż umie się ukłonić, ale teraz przede wszystkim dowozi release notes.*

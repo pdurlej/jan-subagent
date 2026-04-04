@@ -31,7 +31,8 @@ from jan.jan_subagent_opencode import (
     main,
     verify_grammar,
 )
-from jan.system_prompts import get_system_prompt, SYSTEM_PROMPTS
+from jan.policy import load_jan_policy
+from jan.system_prompts import SYSTEM_PROMPTS, get_repo_native_system_prompt, get_system_prompt
 
 
 class TestKochanowskiPersona:
@@ -163,6 +164,19 @@ class TestSystemPrompts:
     def test_grammar_prompt_contract_enforces_json_only(self):
         prompt = get_system_prompt("grammar", response_mode="json_report")
         assert "Zwróć wyłącznie poprawny JSON." in prompt
+
+    def test_repo_native_prompt_contains_sections_and_review_contract(self):
+        policy, _ = load_jan_policy(Path(__file__).resolve().parents[1])
+        prompt = get_repo_native_system_prompt(
+            workflow_name="write_pr_description",
+            artifact_key="pr_description",
+            policy=policy,
+            audience="reviewer",
+            response_mode="review",
+        )
+        assert "repo-native agentem" in prompt
+        assert "Cel zmiany" in prompt
+        assert '"final_text": "string"' in prompt
 
 
 class TestQuotesStructure:
@@ -304,7 +318,7 @@ class TestPackagingAndConfig:
     """Testy pakietowania i sample configu."""
 
     def test_package_version_is_2_1_0(self):
-        assert __version__ == "2.1.0"
+        assert __version__ == "3.0.0"
 
     def test_mcp_config_is_valid_json_and_uses_opencode(self):
         config_path = Path(__file__).resolve().parents[1] / "mcp_config.json"

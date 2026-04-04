@@ -1,159 +1,111 @@
 # Benchmark Methodology
 
-## Scope
+Repo używa teraz dwóch benchmarków o różnych rolach.
 
-Ten benchmark dotyczy `jan-subagent` jako produktu do workplace writing, nie wyłącznie modelu bazowego.
-To pilot public-safe, więc wyniki należy interpretować jako obserwacje z małego zestawu przypadków, a nie jako pełny benchmark statystyczny.
+## Benchmark v1: workplace writing regression
 
-## Systems
+To historyczny pilot, który pomógł znaleźć problem wrappera Jana i sprawdzić, czy produkt wraca do verbose UX.
 
-Benchmark porównuje trzy systemy:
+Rola:
 
-- `Jan` przez realny transport MCP `stdio` i aktualne domyślne UX narzędzi Jana
-- `raw Bielik` przez bezpośrednie wywołania NVIDIA API bez persony Jana
-- `GPT-5.4` przez OpenAI API jako mocny baseline workplace writing
+- regression guardrail
+- kontrola `paste-ready` outputu
+- porównanie literalnego wyniku produktu z dawnym baseline’em
 
-Judge jest osobny od benchmarkowanych modeli i domyślnie działa na `gpt-5.4-mini`.
+Zakres:
 
-## Dataset
+- `PR description`
+- `ticket/issue`
+- `support reply`
+- `release note/changelog`
+- `status email/notatka`
 
-Pilot korzysta z `benchmarks/workplace_writing_v1.jsonl`.
+Dokument wyników:
 
-Zestaw zawiera `15` przypadków:
+- [docs/benchmarks/workplace-writing-pilot.md](/Users/pd/Developer/jan/docs/benchmarks/workplace-writing-pilot.md)
 
-- `5` scenariuszy:
-  - `PR description`
-  - `ticket/issue`
-  - `support reply`
-  - `release note/changelog`
-  - `status email/notatka`
-- `3` intencje na scenariusz:
-  - `surface correction`
-  - `style rewrite`
-  - `full polish`
+## Benchmark v2: repo-native delivery workflows
 
-Każdy case ma jawny schemat:
+To nowy north-star benchmark dla `v3.0.0`.
 
-- `id`
-- `scenario`
-- `intent`
-- `input_text`
-- `jan_tool`
-- `baseline_prompt_family`
-- `must_keep`
-- `should_fix`
-- `must_not_introduce`
-- `notes`
+Rola:
 
-## Prompting Rules
+- mierzyć przewagę workflowu i policy packa, nie tylko modelu
+- sprawdzać, czy Jan wygrywa jako narzędzie codziennej pracy w software delivery
+- oceniać wpływ source context i `jan.yml`
 
-Jan jest mierzony przez realne narzędzia MCP:
+Zakres:
 
-- `surface correction` trafia do `correct_orthography` albo `correct_punctuation`
-- `style rewrite` trafia do `improve_style`
-- `full polish` trafia do `comprehensive_correction(mode="standard")`
+- `write_pr_description`
+- `compose_release_notes`
+- `rewrite_issue`
+- `write_rollout_note`
 
-Nie wyłączamy domyślnych elementów UX Jana. Jeśli narzędzie dorzuca powitanie, refleksję lub pożegnanie, to te elementy zostają ocenione literalnie.
+Oś benchmarku:
 
-Baseline prompts są jawnie zdefiniowane w `benchmarks/prompt_families.json` i spełniają trzy zasady:
+- `artifact`
+- `context richness`
+- `audience`
 
-- brak persony Jana
-- brak promptowych hacków pod benchmark
-- zwrot wyłącznie finalnego tekstu
+Lane’y:
 
-## Scoring
+- `text_only`
+- `structured_context`
+- `policy_pack`
 
-Benchmark ma scoring hybrydowy i dwa widoki raportowe.
+Dataset:
 
-### Two Views
+- [benchmarks/delivery_workflows_v2.jsonl](/Users/pd/Developer/jan/benchmarks/delivery_workflows_v2.jsonl)
 
-- `Primary Literal Score`: główny wynik produktu. Ocenia dokładnie literalny output, który użytkownik dostaje z narzędzia.
-- `Normalized Diagnostic Score`: widok diagnostyczny. Dla Jana usuwa technicznie wrappery takie jak greeting, nagłówki, listy zmian i sekcje raportowe, aby oszacować koszt opakowania odpowiedzi.
+Harness:
 
-### Deterministic Layer
+- [jan/delivery_benchmark.py](/Users/pd/Developer/jan/jan/delivery_benchmark.py)
+- [scripts/test_delivery_benchmark.py](/Users/pd/Developer/jan/scripts/test_delivery_benchmark.py)
+- [scripts/run_delivery_benchmark.py](/Users/pd/Developer/jan/scripts/run_delivery_benchmark.py)
 
-Warstwa deterministyczna ocenia:
+## KPI dla benchmarku v2
 
-- `must_keep`: czy ważne fakty i słowa nadal są obecne
-- `should_fix`: czy błędne lub niepożądane fragmenty zniknęły
-- `must_not_introduce`: czy system nie dodał zakazanych elementów
-- `non_empty`: czy output nie jest pusty
-- `error_free`: czy system nie zakończył się błędem
-- `latency`: prosty score 0-1 zależny od czasu odpowiedzi
+- zero/one-edit acceptance rate
+- fact preservation
+- `no_new_facts`
+- template compliance
+- glossary adherence
+- time-to-paste
+- p95 latency
+- escalation rate do manual/GPT
 
-Wagi komponentów deterministycznych:
+Targety startowe:
 
-- `must_keep`: `0.30`
-- `should_fix`: `0.25`
-- `must_not_introduce`: `0.15`
-- `non_empty`: `0.10`
-- `error_free`: `0.10`
-- `latency`: `0.10`
+- PR zero/one-edit acceptance `>=70%`
+- release notes zero/one-edit acceptance `>=60%`
+- fact preservation `>=99%`
+- `no_new_facts` `<2%`
+- template/glossary compliance `>=95%`
+- repo-aware jobs p95 `<5s`
 
-### Judge Layer
+## Fairness rules
 
-Judge ocenia ślepo i literalnie pięć wymiarów:
-
-- `factual_preservation`
-- `language_quality`
-- `clarity`
-- `workplace_usefulness`
-- `concision`
-
-Każdy wymiar jest oceniany w skali `1-5`, a finalny judge score jest średnią przeskalowaną do `0-1`.
-
-Rubric live runu znajduje się w `benchmarks/judge_rubric.md`.
-
-### Final Weights
-
-Final score zależy od intencji:
-
-- `surface correction`: `70% deterministic` + `30% judge`
-- `style rewrite`: `40% deterministic` + `60% judge`
-- `full polish`: `40% deterministic` + `60% judge`
-
-## Fairness Rules
-
-- Oceniane są literalne outputy systemów.
-- Nie czyścimy ręcznie persony, refleksji, powitań ani komentarzy Jana.
-- W widoku diagnostycznym normalizacja jest jawna i techniczna:
-  - dla `Jan` wycinane są znane wrappery i sekcje raportowe
-  - dla `raw Bielik` i `GPT-5.4` normalizacja jest prawie no-op poza lekkim cleanupem markdownu
-- Raport ma odpowiedzieć nie tylko na pytanie kto wygrał, ale przede wszystkim gdzie Jan pomaga i gdzie szkodzi.
-
-## Artifacts
-
-Live run zapisuje artefakty do `_bmad-output/benchmarks/<timestamp>/`:
-
-- `metadata.json`
-- `cases.json`
-- `results.json`
-- `summary.json`
-- `report.md`
-
-`summary.json` i `report.md` zawierają oba widoki: literalny i diagnostyczny.
+- workflowy są oceniane literalnie jako produkt
+- brakujące tokeny GitHub/Jira nie tworzą synthetic contextu
+- benchmark v2 ma pokazać, czy Jan zyskuje disproporcjonalnie dużo na lane `structured_context` i `policy_pack`
+- jeśli zysk nie rośnie wraz z kontekstem i policy packiem, moat produktu nie jest jeszcze zbudowany
 
 ## Commands
 
-CI-safe walidacja harnessu:
+Regression guardrail:
 
 ```bash
 .venv/bin/python scripts/test_benchmark_harness.py
 ```
 
-Live pilot:
+Delivery benchmark v2, CI-safe:
 
 ```bash
-.venv/bin/python scripts/run_workplace_benchmark.py
+.venv/bin/python scripts/test_delivery_benchmark.py
 ```
 
-Wymagania do live runu:
+Delivery benchmark v2, live:
 
-- działający klucz NVIDIA dla Bielika
-- `OPENAI_API_KEY`
-
-## Interpretation Limits
-
-- To pilot na `15` przypadkach.
-- Wyniki są użyteczne do wykrywania trendów produktowych i do decyzji o dalszym tuningu.
-- Wyniki nie powinny być używane jako ogólne twierdzenie o przewadze jednego systemu na całej klasie zadań.
+```bash
+.venv/bin/python scripts/run_delivery_benchmark.py --systems Jan raw-bielik gpt-5.4
+```

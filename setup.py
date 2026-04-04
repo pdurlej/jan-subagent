@@ -9,9 +9,9 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="jan-subagent",
-    version="2.1.0",
+    version="3.0.0",
     author="Jan Subagent Team",
-    description="MCP server do korekty języka polskiego z personą Jana Kochanowskiego",
+    description="Repo-native agent MCP do polskojęzycznej komunikacji zmian w software delivery",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/pdurlej/jan-subagent",
@@ -36,13 +36,14 @@ setup(
         "openai>=1.12.0",
         "python-dotenv>=1.0.0",
         "pydantic>=2.0.0",
+        "PyYAML>=6.0.0",
     ],
     entry_points={
         "console_scripts": [
             "jan-server=jan.jan_subagent_opencode:main",
         ],
     },
-    keywords="mcp subagent polish language correction kochanowski bielik",
+    keywords="mcp polish software-delivery release-notes changelog pr-description jira github bielik",
     project_urls={
         "Bug Reports": "https://github.com/pdurlej/jan-subagent/issues",
         "Source": "https://github.com/pdurlej/jan-subagent",

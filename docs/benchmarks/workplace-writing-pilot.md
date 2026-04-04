@@ -1,6 +1,7 @@
 # Workplace Writing Pilot
 
 Ten dokument jest public-safe notatką dla pilota benchmarkowego Jana w workplace writing.
+W `v3.0.0` ten benchmark nie jest już north-star kompasem roadmapy. Zostaje jako regression suite pilnujący, żeby Jan nie wrócił do verbose wrappera i nie stracił `paste-ready` UX.
 
 ## Status
 

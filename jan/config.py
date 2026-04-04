@@ -102,6 +102,30 @@ class JanConfig:
         """Pobierz poziom logowania"""
         return os.getenv("LOG_LEVEL", "info")
 
+    @property
+    def github_token_configured(self) -> bool:
+        return bool(os.getenv("GITHUB_TOKEN"))
+
+    @property
+    def github_repository(self) -> str | None:
+        return os.getenv("GITHUB_REPOSITORY")
+
+    @property
+    def jira_base_url(self) -> str | None:
+        return os.getenv("JIRA_BASE_URL")
+
+    @property
+    def jira_email(self) -> str | None:
+        return os.getenv("JIRA_EMAIL")
+
+    @property
+    def jira_token_configured(self) -> bool:
+        return bool(os.getenv("JIRA_API_TOKEN"))
+
+    @property
+    def policy_file(self) -> str:
+        return os.getenv("JAN_POLICY_FILE", str(Path.cwd() / "jan.yml"))
+
     def get_config_summary(self) -> Dict[str, Any]:
         """Pobierz podsumowanie konfiguracji"""
         return {
@@ -113,6 +137,11 @@ class JanConfig:
             "default_temperature": self.default_temperature,
             "max_tokens": self.max_tokens,
             "config_file": str(self.config_file),
+            "github_token_configured": self.github_token_configured,
+            "github_repository": self.github_repository,
+            "jira_base_url": self.jira_base_url,
+            "jira_token_configured": self.jira_token_configured,
+            "policy_file": self.policy_file,
         }
 
     def reset_api_key(self) -> None:
